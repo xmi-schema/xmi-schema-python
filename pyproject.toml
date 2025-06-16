@@ -1,6 +1,6 @@
 [project]
 name = "xmi"
-version = "0.2.5"
+version = "0.2.6"
 description = "Used to intepret XMI Schema"
 authors = [
     {name = "darellchua",email = "darellchua2@gmail.com"}
