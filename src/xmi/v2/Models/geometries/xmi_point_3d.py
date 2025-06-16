@@ -1,5 +1,5 @@
 from pydantic import Field, field_validator
-from typing import Optional, Tuple, List
+from typing import Tuple, List
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 
 class XmiPoint3D(XmiBaseGeometry):
@@ -15,19 +15,19 @@ class XmiPoint3D(XmiBaseGeometry):
         return float(v)
 
     @classmethod
-    def from_dict(cls, data: dict) -> Tuple["XmiPoint3D", List[Exception]]:
+    def from_dict(cls, obj: dict) -> Tuple["XmiPoint3D", List[Exception]]:
         error_logs: List[Exception] = []
 
-        required_keys = ["x", "y", "z"]
-        for key in required_keys:
-            if key not in data:
-                error_logs.append(Exception(f"Missing required attribute: {key}"))
-                data[key] = 0.0
+        missing = [attr for attr in ("x", "y", "z") if attr not in obj]
+        if missing:
+            for attr in missing:
+                error_logs.append(Exception(f"Missing attribute: {attr}"))
+            return None, error_logs
 
         try:
-            instance = cls(**data)
+            instance = cls(**obj)
         except Exception as e:
-            error_logs.append(Exception(f"Failed to create XmiPoint3D: {str(e)}"))
+            error_logs.append(Exception(f"Error instantiating XmiPoint3D: {e}"))
             instance = None
 
         return instance, error_logs
@@ -46,3 +46,44 @@ class XmiPoint3D(XmiBaseGeometry):
 
         processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items() if k in key_map}
         return cls.from_dict(processed)
+    
+
+# Testing run python -m src.xmi.v2.Models.geometries.xmi_point_3d
+    
+if __name__ == "__main__":
+    print("=== Running Quick Tests for XmiPoint3D ===")
+
+    # Test 1: Valid input
+    valid_data = {"x": 1.0, "y": 2.0, "z": 3.0}
+    point, errors = XmiPoint3D.from_dict(valid_data)
+    print("\n[Valid Input]")
+    print("Instance:", point)
+    print("Errors:", errors)
+
+    # Test 2: Missing 'z'
+    missing_z = {"x": 1.0, "y": 2.0}
+    point, errors = XmiPoint3D.from_dict(missing_z)
+    print("\n[Missing 'z']")
+    print("Instance:", point)
+    print("Errors:", [str(e) for e in errors])
+
+    # Test 3: Invalid type for 'x'
+    invalid_x = {"x": "a", "y": 2.0, "z": 3.0}
+    point, errors = XmiPoint3D.from_dict(invalid_x)
+    print("\n[Invalid 'x' Type]")
+    print("Instance:", point)
+    print("Errors:", [str(e) for e in errors])
+
+    # Test 4: Valid XMI-formatted dict
+    xmi_data = {
+        "ID": "001",
+        "Name": "PointA",
+        "X": 10,
+        "Y": 20,
+        "Z": 30,
+        "Description": "Example point"
+    }
+    point, errors = XmiPoint3D.from_xmi_dict_obj(xmi_data)
+    print("\n[XMI-formatted Input]")
+    print("Instance:", point.model_dump() if point else None)
+    print("Errors:", [str(e) for e in errors])
