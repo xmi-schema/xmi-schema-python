@@ -2,6 +2,7 @@ from pydantic import Field, field_validator, model_validator
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 from .xmi_structural_point_connection import XmiStructuralPointConnection
+from .xmi_structural_storey import XmiStructuralStorey
 from ..enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 from ..geometries.xmi_point_3d import XmiPoint3D
 
@@ -11,6 +12,9 @@ class XmiSegment(XmiBaseEntity):
     begin_node: XmiStructuralPointConnection = Field(..., alias="BeginNode")
     end_node: XmiStructuralPointConnection = Field(..., alias="EndNode")
     segment_type: XmiSegmentTypeEnum = Field(..., alias="SegmentType")
+
+    class Config:
+        populate_by_name = True
 
     @field_validator("geometry")
     @classmethod
@@ -50,18 +54,25 @@ if __name__ == "__main__":
     start_point = XmiPoint3D(x=0.0, y=0.0, z=0.0)
     end_point = XmiPoint3D(x=1.0, y=1.0, z=1.0)
 
+    storey = XmiStructuralStorey(
+        id="storey001",
+        name="Level 1",
+        description="Ground level",
+        storey_elevation=0
+    )
+
     start_node = XmiStructuralPointConnection(
         id="node01",
         name="Start",
         point=start_point,
-        storey="Level 1"
+        storey=storey
     )
 
     end_node = XmiStructuralPointConnection(
         id="node02",
         name="End",
         point=end_point,
-        storey="Level 1"
+        storey=storey
     )
 
     segment = XmiSegment(

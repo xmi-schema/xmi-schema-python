@@ -20,6 +20,9 @@ class XmiStructuralCrossSection(XmiBaseEntity):
     plastic_modulus_x_axis: Optional[float] = Field(None, alias="PlasticModulusXAxis")
     plastic_modulus_y_axis: Optional[float] = Field(None, alias="PlasticModulusYAxis")
     torsional_constant: Optional[float] = Field(None, alias="TorsionalConstant")
+    
+    class Config:
+        populate_by_name = True
 
     @field_validator("parameters")
     @classmethod
@@ -64,7 +67,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         values.setdefault("entity_type", "XmiStructuralCrossSection")
         return values
     
-    @classmethod
+    '''@classmethod
     def convert_parameter_string_to_tuple(cls, parameter_str: str) -> Tuple[float, ...]:
         parameter_list: List[str] = parameter_str.split(';')
         for param in parameter_list:
@@ -148,7 +151,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         instance, error_logs_found = cls.from_dict(processed)
         error_logs.extend(error_logs_found)
 
-        return instance, error_logs
+        return instance, error_logs'''
     
 
 # Testing run python -m src.xmi.v2.models.entities.xmi_structural_cross_section
@@ -168,32 +171,25 @@ if __name__ == "__main__":
         description="High-strength steel"
     )
 
-    xmi_dict = {
-        "Name": "I-Beam 300x150",
-        "Shape": "I Shape",
-        "Parameters": "300;150;10;6;8",
-        "Material": "should be overridden by function arg",
-        "Ix": 1200,
-        "Iy": 500,
-        "rx": 3.5,
-        "ry": 1.2,
-        "Ex": 200000,
-        "Ey": 200000,
-        "Zx": 300,
-        "Zy": 150,
-        "J": 80,
-        "Area": 4500,
-        "Description": "Test I-beam section",
-        "ID": "xs001",
-        "IFCGUID": "a-b-c-d"
-    }
+    cross_section = XmiStructuralCrossSection(
+        id="xs001",
+        name="I-Beam 300x150",
+        description="Test I-beam section",
+        ifcguid="a-b-c-d",
+        shape="I Shape",
+        parameters=(300.0, 150.0, 10.0, 6.0, 8.0),
+        material=material,
+        ix=1200,
+        iy=500,
+        rx=3.5,
+        ry=1.2,
+        ex=200000,
+        ey=200000,
+        zx=300,
+        zy=150,
+        j=80,
+        area=4500
+    )
 
-    cross_section, errors = XmiStructuralCrossSection.from_xmi_dict_obj(xmi_dict_obj=xmi_dict, material=material)
-
-    if cross_section:
-        print("Created XmiStructuralCrossSection:")
-        print(cross_section.model_dump(by_alias=True))
-    else:
-        print("Errors while creating XmiStructuralCrossSection:")
-        for error in errors:
-            print(f"- {error}")
+    print("Created XmiStructuralCrossSection:")
+    print(cross_section.model_dump(by_alias=True))

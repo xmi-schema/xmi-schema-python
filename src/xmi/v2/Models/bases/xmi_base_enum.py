@@ -5,6 +5,15 @@ from pydantic import BaseModel, field_validator
 @unique
 class XmiBaseEnum(str, Enum): 
     @classmethod
+    def _missing_(cls, value):
+        if not isinstance(value, str):
+            return None
+        for member in cls:
+            if member.value.lower() == value.lower():
+                return member
+        return None
+    
+    @classmethod
     def from_name_get_enum(cls, name_str: str) -> Optional["XmiBaseEnum"]:
         name_str = name_str.upper()
         try:
