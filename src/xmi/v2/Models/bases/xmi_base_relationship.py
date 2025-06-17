@@ -28,7 +28,7 @@ class XmiBaseRelationship(BaseModel):
         populate_by_name = True
 
 
-# Testing run python -m src.xmi.v2.Models.bases.xmi_base_relationship
+# Testing run python -m src.xmi.v2.models.bases.xmi_base_relationship
 
 source = XmiBaseEntity(id="123", name="StartNode", entity_type="Node")
 target = XmiBaseEntity(id="456", name="EndNode", entity_type="Node")

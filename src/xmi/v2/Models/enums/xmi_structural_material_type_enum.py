@@ -14,7 +14,7 @@ class XmiStructuralMaterialTypeEnum(XmiBaseEnum):
     TENDON = "Tendon"  # to be removed
 
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_structural_material_type_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_structural_material_type_enum
 
 print(XmiStructuralMaterialTypeEnum.ALUMINIUM.value)
 print(XmiStructuralMaterialTypeEnum.CONCRETE.name)

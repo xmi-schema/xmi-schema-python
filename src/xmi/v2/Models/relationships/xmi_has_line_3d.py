@@ -32,7 +32,7 @@ class XmiHasLine3D(XmiBaseRelationship):
         return values
     
 
-# Testing run python -m src.xmi.v2.Models.relationships.xmi_has_line_3d
+# Testing run python -m src.xmi.v2.models.relationships.xmi_has_line_3d
 
 if __name__ == "__main__":
     source = XmiBaseEntity(id="E1", name="Column")

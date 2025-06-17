@@ -31,7 +31,7 @@ class XmiBaseEntity(BaseModel, ABC):
         populate_by_name = True
 
 
-# Testing run python -m src.xmi.v2.Models.bases.xmi_base_entity 
+# Testing run python -m src.xmi.v2.models.bases.xmi_base_entity 
 
 class XmiStructuralMaterial(XmiBaseEntity):
     material_type: str

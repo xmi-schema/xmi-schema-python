@@ -26,7 +26,7 @@ class XmiHasPoint3D(XmiBaseRelationship):
         return values
 
 
-# Testing run python -m src.xmi.v2.Models.relationships.xmi_has_point_3d
+# Testing run python -m src.xmi.v2.models.relationships.xmi_has_point_3d
 
 if __name__ == "__main__":
     source = XmiBaseEntity(id="N1", name="StartNode", entity_type="Node")
