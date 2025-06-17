@@ -1,4 +1,4 @@
-from pydantic import field_validator, model_validator
+from pydantic import Field, field_validator, model_validator
 from typing import Optional, Tuple, Union, List, Dict, Any
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..entities.xmi_structural_material import XmiStructuralMaterial
@@ -7,19 +7,19 @@ from ...utils.xmi_utilities import is_empty_or_whitespace
 from ...utils.xmi_errors import XmiInconsistentDataTypeError, XmiMissingRequiredAttributeError
 
 class XmiStructuralCrossSection(XmiBaseEntity):
-    material: XmiStructuralMaterial
-    shape: XmiShapeEnum
-    parameters: Tuple[Union[float, int], ...]
-    area: Optional[float] = None
-    second_moment_of_area_x_axis: Optional[float] = None
-    second_moment_of_area_y_axis: Optional[float] = None
-    radius_of_gyration_x_axis: Optional[float] = None
-    radius_of_gyration_y_axis: Optional[float] = None
-    elastic_modulus_x_axis: Optional[float] = None
-    elastic_modulus_y_axis: Optional[float] = None
-    plastic_modulus_x_axis: Optional[float] = None
-    plastic_modulus_y_axis: Optional[float] = None
-    torsional_constant: Optional[float] = None
+    material: XmiStructuralMaterial = Field(..., alias="Material")
+    shape: XmiShapeEnum = Field(..., alias="Shape")
+    parameters: Tuple[Union[float, int], ...] = Field(..., alias="Parameters")
+    area: Optional[float] = Field(None, alias="Area")
+    second_moment_of_area_x_axis: Optional[float] = Field(None, alias="SecondMomentOfAreaXAxis")
+    second_moment_of_area_y_axis: Optional[float] = Field(None, alias="SecondMomentOfAreaYAxis")
+    radius_of_gyration_x_axis: Optional[float] = Field(None, alias="RadiusOfGyrationXAxis")
+    radius_of_gyration_y_axis: Optional[float] = Field(None, alias="RadiusOfGyrationYAxis")
+    elastic_modulus_x_axis: Optional[float] = Field(None, alias="ElasticModulusXAxis")
+    elastic_modulus_y_axis: Optional[float] = Field(None, alias="ElasticModulusYAxis")
+    plastic_modulus_x_axis: Optional[float] = Field(None, alias="PlasticModulusXAxis")
+    plastic_modulus_y_axis: Optional[float] = Field(None, alias="PlasticModulusYAxis")
+    torsional_constant: Optional[float] = Field(None, alias="TorsionalConstant")
 
     @field_validator("parameters")
     @classmethod
