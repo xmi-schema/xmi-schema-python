@@ -13,6 +13,9 @@ class XmiStructuralMaterial(XmiBaseEntity):
     poisson_ratio: Optional[float] = Field(None, alias="PoissonRatio")
     thermal_coefficient: Optional[float] = Field(None, alias="ThermalCoefficient")
 
+    class Config:
+        populate_by_name = True
+
     @field_validator("material_type")
     @classmethod
     def validate_material_type(cls, v):
@@ -33,7 +36,7 @@ class XmiStructuralMaterial(XmiBaseEntity):
         values.setdefault("entity_type", "XmiStructuralMaterial")
         return values
 
-    @classmethod
+    '''@classmethod
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiStructuralMaterial"], List[Exception]]:
         error_logs: List[Exception] = []
         required = ["material_type"]
@@ -76,7 +79,7 @@ class XmiStructuralMaterial(XmiBaseEntity):
         }
 
         processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items()}
-        return cls.from_dict(processed)
+        return cls.from_dict(processed)'''
 
 
 # Testing run python -m src.xmi.v2.models.entities.xmi_structural_material

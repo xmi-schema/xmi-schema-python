@@ -1,9 +1,10 @@
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field
 from ..bases.xmi_base_entity import XmiBaseEntity
 
 class XmiStructuralStorey(XmiBaseEntity):
-    	storey_elevation: float = Field(..., alias="StoreyElevation")
-		
+    storey_elevation: float = Field(..., alias="StoreyElevation")
+
+	
 
 # Testing run python -m src.xmi.v2.models.entities.xmi_structural_storey
 if __name__ == "__main__":

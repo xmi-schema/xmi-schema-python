@@ -3,9 +3,9 @@ from typing import Tuple, List, Optional
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 
 class XmiPoint3D(XmiBaseGeometry):
-    x: float = Field(..., description="X coordinate")
-    y: float = Field(..., description="Y coordinate")
-    z: float = Field(..., description="Z coordinate")
+    x: float = Field(..., alias="X", description="X coordinate")
+    y: float = Field(..., alias="Y", description="Y coordinate")
+    z: float = Field(..., alias="Z", description="Z coordinate")
 
     @field_validator("x", "y", "z")
     @classmethod
