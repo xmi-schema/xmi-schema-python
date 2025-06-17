@@ -1,11 +1,12 @@
-from pydantic import field_validator, model_validator
+from pydantic import Field, field_validator, model_validator
 from typing import Optional, Tuple, List
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..geometries.xmi_point_3d import XmiPoint3D
+from ..entities.xmi_structural_storey import XmiStructuralStorey
 
 class XmiStructuralPointConnection(XmiBaseEntity):
-    point: XmiPoint3D
-    storey: Optional[str] = None
+    point: XmiPoint3D = Field(..., alias="Point")
+    storey: Optional[XmiStructuralStorey] = Field(None, alias="Storey")
 
     @field_validator("point")
     @classmethod

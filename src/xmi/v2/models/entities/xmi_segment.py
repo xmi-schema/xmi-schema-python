@@ -1,4 +1,4 @@
-from pydantic import field_validator, model_validator
+from pydantic import Field, field_validator, model_validator
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 from .xmi_structural_point_connection import XmiStructuralPointConnection
@@ -6,11 +6,11 @@ from ..enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 from ..geometries.xmi_point_3d import XmiPoint3D
 
 class XmiSegment(XmiBaseEntity):
-    geometry: XmiBaseGeometry
-    position: int
-    begin_node: XmiStructuralPointConnection
-    end_node: XmiStructuralPointConnection
-    segment_type: XmiSegmentTypeEnum
+    geometry: XmiBaseGeometry = Field(..., alias="Geometry")
+    position: int = Field(..., alias="Position")
+    begin_node: XmiStructuralPointConnection = Field(..., alias="BeginNode")
+    end_node: XmiStructuralPointConnection = Field(..., alias="EndNode")
+    segment_type: XmiSegmentTypeEnum = Field(..., alias="SegmentType")
 
     @field_validator("geometry")
     @classmethod

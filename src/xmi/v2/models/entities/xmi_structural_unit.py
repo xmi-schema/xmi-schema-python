@@ -1,29 +1,28 @@
-from pydantic import field_validator, model_validator
-from typing import Optional, Tuple, List
+from pydantic import Field, field_validator, model_validator
 from uuid import uuid4
 from ..enums.xmi_unit_enum import XmiUnitEnum
 from ..bases.xmi_base_entity import XmiBaseEntity
 
 class XmiStructuralUnit(XmiBaseEntity):
-    Entity: str
-    Attribute: str
-    Unit: XmiUnitEnum
+    entity: str = Field(..., alias="Entity")
+    attribute: str = Field(..., alias="Attribute")
+    unit: XmiUnitEnum = Field(..., alias="Unit")
 
-    @field_validator("Entity")
+    @field_validator("entity")
     @classmethod
     def validate_entity(cls, v):
         if not isinstance(v, str):
             raise TypeError("Entity should be a string.")
         return v
 
-    @field_validator("Attribute")
+    @field_validator("attribute")
     @classmethod
     def validate_attribute(cls, v):
         if not isinstance(v, str):
             raise TypeError("Attribute should be a string.")
         return v
 
-    @field_validator("Unit")
+    @field_validator("unit")
     @classmethod
     def validate_unit(cls, v):
         if not isinstance(v, XmiUnitEnum):

@@ -1,17 +1,17 @@
-from pydantic import field_validator, model_validator
+from pydantic import Field, field_validator, model_validator
 from typing import Optional, Tuple, List
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
 
 
 class XmiStructuralMaterial(XmiBaseEntity):
-    material_type: XmiStructuralMaterialTypeEnum
-    grade: Optional[float] = None
-    unit_weight: Optional[float] = None
-    e_modulus: Optional[float] = None
-    g_modulus: Optional[float] = None
-    poisson_ratio: Optional[float] = None
-    thermal_coefficient: Optional[float] = None
+    material_type: XmiStructuralMaterialTypeEnum = Field(..., alias="MaterialType")
+    grade: Optional[float] = Field(None, alias="Grade")
+    unit_weight: Optional[float] = Field(None, alias="UnitWeight")
+    e_modulus: Optional[float] = Field(None, alias="EModulus")
+    g_modulus: Optional[float] = Field(None, alias="GModulus")
+    poisson_ratio: Optional[float] = Field(None, alias="PoissonRatio")
+    thermal_coefficient: Optional[float] = Field(None, alias="ThermalCoefficient")
 
     @field_validator("material_type")
     @classmethod
