@@ -41,7 +41,7 @@ class XmiLine3D(XmiBaseGeometry):
         return instance, errors
 
 
-# Testing run python -m src.xmi.v2.Models.geometries.xmi_line_3d
+# Testing run python -m src.xmi.v2.models.geometries.xmi_line_3d
 
 if __name__ == "__main__":
     point1 = XmiPoint3D(x=0.0, y=0.0, z=0.0, name="Start", id="p1")

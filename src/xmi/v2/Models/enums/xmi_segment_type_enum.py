@@ -21,7 +21,7 @@ class XmiSegmentTypeEnum(XmiBaseEnum):
         return mapping.get(self)
     
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_segment_type_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_segment_type_enum
 
 if __name__ == "__main__":
     from ..geometries.xmi_point_3d import XmiPoint3D

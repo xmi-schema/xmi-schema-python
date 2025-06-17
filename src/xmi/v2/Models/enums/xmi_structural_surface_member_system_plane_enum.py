@@ -10,7 +10,7 @@ class XmiStructuralSurfaceMemberSystemPlaneEnum(XmiBaseEnum):
     RIGHT = "Right"
 
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_structural_surface_member_system_plane_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_structural_surface_member_system_plane_enum
 
 print(XmiStructuralSurfaceMemberSystemPlaneEnum.RIGHT.value)
 print(XmiStructuralSurfaceMemberSystemPlaneEnum.TOP.name)

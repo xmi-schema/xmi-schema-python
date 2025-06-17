@@ -1,5 +1,5 @@
 from pydantic import Field, field_validator
-from typing import Tuple, List
+from typing import Tuple, List, Optional
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 
 class XmiPoint3D(XmiBaseGeometry):
@@ -15,19 +15,21 @@ class XmiPoint3D(XmiBaseGeometry):
         return float(v)
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Tuple["XmiPoint3D", List[Exception]]:
+    def from_dict(cls, obj: dict) -> Tuple[Optional["XmiPoint3D"], List[Exception]]:
         error_logs: List[Exception] = []
 
-        missing = [attr for attr in ("x", "y", "z") if attr not in obj]
-        if missing:
-            for attr in missing:
+        required_attrs = ["x", "y", "z"]
+        processed_data = obj.copy()
+
+        for attr in required_attrs:
+            if attr not in processed_data:
                 error_logs.append(Exception(f"Missing attribute: {attr}"))
-            return None, error_logs
+                processed_data[attr] = None
 
         try:
-            instance = cls(**obj)
+            instance = cls.model_validate(processed_data)
         except Exception as e:
-            error_logs.append(Exception(f"Error instantiating XmiPoint3D: {e}"))
+            error_logs.append(e)
             instance = None
 
         return instance, error_logs
@@ -44,11 +46,11 @@ class XmiPoint3D(XmiBaseGeometry):
             "IFCGUID": "ifcguid",
         }
 
-        processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items() if k in key_map}
+        processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items()}
         return cls.from_dict(processed)
     
 
-# Testing run python -m src.xmi.v2.Models.geometries.xmi_point_3d
+# Testing run python -m src.xmi.v2.models.geometries.xmi_point_3d
     
 if __name__ == "__main__":
     print("=== Running Quick Tests for XmiPoint3D ===")

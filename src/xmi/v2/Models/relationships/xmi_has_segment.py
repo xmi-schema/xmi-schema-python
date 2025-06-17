@@ -27,8 +27,7 @@ class XmiHasSegment(XmiBaseRelationship):
         return values
 
 
-# Testing run python -m src.xmi.v2.Models.relationships.xmi_has_segment
-
+# Testing run python -m src.xmi.v2.models.relationships.xmi_has_segment
 if __name__ == "__main__":
     source = XmiBaseEntity(id="E1", name="MainElement", entity_type="StructuralElement")
     target = XmiSegment(id="E2", name="Segment1", entity_type="Segment")

@@ -15,7 +15,7 @@ class XmiStructuralCurveMemberSystemLineEnum(XmiBaseEnum):
     UNKNOWN = "Unknown"
 
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_structural_curve_member_system_line_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum
 
 print(XmiStructuralCurveMemberSystemLineEnum.BOTTOM_MIDDLE.value)
 print(XmiStructuralCurveMemberSystemLineEnum.TOP_LEFT.name)

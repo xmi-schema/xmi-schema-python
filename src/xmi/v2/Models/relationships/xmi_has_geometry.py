@@ -30,7 +30,7 @@ class XmiHasGeometry(XmiBaseRelationship):
         return values
 
 
-# Testing run python -m src.xmi.v2.Models.relationships.xmi_has_geometry
+# Testing run python -m src.xmi.v2.models.relationships.xmi_has_geometry
 
 if __name__ == "__main__":
     source = XmiBaseEntity(id="E1", name="Beam")

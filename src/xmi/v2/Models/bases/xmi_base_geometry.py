@@ -16,7 +16,7 @@ class XmiBaseGeometry(XmiBaseEntity):
         populate_by_name = True
 
 
-# Testing run python -m src.xmi.v2.Models.bases.xmi_base_geometry
+# Testing run python -m src.xmi.v2.models.bases.xmi_base_geometry
 
 geometry = XmiBaseGeometry(
     ID="001",

@@ -14,7 +14,7 @@ class XmiShapeEnum(XmiBaseEnum):
     OTHERS = "Others"
 
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_shape_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_shape_enum
 
 print(XmiShapeEnum.RECTANGULAR.value)
 print(XmiShapeEnum.C_SHAPE.name)

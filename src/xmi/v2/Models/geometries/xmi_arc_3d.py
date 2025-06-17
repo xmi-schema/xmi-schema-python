@@ -44,7 +44,7 @@ class XmiArc3D(XmiBaseGeometry):
         return instance, error_logs
 
 
-# Testing run python -m src.xmi.v2.Models.geometries.xmi_arc_3d
+# Testing run python -m src.xmi.v2.models.geometries.xmi_arc_3d
 
 if __name__ == "__main__":
     from .xmi_point_3d import XmiPoint3D

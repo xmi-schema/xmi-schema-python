@@ -7,7 +7,7 @@ class XmiStructuralSurfaceMemberSpanTypeEnum(XmiBaseEnum):
     TWO_WAY = "Two Way"
 
 
-# Testing run python -m src.xmi.v2.Models.enums.xmi_structural_surface_member_span_type_enum
+# Testing run python -m src.xmi.v2.models.enums.xmi_structural_surface_member_span_type_enum
 
 print(XmiStructuralSurfaceMemberSpanTypeEnum.ONE_WAY.value)
 print(XmiStructuralSurfaceMemberSpanTypeEnum.TWO_WAY.name)
