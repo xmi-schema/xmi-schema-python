@@ -1,6 +1,5 @@
 from enum import Enum, unique
 from typing import Optional
-from pydantic import BaseModel, field_validator
 
 @unique
 class XmiBaseEnum(str, Enum): 
