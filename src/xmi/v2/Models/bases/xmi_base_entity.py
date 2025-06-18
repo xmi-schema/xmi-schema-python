@@ -4,7 +4,7 @@ from typing import Optional
 import uuid
 
 class XmiBaseEntity(BaseModel, ABC):
-    id: str = Field(..., alias="ID")
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="ID")
     name: Optional[str] = Field(None, alias="Name")
     ifcguid: Optional[str] = Field(None, alias="IFCGUID")
     native_id: Optional[str] = Field(None, alias="NativeId")
@@ -38,13 +38,13 @@ class XmiStructuralMaterial(XmiBaseEntity):
     unit_weight: Optional[float] = None
 
     def get_info(self) -> str:
-        return f"{self.name} ({self.material_type}), weight: {self.unit_weight}"
+        return f"id: {self.id}, {self.name} ({self.material_type}), weight: {self.unit_weight}"
 
     def create(self):
         print(f"Creating structural material: {self.name}")
 
 entity = XmiStructuralMaterial(
-    id="123", 
+    name="123",
     ifcguid="ABC123",
     description="Steel beam",
     material_type="Steel",

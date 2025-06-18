@@ -5,8 +5,8 @@ from ..bases.xmi_base_entity import XmiBaseEntity
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 
 class XmiHasGeometry(XmiBaseRelationship):
-    is_begin: Optional[bool] = Field(default=None, description="Whether this is the beginning of the geometry relationship")
-    is_end: Optional[bool] = Field(default=None, description="Whether this is the end of the geometry relationship")
+    is_begin: Optional[bool] = Field(default=None, alias="IsBegin", description="Whether this is the beginning of the geometry relationship")
+    is_end: Optional[bool] = Field(default=None, alias="IsEnd", description="Whether this is the end of the geometry relationship")
 
     @field_validator("source", mode="before")
     @classmethod
