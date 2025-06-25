@@ -1,30 +1,36 @@
 import uuid
 
 valid_point_input = {
-    "ID": str(uuid.uuid4()),
-    "Name": "Test Point",
-    "X": 1.23,
-    "Y": 4.56,
-    "Z": 7.89,
-    "Description": "A valid 3D point",
-    "IFCGUID": "abc-123-def"
+    "X": 1932.2,
+    "Y": 187.3,
+    "Z": -3667.1,
+    "ID": "038f4983-0b78-487e-879d-2feca70b7772",
+    "Name": "038f4983-0b78-487e-879d-2feca70b7772",
+    "IFCGUID": "4ef1f147-45cc-46af-9de7-3dfcfa27c044-0005969e",
+    "NativeId": "366238",
+    "Description": "",
+    "EntityType": "XmiPoint3D"
 }
 
 missing_z_input = {
-    "ID": str(uuid.uuid4()),
-    "Name": "Incomplete Point",
-    "X": 1.23,
-    "Y": 4.56,
-    "Description": "Missing Z coordinate",
-    "IFCGUID": "xyz-789"
+    "X": 1932.2,
+    "Y": 187.3,
+    "ID": "038f4983-0b78-487e-879d-2feca70b7772",
+    "Name": "038f4983-0b78-487e-879d-2feca70b7772",
+    "IFCGUID": "4ef1f147-45cc-46af-9de7-3dfcfa27c044-0005969e",
+    "NativeId": "366238",
+    "Description": "",
+    "EntityType": "XmiPoint3D"
 }
 
 invalid_x_input = {
-    "ID": str(uuid.uuid4()),
-    "Name": "Invalid Point",
-    "X": "not a number",
-    "Y": 4.56,
-    "Z": 7.89,
-    "Description": "X is invalid",
-    "IFCGUID": "invalid-001"
+    "X": "Not a float",
+    "Y": 187.3,
+    "Z": -3667.1,
+    "ID": "038f4983-0b78-487e-879d-2feca70b7772",
+    "Name": "038f4983-0b78-487e-879d-2feca70b7772",
+    "IFCGUID": "4ef1f147-45cc-46af-9de7-3dfcfa27c044-0005969e",
+    "NativeId": "366238",
+    "Description": "",
+    "EntityType": "XmiPoint3D"
 }
