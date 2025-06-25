@@ -26,41 +26,24 @@ class XmiLine3D(XmiBaseGeometry):
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiLine3D"], List[Exception]]:
         errors: List[Exception] = []
 
-        missing = [attr for attr in ("start_point", "end_point") if attr not in obj]
-        if missing:
-            for attr in missing:
-                errors.append(Exception(f"Missing required field: {attr}"))
+        if "start_point" not in obj or "end_point" not in obj:
+            if "start_point" not in obj:
+                errors.append(Exception("Missing required field: start_point"))
+            if "end_point" not in obj:
+                errors.append(Exception("Missing required field: end_point"))
+            return None, errors
+
+        start_point, start_errors = XmiPoint3D.from_dict(obj["start_point"])
+        end_point, end_errors = XmiPoint3D.from_dict(obj["end_point"])
+        errors.extend(start_errors + end_errors)
+
+        if start_point is None or end_point is None:
             return None, errors
 
         try:
-            instance = cls(**obj)
+            instance = cls(start_point=start_point, end_point=end_point)
         except Exception as e:
             errors.append(e)
             instance = None
 
         return instance, errors
-
-
-# Testing run python -m src.xmi.v2.models.geometries.xmi_line_3d
-
-if __name__ == "__main__":
-    point1 = XmiPoint3D(x=0.0, y=0.0, z=0.0, name="Start", id="p1")
-    point2 = XmiPoint3D(x=10.0, y=5.0, z=2.0, name="End", id="p2")
-
-    line_data = {
-        "start_point": point1,
-        "end_point": point2,
-        "name": "TestLine",
-        "id": "line123",
-        "description": "A simple test line"
-    }
-
-    line_instance, errors = XmiLine3D.from_dict(line_data)
-
-    if errors:
-        print("Errors during instantiation:")
-        for e in errors:
-            print(" -", e)
-    else:
-        print("Line created successfully:")
-        print(line_instance.model_dump(by_alias=True))
