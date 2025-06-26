@@ -21,8 +21,12 @@ class XmiBaseEnum(str, Enum):
             return None
 
     @classmethod
-    def from_attribute_get_enum(cls, attribute_str: str) -> Optional["XmiBaseEnum"]:
+    def from_attribute_get_enum(cls, attribute_str: str) -> "XmiBaseEnum":
+        if isinstance(attribute_str, cls):
+            return attribute_str
+
         for member in cls:
             if member.value == attribute_str:
                 return member
-        return None
+
+        raise ValueError(f"Invalid {cls.__name__} value: {attribute_str}")
