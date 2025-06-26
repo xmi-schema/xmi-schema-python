@@ -5,10 +5,10 @@ from .xmi_point_3d import XmiPoint3D
 
 
 class XmiArc3D(XmiBaseGeometry):
-    start_point: XmiPoint3D = Field(..., description="Start point of the arc")
-    end_point: XmiPoint3D = Field(..., description="End point of the arc")
-    center_point: XmiPoint3D = Field(..., description="Center point of the arc")
-    radius: Optional[float] = Field(None, description="Radius of the arc")
+    start_point: XmiPoint3D = Field(..., alias="StartPoint", description="Start point of the arc")
+    end_point: XmiPoint3D = Field(..., alias="EndPoint", description="End point of the arc")
+    center_point: XmiPoint3D = Field(..., alias="CenterPoint", description="Center point of the arc")
+    radius: Optional[float] = Field(None, alias="Radius", description="Radius of the arc")
 
     @field_validator("start_point", "end_point", "center_point", mode="before")
     @classmethod
@@ -29,41 +29,31 @@ class XmiArc3D(XmiBaseGeometry):
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiArc3D"], List[Exception]]:
         error_logs: List[Exception] = []
 
-        missing = [attr for attr in ("start_point", "end_point", "center_point") if attr not in obj]
+        required_attrs = ("start_point", "end_point", "center_point")
+        missing = [attr for attr in required_attrs if attr not in obj]
         if missing:
             for attr in missing:
                 error_logs.append(Exception(f"Missing attribute: {attr}"))
             return None, error_logs
 
+        start_point, start_errors = XmiPoint3D.from_dict(obj["start_point"])
+        end_point, end_errors = XmiPoint3D.from_dict(obj["end_point"])
+        center_point, center_errors = XmiPoint3D.from_dict(obj["center_point"])
+        error_logs.extend(start_errors + end_errors + center_errors)
+
+        if start_point is None or end_point is None or center_point is None:
+            return None, error_logs
+
         try:
-            instance = cls(**obj)
+            instance = cls(
+                start_point=start_point,
+                end_point=end_point,
+                center_point=center_point,
+                radius=obj.get("radius"),
+                name=obj.get("name")
+            )
         except Exception as e:
             error_logs.append(Exception(f"Error instantiating XmiArc3D: {e}"))
             instance = None
 
         return instance, error_logs
-
-
-# Testing run python -m src.xmi.v2.models.geometries.xmi_arc_3d
-
-if __name__ == "__main__":
-    from .xmi_point_3d import XmiPoint3D
-
-    p1 = XmiPoint3D(x=0, y=0, z=0)
-    p2 = XmiPoint3D(x=1, y=0, z=0)
-    p3 = XmiPoint3D(x=0.5, y=0.5, z=0)
-
-    arc_data = {
-        "start_point": p1,
-        "end_point": p2,
-        "center_point": p3,
-        "radius": 0.5,
-        "name": "Arc between P1 and P2"
-    }
-
-    arc, errors = XmiArc3D.from_dict(arc_data)
-    if arc:
-        print(arc.model_dump())
-    else:
-        for e in errors:
-            print(f"Error: {e}")

@@ -1,6 +1,4 @@
-from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
-
-valid_line_input = {
+valid_arc_input = {
     "start_point": {
         "X": 1932.2,
         "Y": 187.3,
@@ -22,10 +20,23 @@ valid_line_input = {
         "NativeId": "366240",
         "Description": "",
         "EntityType": "XmiPoint3D"
-    }
+    },
+    "center_point": {
+        "X": 1932.2,
+        "Y": -2812.7,
+        "Z": -3667.1,
+        "ID": "014de7f3-dca5-423e-8d9f-af9b96f2a0d3",
+        "Name": "014de7f3-dca5-423e-8d9f-af9b96f2a0d3",
+        "IFCGUID": "2bc1f147-45cc-46af-9de7-3dfcfa27c044-000596ba",
+        "NativeId": "366266",
+        "Description": "",
+        "EntityType": "XmiPoint3D"
+    },
+    "radius": 0.5,
+    "name": "Arc between P1 and P2"
 }
 
-missing_end_input = {
+missing_center_input = {
     "start_point": {
         "X": 1932.2,
         "Y": 187.3,
@@ -36,19 +47,6 @@ missing_end_input = {
         "NativeId": "366238",
         "Description": "",
         "EntityType": "XmiPoint3D"
-    }
-}
-
-invalid_start_point_input = {
-    "start_point": {
-        "ID": "69ba726b-de6a-4959-9943-78cedda121bd",
-        "Name": "Level 3",
-        "IFCGUID": "ac57991d-73eb-402c-abe6-9e3d3ff9c128-00055c52",
-        "NativeId": "351314",
-        "Description": "",
-        "EntityType": "XmiStructuralStorey",
-        "StoreyElevation": 6000.0,
-        "StoreyMass": 1.0
     },
     "end_point": {
         "X": -1067.8,
@@ -60,5 +58,8 @@ invalid_start_point_input = {
         "NativeId": "366240",
         "Description": "",
         "EntityType": "XmiPoint3D"
-    }
+    },
+    "radius": 0.5,
+    "name": "Incomplete arc"
 }
+

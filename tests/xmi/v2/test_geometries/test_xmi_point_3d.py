@@ -1,5 +1,5 @@
 from src.xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
-from tests.xmi.v2.models.test_inputs import xmi_point_3d_input as input_data
+from tests.xmi.v2.test_inputs import xmi_point_3d_input as input_data
 
 def test_valid_point():
     instance, errors = XmiPoint3D.from_dict(input_data.valid_point_input)
@@ -20,4 +20,4 @@ def test_invalid_x():
     assert any("X must be a number")
 
 
-# .venv/bin/python -m pytest tests/xmi/v2/models/test_geometries/test_xmi_point_3d.py
+# .venv/bin/python -m pytest tests/xmi/v2/test_geometries/test_xmi_point_3d.py

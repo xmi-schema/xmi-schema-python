@@ -1,5 +1,3 @@
-import uuid
-
 valid_point_input = {
     "X": 1932.2,
     "Y": 187.3,

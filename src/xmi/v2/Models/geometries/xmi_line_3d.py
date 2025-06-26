@@ -4,8 +4,8 @@ from ..bases.xmi_base_geometry import XmiBaseGeometry
 from .xmi_point_3d import XmiPoint3D
 
 class XmiLine3D(XmiBaseGeometry):
-    start_point: XmiPoint3D = Field(..., description="Start point of the line")
-    end_point: XmiPoint3D = Field(..., description="End point of the line")
+    start_point: XmiPoint3D = Field(..., alias="StartPoint", description="Start point of the line")
+    end_point: XmiPoint3D = Field(..., alias="EndPoint", description="End point of the line")
 
     @field_validator("start_point", "end_point", mode="before")
     @classmethod
@@ -24,26 +24,29 @@ class XmiLine3D(XmiBaseGeometry):
 
     @classmethod
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiLine3D"], List[Exception]]:
-        errors: List[Exception] = []
+        error_logs: List[Exception] = []
 
-        if "start_point" not in obj or "end_point" not in obj:
-            if "start_point" not in obj:
-                errors.append(Exception("Missing required field: start_point"))
-            if "end_point" not in obj:
-                errors.append(Exception("Missing required field: end_point"))
-            return None, errors
+        required_attrs = ("start_point", "end_point")
+        missing = [attr for attr in required_attrs if attr not in obj]
+        if missing:
+            for attr in missing:
+                error_logs.append(Exception(f"Missing attribute: {attr}"))
+            return None, error_logs
 
         start_point, start_errors = XmiPoint3D.from_dict(obj["start_point"])
         end_point, end_errors = XmiPoint3D.from_dict(obj["end_point"])
-        errors.extend(start_errors + end_errors)
+        error_logs.extend(start_errors + end_errors)
 
         if start_point is None or end_point is None:
-            return None, errors
+            return None, error_logs
 
         try:
-            instance = cls(start_point=start_point, end_point=end_point)
+            instance = cls(
+                start_point=start_point, 
+                end_point=end_point
+            )
         except Exception as e:
-            errors.append(e)
+            error_logs.append(Exception(f"Error instantiating XmiLine3D: {e}"))
             instance = None
 
-        return instance, errors
+        return instance, error_logs

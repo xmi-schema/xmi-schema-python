@@ -28,7 +28,7 @@ class XmiPoint3D(XmiBaseGeometry):
         try:
             instance = cls.model_validate(processed_data)
         except Exception as e:
-            error_logs.append(e)
+            error_logs.append(Exception(f"Error instantiating XmiPoint3D: {e}"))
             instance = None
 
         return instance, error_logs
