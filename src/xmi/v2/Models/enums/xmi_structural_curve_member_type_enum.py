@@ -7,9 +7,3 @@ class XmiStructuralCurveMemberTypeEnum(XmiBaseEnum):
     COLUMN = "Column"
     BRACING = "Bracing"
     OTHER = "Other"
-
-
-# Testing run python -m src.xmi.v2.models.enums.xmi_structural_curve_member_type_enum
-
-print(XmiStructuralCurveMemberTypeEnum.BRACING.value)
-print(XmiStructuralCurveMemberTypeEnum.COLUMN.name)

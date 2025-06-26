@@ -14,7 +14,3 @@ class XmiStructuralSurfaceMemberTypeEnum(XmiBaseEnum):
     RAFT = "Raft"
 
 
-# Testing run python -m src.xmi.v2.models.enums.xmi_structural_surface_member_type_enum
-
-print(XmiStructuralSurfaceMemberTypeEnum.STRIP_FOOTING.value)
-print(XmiStructuralSurfaceMemberTypeEnum.SLAB.name)

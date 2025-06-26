@@ -13,9 +13,3 @@ class XmiUnitEnum(XmiBaseEnum):
     MILLIMETER3 = "mm^3"
     MILLIMETER2 = "mm^2"
     SECOND = "sec"
-
-
-# Testing run python -m src.xmi.v2.models.enums.xmi_unit_enum
-
-print(XmiUnitEnum.MILLIMETER.value)
-print(XmiUnitEnum.METER2.name)
