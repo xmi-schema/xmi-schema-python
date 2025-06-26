@@ -13,9 +13,3 @@ class XmiStructuralCurveMemberSystemLineEnum(XmiBaseEnum):
     BOTTOM_MIDDLE = "Bottom Middle"
     BOTTOM_RIGHT = "Bottom Right"
     UNKNOWN = "Unknown"
-
-
-# Testing run python -m src.xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum
-
-print(XmiStructuralCurveMemberSystemLineEnum.BOTTOM_MIDDLE.value)
-print(XmiStructuralCurveMemberSystemLineEnum.TOP_LEFT.name)

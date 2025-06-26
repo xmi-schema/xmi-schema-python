@@ -12,9 +12,3 @@ class XmiShapeEnum(XmiBaseEnum):
     SQUARE_HOLLOW = "Square Hollow"
     RECTANGULAR_HOLLOW = "Rectangular Hollow"
     OTHERS = "Others"
-
-
-# Testing run python -m src.xmi.v2.models.enums.xmi_shape_enum
-
-print(XmiShapeEnum.RECTANGULAR.value)
-print(XmiShapeEnum.C_SHAPE.name)
