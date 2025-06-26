@@ -28,9 +28,10 @@ class XmiArc3D(XmiBaseGeometry):
     @classmethod
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiArc3D"], List[Exception]]:
         error_logs: List[Exception] = []
+        processed = obj.copy()
 
         required_attrs = ("start_point", "end_point", "center_point")
-        missing = [attr for attr in required_attrs if attr not in obj]
+        missing = [attr for attr in required_attrs if attr not in processed]
         if missing:
             for attr in missing:
                 error_logs.append(Exception(f"Missing attribute: {attr}"))
