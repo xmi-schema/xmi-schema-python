@@ -24,7 +24,7 @@ class XmiStructuralPointConnection(XmiBaseEntity):
         values.setdefault("entity_type", "XmiStructuralPointConnection")
         return values
     
-    '''@classmethod
+    @classmethod
     def from_dict(cls, obj: dict) -> Tuple[Optional["XmiStructuralPointConnection"], List[Exception]]:
         error_logs = []
         required = ["id", "name", "point"]
@@ -43,7 +43,7 @@ class XmiStructuralPointConnection(XmiBaseEntity):
 
         return instance, error_logs
 
-    @classmethod
+    '''@classmethod
     def from_xmi_dict_obj(cls, xmi_dict_obj: dict) -> Tuple[Optional["XmiStructuralPointConnection"], List[Exception]]:
         key_map = {
             "ID": "id",
@@ -55,23 +55,3 @@ class XmiStructuralPointConnection(XmiBaseEntity):
 
         processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items()}
         return cls.from_dict(processed)'''
-
-
-# Testing run python -m src.xmi.v2.models.entities.xmi_structural_point_connection
-if __name__ == "__main__":
-    storey = XmiStructuralStorey(
-        id="storey001",
-        name="Level 1",
-        description="Ground level",
-        storey_elevation=0
-    )
-
-    spc = XmiStructuralPointConnection(
-        id="SPC001",
-        name="Start Point Connection",
-        point=XmiPoint3D(x=10.0, y=5.0, z=0.0),
-        storey=storey
-    )
-
-    print("Created XmiStructuralPointConnection:")
-    print(spc.model_dump(by_alias=True))
