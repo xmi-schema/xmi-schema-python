@@ -1,13 +1,11 @@
 from pydantic import Field, field_validator, model_validator
 from typing import Optional, Tuple, Union, List, Dict, Any
 from ..bases.xmi_base_entity import XmiBaseEntity
-from ..entities.xmi_structural_material import XmiStructuralMaterial
 from ..enums.xmi_shape_enum import XmiShapeEnum
 from ...utils.xmi_utilities import is_empty_or_whitespace
 from ...utils.xmi_errors import XmiInconsistentDataTypeError, XmiMissingRequiredAttributeError
 
 class XmiStructuralCrossSection(XmiBaseEntity):
-    material: XmiStructuralMaterial = Field(..., alias="Material")
     shape: XmiShapeEnum = Field(..., alias="Shape")
     parameters: Tuple[Union[float, int], ...] = Field(..., alias="Parameters")
     area: Optional[float] = Field(None, alias="Area")
@@ -36,13 +34,6 @@ class XmiStructuralCrossSection(XmiBaseEntity):
                 raise ValueError("Value cannot be smaller than 0")
         return tuple(v)
 
-    @field_validator("material")
-    @classmethod
-    def validate_material(cls, v):
-        if not isinstance(v, XmiStructuralMaterial):
-            raise TypeError("material must be of type XmiStructuralMaterial")
-        return v
-
     @field_validator("shape")
     @classmethod
     def validate_shape(cls, v):
@@ -67,7 +58,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         values.setdefault("entity_type", "XmiStructuralCrossSection")
         return values
     
-    '''@classmethod
+    @classmethod
     def convert_parameter_string_to_tuple(cls, parameter_str: str) -> Tuple[float, ...]:
         parameter_list: List[str] = parameter_str.split(';')
         for param in parameter_list:
@@ -86,23 +77,19 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         errors = []
         processed = obj.copy()
 
-        if "shape" in processed:
-            shape = XmiShapeEnum.from_attribute_get_enum(processed["shape"])
-            if shape is None:
-                errors.append(Exception(f"Invalid shape enum value: {processed['shape']}"))
-                return None, errors
-            processed["shape"] = shape
-        else:
+        if "Shape" in processed:
+            processed["shape"] = processed.pop("Shape")
+        elif "shape" not in processed:
             errors.append(XmiMissingRequiredAttributeError("Missing 'shape'"))
             return None, errors
 
-        if "parameters" in processed:
+        if "Parameters" in processed:
             try:
-                processed["parameters"] = cls.convert_parameter_string_to_tuple(processed["parameters"])
+                processed["parameters"] = cls.convert_parameter_string_to_tuple(processed.pop("Parameters"))
             except Exception as e:
                 errors.append(e)
                 return None, errors
-        else:
+        elif "parameters" not in processed:
             errors.append(XmiMissingRequiredAttributeError("Missing 'parameters'"))
             return None, errors
 
@@ -115,7 +102,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         return instance, errors
 
     
-    @classmethod
+    '''@classmethod
     def from_xmi_dict_obj(
         cls,
         xmi_dict_obj: Dict[str, Any],
@@ -153,43 +140,3 @@ class XmiStructuralCrossSection(XmiBaseEntity):
 
         return instance, error_logs'''
     
-
-# Testing run python -m src.xmi.v2.models.entities.xmi_structural_cross_section
-if __name__ == "__main__":
-    from ..enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
-
-    material = XmiStructuralMaterial(
-        id="mat001",
-        name="S450",
-        material_type=XmiStructuralMaterialTypeEnum.STEEL,
-        grade=450.0,
-        unit_weight=7850.0,
-        e_modulus=200000.0,
-        g_modulus=80000.0,
-        poisson_ratio=0.3,
-        thermal_coefficient=1.2e-5,
-        description="High-strength steel"
-    )
-
-    cross_section = XmiStructuralCrossSection(
-        id="xs001",
-        name="I-Beam 300x150",
-        description="Test I-beam section",
-        ifcguid="a-b-c-d",
-        shape="I Shape",
-        parameters=(300.0, 150.0, 10.0, 6.0, 8.0),
-        material=material,
-        ix=1200,
-        iy=500,
-        rx=3.5,
-        ry=1.2,
-        ex=200000,
-        ey=200000,
-        zx=300,
-        zy=150,
-        j=80,
-        area=4500
-    )
-
-    print("Created XmiStructuralCrossSection:")
-    print(cross_section.model_dump(by_alias=True))

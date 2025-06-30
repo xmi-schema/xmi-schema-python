@@ -1,0 +1,20 @@
+valid_cross_section_input = {
+    "ID": "b22bd84c-91fd-445b-a61a-54268be48999",
+    "Name": "300 x 300mm",
+    "IFCGUID": "ac57991d-73eb-402c-abe6-9e3d3ff9c128-00055b16",
+    "NativeId": "350998",
+    "Description": "",
+    "EntityType": "XmiStructuralCrossSection",
+    "Shape": "Unknown",
+    "Parameters": "300;300",
+    "Area": 3179999.9999999977,
+    "SecondMomentOfAreaXAxis": 0.0,
+    "SecondMomentOfAreaYAxis": 0.0,
+    "RadiusOfGyrationXAxis": 0.0,
+    "RadiusOfGyrationYAxis": 0.0,
+    "ElasticModulusXAxis": 0.0,
+    "ElasticModulusYAxis": 0.0,
+    "PlasticModulusXAxis": 0.0,
+    "PlasticModulusYAxis": 0.0,
+    "TorsionalConstant": 0.0
+}

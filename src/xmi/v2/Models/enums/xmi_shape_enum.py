@@ -12,3 +12,4 @@ class XmiShapeEnum(XmiBaseEnum):
     SQUARE_HOLLOW = "Square Hollow"
     RECTANGULAR_HOLLOW = "Rectangular Hollow"
     OTHERS = "Others"
+    UNKNOWN = "Unknown"

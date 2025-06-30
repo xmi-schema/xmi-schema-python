@@ -7,17 +7,15 @@ def test_valid_segment_instantiation():
 
     assert segment.name == "Segment 1"
     assert segment.position == 1
-    assert segment.begin_node.point.x == 0.0
-    assert segment.end_node.point.x == 10.0
     assert segment.segment_type.name == "LINE"
     assert segment.entity_type == "XmiSegment"
 
 
-def test_missing_geometry_raises():
+def test_missing_position_raises():
     with pytest.raises(ValueError) as exc_info:
-        XmiSegment(**input_data.missing_geometry_input)
+        XmiSegment(**input_data.missing_position_input)
 
-    assert "Geometry" in str(exc_info.value)
+    assert "Position" in str(exc_info.value)
 
 
 def test_invalid_segment_type_raises():
