@@ -38,19 +38,3 @@ class XmiStructuralUnit(XmiBaseEntity):
             values["name"] = f"{cls.__name__}_{values['id']}"
         values.setdefault("entity_type", "XmiStructuralUnit")
         return values
-
-
-# Testing run python -m src.xmi.v2.models.entities.xmi_structural_unit
-if __name__ == "__main__":
-    def test_structural_unit():
-        unit = XmiStructuralUnit(
-            Entity="XmiBeam",
-            Attribute="length",
-            Unit=XmiUnitEnum.METER,
-            description="Length unit of beam"
-        )
-
-        print("Created XmiStructuralUnit:")
-        print(unit.model_dump(by_alias=True))
-
-    test_structural_unit()
