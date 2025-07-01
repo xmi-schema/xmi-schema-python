@@ -8,8 +8,9 @@ class XmiStructuralPointConnection(XmiBaseEntity):
     point: XmiPoint3D = Field(..., alias="Point")
     storey: Optional[XmiStructuralStorey] = Field(None, alias="Storey")
 
-    class Config:
-        populate_by_name = True
+    model_config = {
+        "populate_by_name": True,
+    }
 
     @field_validator("point")
     @classmethod

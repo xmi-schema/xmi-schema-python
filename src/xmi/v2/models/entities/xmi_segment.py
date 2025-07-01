@@ -6,8 +6,9 @@ class XmiSegment(XmiBaseEntity):
     position: int = Field(..., alias="Position")
     segment_type: XmiSegmentTypeEnum = Field(..., alias="SegmentType")
 
-    class Config:
-        populate_by_name = True
+    model_config = {
+        "populate_by_name": True,
+    }
 
     @field_validator("segment_type")
     @classmethod

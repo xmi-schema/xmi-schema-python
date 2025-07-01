@@ -19,8 +19,9 @@ class XmiStructuralCrossSection(XmiBaseEntity):
     plastic_modulus_y_axis: Optional[float] = Field(None, alias="PlasticModulusYAxis")
     torsional_constant: Optional[float] = Field(None, alias="TorsionalConstant")
     
-    class Config:
-        populate_by_name = True
+    model_config = {
+        "populate_by_name": True,
+    }
 
     @field_validator("parameters")
     @classmethod

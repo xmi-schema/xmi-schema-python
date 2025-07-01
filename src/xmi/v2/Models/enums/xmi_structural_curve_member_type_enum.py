@@ -7,3 +7,4 @@ class XmiStructuralCurveMemberTypeEnum(XmiBaseEnum):
     COLUMN = "Column"
     BRACING = "Bracing"
     OTHER = "Other"
+    UNKNOWN = "Unknown"
