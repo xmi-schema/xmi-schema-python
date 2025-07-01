@@ -24,8 +24,9 @@ class XmiStructuralSurfaceMember(XmiBaseEntity):
     storey: Optional[XmiStructuralStorey] = Field(None, alias="Storey")
     height: Optional[Union[float, int]] = Field(None, alias="Height")
 
-    class Config:
-        populate_by_name = True
+    model_config = {
+        "populate_by_name": True,
+    }
 
     @field_validator("segments")
     @classmethod

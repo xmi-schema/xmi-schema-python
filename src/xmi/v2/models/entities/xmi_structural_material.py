@@ -14,8 +14,9 @@ class XmiStructuralMaterial(XmiBaseEntity):
     poisson_ratio: Optional[Tuple[float, float, float]] = Field(None, alias="PoissonRatio")
     thermal_coefficient: Optional[float] = Field(None, alias="ThermalCoefficient")
 
-    class Config:
-        populate_by_name = True
+    model_config = {
+        "populate_by_name": True,
+    }
 
     @field_validator("material_type")
     @classmethod

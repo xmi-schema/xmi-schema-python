@@ -1,0 +1,22 @@
+valid_curve_member_input = {
+    "ID": "eebf4b4f-14b0-4be1-8a6d-94b9858cff4a",
+    "Name": "eebf4b4f-14b0-4be1-8a6d-94b9858cff4a",
+    "IFCGUID": "4ef1f147-45cc-46af-9de7-3dfcfa27c044-00059530",
+    "NativeId": "365872",
+    "Description": "",
+    "EntityType": "XmiStructuralCurveMember",
+    "CurvememberType": "Unknown",
+    "SystemLine": "Unknown",
+    "Length": 0.0,
+    "LocalAxisX": "0,0,1",
+    "LocalAxisY": "1,0,0",
+    "LocalAxisZ": "0,1,0",
+    "BeginNodeYOffset": 0.0,
+    "EndNodeYOffset": 0.0,
+    "BeginNodeZOffset": 0.0,
+    "EndNodeZOffset": 0.0,
+    "BeginNodeXOffset": 0.0,
+    "EndNodeXOffset": 0.0,
+    "EndFixityStart": "FFFFFF",
+    "EndFixityEnd": "FFFFFF"
+}
