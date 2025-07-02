@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, field_validator, model_validator, ConfigDict
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 
@@ -6,9 +6,7 @@ class XmiSegment(XmiBaseEntity):
     position: int = Field(..., alias="Position")
     segment_type: XmiSegmentTypeEnum = Field(..., alias="SegmentType")
 
-    model_config = {
-        "populate_by_name": True,
-    }
+    model_config = ConfigDict(populate_by_name=True)
 
     @field_validator("segment_type")
     @classmethod

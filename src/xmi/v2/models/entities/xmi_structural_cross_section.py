@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Optional, Tuple, Union, List, Dict, Any
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..enums.xmi_shape_enum import XmiShapeEnum
@@ -19,9 +19,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
     plastic_modulus_y_axis: Optional[float] = Field(None, alias="PlasticModulusYAxis")
     torsional_constant: Optional[float] = Field(None, alias="TorsionalConstant")
     
-    model_config = {
-        "populate_by_name": True,
-    }
+    model_config = ConfigDict(populate_by_name=True)
 
     @field_validator("parameters")
     @classmethod

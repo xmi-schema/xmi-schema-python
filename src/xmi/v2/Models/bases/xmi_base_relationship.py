@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, Field, model_validator, ConfigDict
 from typing import Optional
 from .xmi_base_entity import XmiBaseEntity 
 import uuid
@@ -24,8 +24,7 @@ class XmiBaseRelationship(BaseModel):
             raise ValueError("Name must be provided")
         return values
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 # Testing run python -m src.xmi.v2.models.bases.xmi_base_relationship

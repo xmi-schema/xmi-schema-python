@@ -12,5 +12,4 @@ class XmiStructuralSurfaceMemberTypeEnum(XmiBaseEnum):
     WALL_PANEL = "Wall Panel"  # this sounds like archi. should not be here
     # For future changes to be shifted to foundation type elements
     RAFT = "Raft"
-
-
+    UNKNOWN = "Unknown"
