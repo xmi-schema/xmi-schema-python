@@ -28,27 +28,3 @@ class XmiBaseEntity(BaseModel, ABC):
         return values
 
     model_config = ConfigDict(populate_by_name=True)
-
-
-# Testing run python -m src.xmi.v2.models.bases.xmi_base_entity 
-
-class XmiStructuralMaterial(XmiBaseEntity):
-    material_type: str
-    unit_weight: Optional[float] = None
-
-    def get_info(self) -> str:
-        return f"id: {self.id}, {self.name} ({self.material_type}), weight: {self.unit_weight}"
-
-    def create(self):
-        print(f"Creating structural material: {self.name}")
-
-entity = XmiStructuralMaterial(
-    name="123",
-    ifcguid="ABC123",
-    description="Steel beam",
-    material_type="Steel",
-    unit_weight=78.5
-)
-
-print(entity.get_info())
-entity.create()

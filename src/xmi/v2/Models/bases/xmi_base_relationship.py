@@ -16,22 +16,8 @@ class XmiBaseRelationship(BaseModel):
     @model_validator(mode="before")
     @classmethod
     def validate_fields(cls, values):
-        if not isinstance(values.get("source"), XmiBaseEntity):
-            raise TypeError("Source must be of type XmiBaseEntity")
-        if not isinstance(values.get("target"), XmiBaseEntity):
-            raise TypeError("Target must be of type XmiBaseEntity")
         if not values.get("name"):
             raise ValueError("Name must be provided")
         return values
 
     model_config = ConfigDict(populate_by_name=True)
-
-
-# Testing run python -m src.xmi.v2.models.bases.xmi_base_relationship
-
-source = XmiBaseEntity(id="123", name="StartNode", entity_type="Node")
-target = XmiBaseEntity(id="456", name="EndNode", entity_type="Node")
-
-relationship = XmiBaseRelationship(source=source, target=target, name="connects_to")
-
-print(relationship.model_dump(by_alias=True, exclude_none=True))
