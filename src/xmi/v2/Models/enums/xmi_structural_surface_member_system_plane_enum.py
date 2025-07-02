@@ -8,3 +8,4 @@ class XmiStructuralSurfaceMemberSystemPlaneEnum(XmiBaseEnum):
     MIDDLE = "Middle"
     LEFT = "Left"
     RIGHT = "Right"
+    UNKNOWN = "Unknown"

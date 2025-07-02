@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Dict, Any, List, Optional, Tuple, Union
 from ..bases.xmi_base_entity import XmiBaseEntity
 from ..enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
@@ -23,40 +23,39 @@ class XmiStructuralCurveMember(XmiBaseEntity):
 
     length: Optional[Union[int, float]] = Field(None, alias="Length")
 
-    end_fixity_start: Optional[float]  = Field(None, alias="EndFixityStart")
-    end_fixity_end: Optional[float] = Field(None, alias="EndFixityEnd")
+    end_fixity_start: Optional[str] = Field(None, alias="EndFixityStart")
+    end_fixity_end: Optional[str] = Field(None, alias="EndFixityEnd")
 
-    model_config = {
-        "populate_by_name": True,
-    }
+    model_config = ConfigDict(populate_by_name=True)
 
+    @staticmethod
+    def parse_axis_string(value: Union[str, Tuple]) -> Tuple[float, float, float]:
+        if isinstance(value, tuple):
+            if len(value) != 3 or not all(isinstance(i, (int, float)) for i in value):
+                raise ValueError("Axis tuple must contain exactly 3 numbers")
+            return tuple(float(i) for i in value)
+
+        if isinstance(value, str):
+            parts = value.split(",")
+            if len(parts) != 3:
+                raise ValueError("Axis string must contain exactly 3 comma-separated values")
+            try:
+                return tuple(float(p.strip()) for p in parts)
+            except ValueError as e:
+                raise ValueError("All axis values must be valid numbers") from e
+
+        raise TypeError("Axis must be a string or tuple of 3 floats")
 
     @field_validator("local_axis_x", "local_axis_y", "local_axis_z", mode="before")
     @classmethod
     def parse_and_validate_axis(cls, v, info):
-        if isinstance(v, tuple):
-            if len(v) != 3 or not all(isinstance(i, (int, float)) for i in v):
-                raise ValueError(f"{info.field_name} must be a tuple of 3 numbers")
-            return tuple(float(i) for i in v)
-
-        if isinstance(v, str):
-            parts = v.split(',')
-            if len(parts) != 3:
-                raise ValueError(f"{info.field_name} must contain exactly 3 components separated by commas")
-            try:
-                return tuple(float(part.strip()) for part in parts)
-            except ValueError as e:
-                raise ValueError(f"All values in {info.field_name} must be valid numbers") from e
-
-        raise TypeError(f"{info.field_name} must be a string or tuple of 3 numbers")
-
+        return cls.parse_axis_string(v)
 
     @model_validator(mode="before")
     @classmethod
-    def fill_entity_type(cls, values):
+    def set_entity_type(cls, values):
         values.setdefault("EntityType", "XmiStructuralCurveMember")
         return values
-    
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Tuple[Optional["XmiStructuralCurveMember"], List[Exception]]:
@@ -78,17 +77,17 @@ class XmiStructuralCurveMember(XmiBaseEntity):
             errors.append(e)
 
         try:
-            processed["local_axis_x"] = cls.parse_and_validate_axis("x", processed["LocalAxisX"])
+            processed["local_axis_x"] = cls.parse_axis_string(processed["LocalAxisX"])
         except Exception as e:
             errors.append(e)
 
         try:
-            processed["local_axis_y"] = cls.parse_and_validate_axis("y", processed["LocalAxisY"])
+            processed["local_axis_y"] = cls.parse_axis_string(processed["LocalAxisY"])
         except Exception as e:
             errors.append(e)
 
         try:
-            processed["local_axis_z"] = cls.parse_and_validate_axis("z", processed["LocalAxisZ"])
+            processed["local_axis_z"] = cls.parse_axis_string(processed["LocalAxisZ"])
         except Exception as e:
             errors.append(e)
 
@@ -100,4 +99,3 @@ class XmiStructuralCurveMember(XmiBaseEntity):
             return instance, []
         except Exception as e:
             return None, [e]
-

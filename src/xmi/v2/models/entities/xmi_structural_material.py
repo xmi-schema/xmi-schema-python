@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Optional, Tuple, List
 from ast import literal_eval
 from ..bases.xmi_base_entity import XmiBaseEntity
@@ -14,9 +14,7 @@ class XmiStructuralMaterial(XmiBaseEntity):
     poisson_ratio: Optional[Tuple[float, float, float]] = Field(None, alias="PoissonRatio")
     thermal_coefficient: Optional[float] = Field(None, alias="ThermalCoefficient")
 
-    model_config = {
-        "populate_by_name": True,
-    }
+    model_config = ConfigDict(populate_by_name=True)
 
     @field_validator("material_type")
     @classmethod

@@ -1,4 +1,4 @@
-from pydantic import Field, model_validator
+from pydantic import Field, model_validator, ConfigDict
 from typing import Optional
 from .xmi_base_entity import XmiBaseEntity
 
@@ -12,8 +12,7 @@ class XmiBaseGeometry(XmiBaseEntity):
 
         return values
 
-    class Config:
-        populate_by_name = True
+    model_config = ConfigDict(populate_by_name=True)
 
 
 # Testing run python -m src.xmi.v2.models.bases.xmi_base_geometry
