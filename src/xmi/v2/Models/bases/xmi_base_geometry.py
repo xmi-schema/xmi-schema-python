@@ -13,15 +13,3 @@ class XmiBaseGeometry(XmiBaseEntity):
         return values
 
     model_config = ConfigDict(populate_by_name=True)
-
-
-# Testing run python -m src.xmi.v2.models.bases.xmi_base_geometry
-
-geometry = XmiBaseGeometry(
-    ID="001",
-    Name=None,
-    IFCGUID="abc-123",
-    Description="Test geometry"
-)
-
-print(geometry.model_dump(by_alias=True, exclude_none=True))

@@ -12,14 +12,14 @@ class XmiHasGeometry(XmiBaseRelationship):
     @classmethod
     def validate_source(cls, v):
         if not isinstance(v, XmiBaseEntity):
-            raise TypeError("'source' should be of type XmiBaseEntity")
+            raise TypeError("Source must be of type XmiBaseEntity")
         return v
 
     @field_validator("target", mode="before")
     @classmethod
     def validate_target(cls, v):
         if not isinstance(v, XmiBaseGeometry):
-            raise TypeError("'target' should be of type XmiBaseGeometry")
+            raise TypeError("Target must be of type XmiBaseGeometry")
         return v
 
     @model_validator(mode="before")
@@ -28,18 +28,3 @@ class XmiHasGeometry(XmiBaseRelationship):
         values.setdefault("name", "hasGeometry")
         values.setdefault("entity_type", "XmiRelHasGeometry")
         return values
-
-
-# Testing run python -m src.xmi.v2.models.relationships.xmi_has_geometry
-
-if __name__ == "__main__":
-    source = XmiBaseEntity(id="E1", name="Beam")
-    target = XmiBaseGeometry(id="G1", description="Geometry of Beam")
-
-    rel = XmiHasGeometry(
-        source=source,
-        target=target
-    )
-
-    print("Created XmiHasGeometry relationship:")
-    print(rel.model_dump(by_alias=True))

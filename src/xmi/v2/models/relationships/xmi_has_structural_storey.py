@@ -24,25 +24,3 @@ class XmiHasStructuralStorey(XmiBaseRelationship):
         values.setdefault("name", "hasStructuralStorey")
         values.setdefault("entity_type", "XmiRelHasStructuralStorey")
         return values
-
-
-# Testing run python -m src.xmi.v2.models.relationships.xmi_has_structural_storey
-if __name__ == "__main__":
-    source = XmiBaseEntity(
-        id="elem001",
-        name="Column A",
-        entity_type="XmiStructuralElement",
-        description="Test column"
-    )
-
-    storey = XmiStructuralStorey(
-        id="storey001",
-        name="Level 1",
-        storey_elevation=0.0,
-        description="Ground floor level"
-    )
-
-    rel = XmiHasStructuralStorey(source=source, target=storey)
-
-    print("Created XmiHasStructuralStorey relationship:")
-    print(rel.model_dump(by_alias=True))

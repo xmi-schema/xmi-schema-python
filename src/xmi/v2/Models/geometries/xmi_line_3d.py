@@ -1,5 +1,5 @@
 from typing import List, Tuple, Optional
-from pydantic import Field, field_validator, model_validator
+from pydantic import Field, field_validator, model_validator, ValidationInfo
 from ..bases.xmi_base_geometry import XmiBaseGeometry
 from .xmi_point_3d import XmiPoint3D
 
@@ -9,9 +9,9 @@ class XmiLine3D(XmiBaseGeometry):
 
     @field_validator("start_point", "end_point", mode="before")
     @classmethod
-    def check_is_point(cls, v, field):
+    def check_is_point(cls, v, info: ValidationInfo):
         if not isinstance(v, XmiPoint3D):
-            raise TypeError(f"{field.name} must be an XmiPoint3D")
+            raise TypeError(f"{info.field_name} must be an XmiPoint3D")
         return v
 
     @model_validator(mode="before")
