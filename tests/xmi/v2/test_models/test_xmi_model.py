@@ -1,5 +1,5 @@
 import json
-from xmi.v2.xmi_model import XmiModel
+from xmi.v2.models.xmi_model.xmi_model import XmiModel
 from tests.xmi.v2.test_inputs.xmi_model_input import json_data
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
