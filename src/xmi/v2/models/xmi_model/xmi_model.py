@@ -37,7 +37,7 @@ class XmiModel(BaseModel):
 
     @model_validator(mode="before")
     @classmethod
-    def instantiate_entities(cls, values: Dict[str, Any]) -> Dict[str, Any]:
+    def instantiate_entities_and_relationships(cls, values: Dict[str, Any]) -> Dict[str, Any]:
         entities = values.get("Entities", [])
         instantiated_entities = []
 
@@ -61,6 +61,25 @@ class XmiModel(BaseModel):
                 instantiated_entities.append(entity_dict)
 
         values["Entities"] = instantiated_entities
+
+        relationships = values.get("Relationships", [])
+        instantiated_relationships = []
+
+        for rel_dict in relationships:
+            rel_type = rel_dict.get("EntityType")
+            rel_class = ENTITY_TYPE_MAPPING.get(rel_type)
+
+            if rel_class:
+                try:
+                    rel_instance = rel_class.model_validate(rel_dict)
+                    instantiated_relationships.append(rel_instance)
+                except Exception:
+                    instantiated_relationships.append(rel_dict)
+            else:
+                instantiated_relationships.append(rel_dict)
+
+        values["Relationships"] = instantiated_relationships
+
         return values
 
     def create_relationship(
