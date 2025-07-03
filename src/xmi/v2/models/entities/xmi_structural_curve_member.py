@@ -71,7 +71,7 @@ class XmiStructuralCurveMember(XmiBaseEntity):
 
         try:
             processed["curve_member_type"] = XmiStructuralCurveMemberTypeEnum.from_attribute_get_enum(
-                processed["CurvememberType"]
+                processed["CurveMemberType"]
             )
         except Exception as e:
             errors.append(e)
