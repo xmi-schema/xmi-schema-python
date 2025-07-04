@@ -1,9 +1,10 @@
 from __future__ import annotations
+
 from typing import Dict, Any, List, Optional, Type
 from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.bases.xmi_base_relationship import XmiBaseRelationship
-from xmi.v2.utils.xmi_entity_type_mapping import ENTITY_TYPE_MAPPING
+from xmi.v2.utils.xmi_entity_type_mapping import ENTITY_CLASS_MAPPING, RELATIONSHIP_CLASS_MAPPING
 
 
 class ErrorLog(BaseModel):
@@ -35,72 +36,82 @@ class XmiModel(BaseModel):
             raise TypeError("Value must be a string or None")
         return v
 
-    @model_validator(mode="before")
-    @classmethod
-    def instantiate_entities_and_relationships(cls, values: Dict[str, Any]) -> Dict[str, Any]:
-        entities = values.get("Entities", [])
-        instantiated_entities = []
+    def find_entity(self, entity_id: str) -> Optional[XmiBaseEntity]:
+        for entity in self.entities:
+            if getattr(entity, 'id', None) == entity_id:
+                return entity
+        return None
 
-        for entity_dict in entities:
-            entity_type = entity_dict.get("EntityType")
-            entity_class = ENTITY_TYPE_MAPPING.get(entity_type)
+    def load_from_dict(self, data: Dict[str, Any]) -> None:
+        self.name = data.get("Name")
+        self.xmi_version = data.get("XmiVersion")
+        self.application_name = data.get("ApplicationName")
+        self.application_version = data.get("ApplicationVersion")
 
-            if entity_class and hasattr(entity_class, "from_dict"):
-                instance, errors = entity_class.from_dict(entity_dict)
+        for index, entity_data in enumerate(data.get("Entities", [])):
+            entity_type = entity_data.get("EntityType")
+            entity_class = ENTITY_CLASS_MAPPING.get(entity_type)
+
+            if not entity_type or not entity_class:
+                self.errors.append(ErrorLog(
+                    entity_type=entity_type or "Unknown",
+                    index=index,
+                    message=f"Entity type '{entity_type}' is not recognized.",
+                    obj=str(entity_data)
+                ))
+                continue
+
+            try:
+                instance, errors = (entity_class.from_dict(entity_data)
+                                    if hasattr(entity_class, 'from_dict')
+                                    else (entity_class.model_validate(entity_data), []))
                 if instance:
-                    instantiated_entities.append(instance)
-                else:
-                    instantiated_entities.append(entity_dict)
-            elif entity_class:
-                try:
-                    instance = entity_class.model_validate(entity_dict)
-                    instantiated_entities.append(instance)
-                except Exception:
-                    instantiated_entities.append(entity_dict)
-            else:
-                instantiated_entities.append(entity_dict)
+                    self.entities.append(instance)
+                self.errors.extend(errors)
+            except Exception as e:
+                self.errors.append(ErrorLog(
+                    entity_type=entity_type,
+                    index=index,
+                    message=f"Failed to instantiate entity: {str(e)}",
+                    obj=str(entity_data)
+                ))
 
-        values["Entities"] = instantiated_entities
+        for index, rel_data in enumerate(data.get("Relationships", [])):
+            rel_type = rel_data.get("EntityType")
+            rel_class = RELATIONSHIP_CLASS_MAPPING.get(rel_type)
 
-        relationships = values.get("Relationships", [])
-        instantiated_relationships = []
+            if not rel_type or not rel_class:
+                self.errors.append(ErrorLog(
+                    entity_type=rel_type or "Unknown",
+                    index=index,
+                    message=f"Relationship type '{rel_type}' is not recognized.",
+                    obj=str(rel_data)
+                ))
+                continue
 
-        for rel_dict in relationships:
-            rel_type = rel_dict.get("EntityType")
-            rel_class = ENTITY_TYPE_MAPPING.get(rel_type)
+            source_id = rel_data.get("Source")
+            target_id = rel_data.get("Target")
 
-            if rel_class:
-                try:
-                    rel_instance = rel_class.model_validate(rel_dict)
-                    instantiated_relationships.append(rel_instance)
-                except Exception:
-                    instantiated_relationships.append(rel_dict)
-            else:
-                instantiated_relationships.append(rel_dict)
+            source_entity = self.find_entity(source_id)
+            target_entity = self.find_entity(target_id)
 
-        values["Relationships"] = instantiated_relationships
+            if not source_entity or not target_entity:
+                self.errors.append(ErrorLog(
+                    entity_type=rel_type,
+                    index=index,
+                    message="Missing source or target entity for relationship.",
+                    obj=str(rel_data)
+                ))
+                continue
 
-        return values
-
-    def create_relationship(
-        self,
-        relationship_class: Type[XmiBaseRelationship],
-        source: XmiBaseEntity,
-        target: XmiBaseEntity,
-        name: Optional[str] = None,
-        **kwargs
-    ) -> XmiBaseRelationship:
-
-        if relationship_class == XmiBaseRelationship:
-            relationship = relationship_class(source=source, target=target, name=name)
-        else:
-            relationship = relationship_class(source=source, target=target, **kwargs)
-
-        self.relationships.append(relationship)
-        return relationship
-
-    def find_relationships_by_target(self, target: XmiBaseEntity) -> List[XmiBaseRelationship]:
-        return [rel for rel in self.relationships if rel.target == target]
-
-    def find_relationships_by_source(self, source: XmiBaseEntity) -> List[XmiBaseRelationship]:
-        return [rel for rel in self.relationships if rel.source == source]
+            try:
+                rel_data_clean = {k: v for k, v in rel_data.items() if k not in ('Source', 'Target')}
+                relationship_instance = rel_class(source=source_entity, target=target_entity, **rel_data_clean)
+                self.relationships.append(relationship_instance)
+            except Exception as e:
+                self.errors.append(ErrorLog(
+                    entity_type=rel_type,
+                    index=index,
+                    message=f"Failed to instantiate relationship: {str(e)}",
+                    obj=str(rel_data)
+                ))
