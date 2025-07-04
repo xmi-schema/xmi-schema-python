@@ -41,7 +41,7 @@ def test_non_float_axis_component():
 
 def test_invalid_enum_values():
     bad_input = valid_curve_member_input.copy()
-    bad_input["CurvememberType"] = "NotAValidEnum"
+    bad_input["CurveMemberType"] = "NotAValidEnum"
 
     instance, errors = XmiStructuralCurveMember.from_dict(bad_input)
 

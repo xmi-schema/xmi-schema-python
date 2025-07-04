@@ -5,7 +5,7 @@ valid_curve_member_input = {
     "NativeId": "365872",
     "Description": "",
     "EntityType": "XmiStructuralCurveMember",
-    "CurvememberType": "Unknown",
+    "CurveMemberType": "Unknown",
     "SystemLine": "Unknown",
     "Length": 0.0,
     "LocalAxisX": "0,0,1",
