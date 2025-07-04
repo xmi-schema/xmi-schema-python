@@ -95,9 +95,47 @@ json_data = {
             "LocalAxisY": "0,1,0",
             "LocalAxisZ": "0,0,1",
             "Height": 0.0
+        },
+        {
+            "ID": "763ffd9e-b2a1-4e84-8c27-6bd63fec07f9",
+            "Name": "Level 1",
+            "IFCGUID": "74e46f31-7d48-47ee-9207-931708e57a52-00000153",
+            "NativeId": "339",
+            "Description": "",
+            "EntityType": "XmiStructuralStorey",
+            "StoreyElevation": 0.0,
+            "StoreyMass": 1.0
+        },
+    ],
+    "Relationships": [
+        {
+            "ID": "6e6a0aa7-5e40-4049-bb65-a32bed7f675f",
+            "Source": "defc7646-29f3-4f12-93b9-b85142ec1cdf",
+            "Target": "71d8b547-ba42-4854-9542-fda1d72da314",
+            "Name": "XmiHasStructuralMaterial",
+            "Description": "",
+            "EntityType": "XmiHasStructuralMaterial",
+            "UmlType": "Association"
+        },
+        {
+            "ID": "c4dbe00c-d343-489a-956c-2af3a4eb8dc2",
+            "Source": "defc7646-29f3-4f12-93b9-b85142ec1cdf",
+            "Target": "790540c5-9df3-4fe4-8b88-7035456cc572",
+            "Name": "XmiHasStructuralCrossSection",
+            "Description": "",
+            "EntityType": "XmiHasStructuralCrossSection",
+            "UmlType": "Association"
+        },
+        {
+            "ID": "2c813025-0218-477a-9022-443576ad83f4",
+            "Source": "defc7646-29f3-4f12-93b9-b85142ec1cdf",
+            "Target": "763ffd9e-b2a1-4e84-8c27-6bd63fec07f9",
+            "Name": "XmiHasStructuralStorey",
+            "Description": "",
+            "EntityType": "XmiHasStructuralStorey",
+            "UmlType": "Association"
         }
     ],
-    "Relationships": [],
     "Histories": [],
     "Errors": [],
     "Name": "TestModel",

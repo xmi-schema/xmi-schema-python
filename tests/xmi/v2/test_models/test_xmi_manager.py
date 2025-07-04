@@ -9,6 +9,7 @@ from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSu
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_storey import XmiHasStructuralStorey
 
 
 def test_xmi_manager_parsing():
@@ -19,13 +20,18 @@ def test_xmi_manager_parsing():
     print(json.dumps(model_dict, indent=4))
 
     assert model is not None
-    assert len(model.entities) == 5
+    assert len(model.entities) == 7
 
     assert any(isinstance(e, XmiStructuralMaterial) for e in model.entities)
     assert any(isinstance(e, XmiStructuralCrossSection) for e in model.entities)
     assert any(isinstance(e, XmiStructuralCurveMember) for e in model.entities)
     assert any(isinstance(e, XmiStructuralSurfaceMember) for e in model.entities)
     assert any(isinstance(e, XmiPoint3D) for e in model.entities)
+
+    assert len(model.relationships) > 0
+    assert any(isinstance(r, XmiHasStructuralMaterial) for r in model.relationships)
+    assert any(isinstance(r, XmiHasStructuralCrossSection) for r in model.relationships)
+    assert any(isinstance(r, XmiHasStructuralStorey) for r in model.relationships)
 
 
 if __name__ == "__main__":

@@ -18,7 +18,7 @@ from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStruct
 from xmi.v2.models.relationships.xmi_has_structural_point_connection import XmiHasStructuralPointConnection
 from xmi.v2.models.relationships.xmi_has_structural_storey import XmiHasStructuralStorey
 
-ENTITY_TYPE_MAPPING = {
+ENTITY_CLASS_MAPPING = {
     "XmiStructuralCrossSection": XmiStructuralCrossSection,
     "XmiStructuralCurveMember": XmiStructuralCurveMember,
     "XmiSegment": XmiSegment,
@@ -30,6 +30,9 @@ ENTITY_TYPE_MAPPING = {
     "XmiPoint3D": XmiPoint3D,
     "XmiLine3D": XmiLine3D,
     "XmiArc3D": XmiArc3D,
+}
+
+RELATIONSHIP_CLASS_MAPPING = {
     "XmiHasGeometry": XmiHasGeometry,
     "XmiHasLine3D": XmiHasLine3D,
     "XmiHasPoint3D": XmiHasPoint3D,
