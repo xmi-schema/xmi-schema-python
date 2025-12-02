@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
+from xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 
 valid_segment_input = {
     "id": "eebf4b4f-14b0-4be1-8a6d-94b9858cff4a",

@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
+from xmi.v2.models.enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
 
 def test_enum_values():
     assert XmiStructuralSurfaceMemberTypeEnum.SLAB.value == "Slab"

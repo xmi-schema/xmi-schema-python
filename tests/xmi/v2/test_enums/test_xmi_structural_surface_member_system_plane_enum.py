@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_surface_member_system_plane_enum import XmiStructuralSurfaceMemberSystemPlaneEnum
+from xmi.v2.models.enums.xmi_structural_surface_member_system_plane_enum import XmiStructuralSurfaceMemberSystemPlaneEnum
 
 def test_enum_values():
     assert XmiStructuralSurfaceMemberSystemPlaneEnum.BOTTOM.value == "Bottom"

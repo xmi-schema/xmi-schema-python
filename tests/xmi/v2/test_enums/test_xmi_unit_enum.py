@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_unit_enum import XmiUnitEnum
+from xmi.v2.models.enums.xmi_unit_enum import XmiUnitEnum
 
 def test_xmi_unit_enum_values():
     assert XmiUnitEnum.METER3.value == "m^3"

@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_surface_member_span_type_enum import XmiStructuralSurfaceMemberSpanTypeEnum
+from xmi.v2.models.enums.xmi_structural_surface_member_span_type_enum import XmiStructuralSurfaceMemberSpanTypeEnum
 
 def test_xmi_shape_enum_values():
     assert XmiStructuralSurfaceMemberSpanTypeEnum.ONE_WAY.value == "One Way"

@@ -1,4 +1,4 @@
-from src.xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
 from tests.xmi.v2.test_inputs import xmi_structural_material_input as input_data
 
 

@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
 
 def test_enum_values():
     assert XmiStructuralMaterialTypeEnum.CONCRETE.value == "Concrete"

@@ -1,6 +1,6 @@
 import pytest
 from uuid import UUID
-from src.xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
 from tests.xmi.v2.test_inputs import xmi_structural_unit_input as input_data
 
 

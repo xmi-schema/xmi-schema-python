@@ -1,5 +1,5 @@
-from src.xmi.v2.models.geometries.xmi_arc_3d import XmiArc3D
-from src.xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
+from xmi.v2.models.geometries.xmi_arc_3d import XmiArc3D
+from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from tests.xmi.v2.test_inputs import xmi_arc_3d_input as input_data
 
 def test_valid_arc():
