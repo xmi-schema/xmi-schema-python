@@ -1168,7 +1168,7 @@
       "EModulus": 33500.0,
       "GModulus": 13958.33,
       "PoissonRatio": 0.2,
-      "ThermalCoefficient": 1E-05,
+      "ThermalCoefficient": 1e-5,
       "Description": "C32/40",
       "ID": "79ce617c-d332-4523-b544-369f9b91f8a3",
       "IFCGUID": null
@@ -1181,7 +1181,7 @@
       "EModulus": 210000.0,
       "GModulus": 80769.23,
       "PoissonRatio": 0.3,
-      "ThermalCoefficient": 1.2E-05,
+      "ThermalCoefficient": 1.2e-5,
       "Description": "S355",
       "ID": "335e6d4d-6628-4afc-ba44-3a512b0a5915",
       "IFCGUID": null
