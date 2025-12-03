@@ -17,6 +17,7 @@ class XmiShapeEnum(XmiBaseEnum):
         T_SHAPE: T-shaped cross-section (steel T-sections)
         C_SHAPE: C-shaped channel cross-section (steel channels)
         I_SHAPE: I-shaped wide flange cross-section (steel I-beams)
+        CIRCULAR_HOLLOW: Hollow circular cross-section (steel pipes)
         SQUARE_HOLLOW: Hollow square cross-section (steel hollow sections)
         RECTANGULAR_HOLLOW: Hollow rectangular cross-section (steel hollow sections)
         OTHERS: Custom or non-standard shapes
@@ -50,6 +51,7 @@ class XmiShapeEnum(XmiBaseEnum):
     T_SHAPE = "T Shape"
     C_SHAPE = "C Shape"
     I_SHAPE = "I Shape"
+    CIRCULAR_HOLLOW = "Circular Hollow"
     SQUARE_HOLLOW = "Square Hollow"
     RECTANGULAR_HOLLOW = "Rectangular Hollow"
     OTHERS = "Others"
