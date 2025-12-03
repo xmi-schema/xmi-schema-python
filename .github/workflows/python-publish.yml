@@ -12,6 +12,8 @@ permissions:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # Note: Tests are run on PRs via pr-validation.yml
+    # This workflow assumes tests have passed before merge
 
     steps:
       - name: Checkout Repository
@@ -24,10 +26,14 @@ jobs:
         with:
           python-version: "3.9"
 
-      - name: Install dependencies
+      - name: Install Poetry
         run: |
           python -m pip install --upgrade pip
-          pip install build
+          pip install poetry
+
+      - name: Install dependencies
+        run: |
+          poetry install --no-interaction
 
       # STEP 1: Determine next version (but do NOT tag yet)
       - name: Get next semantic version (no tag)
@@ -46,9 +52,9 @@ jobs:
           sed -i "s/^version = \".*\"/version = \"$version\"/" pyproject.toml
           echo "NEXT_VERSION=$version" >> $GITHUB_ENV
 
-      # STEP 3: Build the package
+      # STEP 3: Build the package using Poetry
       - name: Build Python package
-        run: python -m build
+        run: poetry build
 
       # STEP 4: Publish to PyPI
       - name: Publish to PyPI
