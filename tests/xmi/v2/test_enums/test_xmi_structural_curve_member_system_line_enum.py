@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
+from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 
 def test_xmi_structural_curve_member_system_line_enum_values():
     assert XmiStructuralCurveMemberSystemLineEnum.TOP_LEFT.value == "Top Left"

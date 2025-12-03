@@ -1,5 +1,5 @@
 import pytest
-from src.xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
 from tests.xmi.v2.test_inputs import xmi_structural_storey_input as input_data
 
 

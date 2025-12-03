@@ -5,7 +5,7 @@ from ..xmi_base import XmiBaseRelationship, XmiBaseEntity
 from ..constants import *
 
 
-class XmiHasStructuralCrossSection(XmiBaseRelationship):
+class XmiHasCrossSection(XmiBaseRelationship):
     __slots__ = XmiBaseRelationship.__slots__
 
     _attributes_needed = [slot[1:] if slot.startswith(

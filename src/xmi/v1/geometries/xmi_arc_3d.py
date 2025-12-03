@@ -7,7 +7,7 @@ from .xmi_base_geometry import XmiBaseGeometry
 
 
 class XmiArc3D(XmiBaseGeometry):
-    __slots__ = ('_start_point', '_end_point')
+    __slots__ = ('_start_point', '_end_point', '_center_point')
 
     _attributes_needed = [slot[1:] if slot.startswith(
         '_') else slot for slot in __slots__ if slot != "_entity_type"]
@@ -99,6 +99,7 @@ class XmiArc3D(XmiBaseGeometry):
     @classmethod
     def from_dict(cls, obj: dict) -> XmiPoint3D:
         error_logs = []
+        instance = None
         processed_data = obj.copy()
 
         for attr in cls._attributes_needed:
@@ -118,9 +119,10 @@ class XmiArc3D(XmiBaseGeometry):
             instance = cls(
                 start_point=start_point_found,
                 end_point=end_point_found,
+                center_point=center_point_found,
                 **processed_data)
         except Exception as e:
             error_logs.append(
-                Exception(f"Error instantiating XmiLine3D: {obj}"))
+                Exception(f"Error instantiating XmiArc3D: {obj}"))
 
         return instance, error_logs

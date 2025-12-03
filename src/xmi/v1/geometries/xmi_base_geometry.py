@@ -12,8 +12,10 @@ class XmiBaseGeometry(XmiBaseEntity):
                  name: str = None,
                  ifcguid: str = None,
                  description: str = None,
+                 entity_type: str = None,
                  ** kwargs):
-        entity_type = "XmiBaseGeometry"
+        if entity_type is None:
+            entity_type = "XmiBaseGeometry"
 
         # Initialize parent class
         super().__init__(id=id,

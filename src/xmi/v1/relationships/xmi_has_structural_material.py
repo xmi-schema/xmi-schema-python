@@ -3,7 +3,7 @@ from __future__ import annotations
 
 from ..xmi_base import XmiBaseRelationship, XmiBaseEntity
 # from ..entities.xmi_structural_material import XmiStructuralMaterial
-# from ..entities.xmi_structural_cross_section import XmiStructuralCrossSection
+# from ..entities.xmi_structural_cross_section import XmiCrossSection
 # from ..xmi_errors import XmiInconsistentDataTypeError
 from ..constants import *
 
@@ -18,9 +18,9 @@ class XmiHasStructuralMaterial(XmiBaseRelationship):
         name = 'hasStructuralMaterial'
         entity_type = "XmiRelHasSegment"
 
-        # if not isinstance(source, XmiStructuralCrossSection):
+        # if not isinstance(source, XmiCrossSection):
         #     raise XmiInconsistentDataTypeError(
-        #         "'source' parameter needs to be of type XmiStructuralCrossSection")
+        #         "'source' parameter needs to be of type XmiCrossSection")
         # if not isinstance(target, XmiStructuralMaterial):
         #     raise XmiInconsistentDataTypeError(
         #         "'target' parameter needs to be of type XmiStructuralMaterial")

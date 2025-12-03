@@ -28,7 +28,7 @@ SHAPE_MAPPING = {
 }
 
 
-class XmiStructuralCrossSection(XmiBaseEntity):
+class XmiCrossSection(XmiBaseEntity):
     __slots__ = XmiBaseEntity.__slots__ + ('_material',
                                            '_shape',
                                            '_parameters',
@@ -66,7 +66,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
                  ifcguid: str = None,
                  **kwargs
                  ):
-        entity_type = "XmiStructuralCrossSection"
+        entity_type = "XmiCrossSection"
 
         # Ensure material_type is provided
         if material is None:
@@ -344,12 +344,12 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         for param in parameter_list:
             if is_empty_or_whitespace(param):
                 raise XmiInconsistentDataTypeError(
-                    f"The individual parameter [{param}] within the XmiStructuralCrossSection 'parameters' attribute should not be empty string or empty space")
+                    f"The individual parameter [{param}] within the XmiCrossSection 'parameters' attribute should not be empty string or empty space")
             try:
                 float_value = float(param)
             except ValueError:
                 raise XmiInconsistentDataTypeError(
-                    f"The parameter [{param}] within the XmiStructuralCrossSection 'parameters' attribute should be convertible to float")
+                    f"The parameter [{param}] within the XmiCrossSection 'parameters' attribute should be convertible to float")
 
         parameter_tuple = tuple([float(param) for param in parameter_list])
 
@@ -357,8 +357,8 @@ class XmiStructuralCrossSection(XmiBaseEntity):
 
     # from_dict class method is used to do data conversion
     @classmethod
-    def from_dict(cls, obj: dict) -> XmiStructuralCrossSection:
-        instance: XmiStructuralCrossSection | None = None
+    def from_dict(cls, obj: dict) -> XmiCrossSection:
+        instance: XmiCrossSection | None = None
         error_logs = []
         processed_data = obj.copy()
 
@@ -402,7 +402,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
                     "Please provide value for the parameters attribute"))
                 return None, error_logs
             else:
-                parameters_found: tuple[float | int] = XmiStructuralCrossSection.convert_parameter_string_to_tuple(
+                parameters_found: tuple[float | int] = XmiCrossSection.convert_parameter_string_to_tuple(
                     processed_data['parameters'])
 
                 if not isinstance(parameters_found, tuple):
@@ -422,14 +422,14 @@ class XmiStructuralCrossSection(XmiBaseEntity):
                 **processed_data)
         except Exception as e:
             error_logs.append(
-                Exception(f"Error instantiating XmiStructuralCrossSection: {obj}"))
+                Exception(f"Error instantiating XmiCrossSection: {obj}"))
 
         return instance, error_logs
 
     # additional parameters are used to inject reference elements
     @classmethod
     def from_xmi_dict_obj(cls, xmi_dict_obj: dict,
-                          material: XmiStructuralMaterial = None) -> XmiStructuralCrossSection:
+                          material: XmiStructuralMaterial = None) -> XmiCrossSection:
         # Define a mapping from snake_case keys to custom keys
         KEY_MAPPING = {
             "Name": "name",
@@ -451,7 +451,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
             "IFCGUID": "ifcguid",
         }
 
-        instance: XmiStructuralCrossSection | None = None
+        instance: XmiCrossSection | None = None
         error_logs: list[Exception] = []
         processed_data: dict = {KEY_MAPPING.get(
             key, key): value for key, value in xmi_dict_obj.items()}

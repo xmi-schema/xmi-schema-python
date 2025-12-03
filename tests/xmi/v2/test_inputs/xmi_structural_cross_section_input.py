@@ -4,7 +4,7 @@ valid_cross_section_input = {
     "IFCGUID": "ac57991d-73eb-402c-abe6-9e3d3ff9c128-00055b16",
     "NativeId": "350998",
     "Description": "",
-    "EntityType": "XmiStructuralCrossSection",
+    "EntityType": "XmiCrossSection",
     "Shape": "Unknown",
     "Parameters": "300;300",
     "Area": 3179999.9999999977,

@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
+from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 def test_xmi_shape_enum_values():
     assert XmiShapeEnum.RECTANGULAR.value == "Rectangular"

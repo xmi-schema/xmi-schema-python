@@ -5,7 +5,7 @@ from ..enums.xmi_shape_enum import XmiShapeEnum
 from ...utils.xmi_utilities import is_empty_or_whitespace
 from ...utils.xmi_errors import XmiInconsistentDataTypeError, XmiMissingRequiredAttributeError
 
-class XmiStructuralCrossSection(XmiBaseEntity):
+class XmiCrossSection(XmiBaseEntity):
     shape: XmiShapeEnum = Field(..., alias="Shape")
     parameters: Tuple[Union[float, int], ...] = Field(..., alias="Parameters")
     area: Optional[float] = Field(None, alias="Area")
@@ -54,7 +54,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
     @model_validator(mode="before")
     @classmethod
     def set_entity_type(cls, values):
-        values.setdefault("entity_type", "XmiStructuralCrossSection")
+        values.setdefault("entity_type", "XmiCrossSection")
         return values
     
     @classmethod
@@ -68,11 +68,11 @@ class XmiStructuralCrossSection(XmiBaseEntity):
                 float(param)
             except ValueError:
                 raise XmiInconsistentDataTypeError(
-                    f"The parameter [{param}] within the XmiStructuralCrossSection 'parameters' attribute should be convertible to float")
+                    f"The parameter [{param}] within the XmiCrossSection 'parameters' attribute should be convertible to float")
         return tuple(float(param) for param in parameter_list)
 
     @classmethod
-    def from_dict(cls, obj: Dict[str, Any]) -> Tuple[Optional["XmiStructuralCrossSection"], List[Exception]]:
+    def from_dict(cls, obj: Dict[str, Any]) -> Tuple[Optional["XmiCrossSection"], List[Exception]]:
         errors = []
         processed = obj.copy()
 
@@ -106,7 +106,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
         cls,
         xmi_dict_obj: Dict[str, Any],
         material: Optional[XmiStructuralMaterial] = None
-    ) -> Tuple[Optional["XmiStructuralCrossSection"], List[Exception]]:
+    ) -> Tuple[Optional["XmiCrossSection"], List[Exception]]:
         key_map = {
             "Name": "name",
             "Material": "material",
@@ -127,7 +127,7 @@ class XmiStructuralCrossSection(XmiBaseEntity):
             "IFCGUID": "ifcguid",
         }
 
-        instance: XmiStructuralCrossSection | None = None
+        instance: XmiCrossSection | None = None
         error_logs: list[Exception] = []
         processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items()}
 

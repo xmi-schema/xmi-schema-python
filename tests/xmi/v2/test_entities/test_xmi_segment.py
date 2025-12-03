@@ -1,5 +1,5 @@
 import pytest
-from src.xmi.v2.models.entities.xmi_segment import XmiSegment
+from xmi.v2.models.entities.xmi_segment import XmiSegment
 from tests.xmi.v2.test_inputs import xmi_segment_input as input_data
 
 def test_valid_segment_instantiation():

@@ -1,7 +1,7 @@
 import pytest
-from src.xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
-from src.xmi.v2.models.geometries.xmi_line_3d import XmiLine3D
-from src.xmi.v2.models.geometries.xmi_arc_3d import XmiArc3D
+from xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
+from xmi.v2.models.geometries.xmi_line_3d import XmiLine3D
+from xmi.v2.models.geometries.xmi_arc_3d import XmiArc3D
 
 def test_xmi_segment_type_enum_values():
     assert XmiSegmentTypeEnum.LINE.value == "Line"

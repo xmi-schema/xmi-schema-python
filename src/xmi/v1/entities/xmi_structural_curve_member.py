@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from ..entities.xmi_segment import XmiSegment
-from ..entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from ..entities.xmi_structural_cross_section import XmiCrossSection
 
 from .xmi_structural_point_connection import XmiStructuralPointConnection
 from ..xmi_base import XmiBaseEntity
@@ -40,7 +40,7 @@ class XmiStructuralCurveMember(XmiBaseEntity):
         '_') else slot for slot in __slots__ if slot != "_entity_type"]
 
     def __init__(self,
-                 cross_section: XmiStructuralCrossSection,
+                 cross_section: XmiCrossSection,
                  curve_member_type: XmiStructuralCurveMemberTypeEnum,
                  system_line: XmiStructuralCurveMemberSystemLineEnum,
                  local_axis_x: tuple = (1.0, 0.0, 0.0),
@@ -146,7 +146,7 @@ class XmiStructuralCurveMember(XmiBaseEntity):
             ** kwargs)
 
     def set_attributes(self,
-                       cross_section: XmiStructuralCrossSection,
+                       cross_section: XmiCrossSection,
                        curve_member_type: XmiStructuralCurveMemberTypeEnum,
                        system_line: XmiStructuralCurveMemberSystemLineEnum,
                        nodes: list[XmiStructuralPointConnection],
@@ -260,9 +260,9 @@ class XmiStructuralCurveMember(XmiBaseEntity):
 
     @cross_section.setter
     def cross_section(self, value):
-        if not isinstance(value, XmiStructuralCrossSection):
+        if not isinstance(value, XmiCrossSection):
             raise TypeError(
-                "cross_section should be of type XmiStructuralCrossSection")
+                "cross_section should be of type XmiCrossSection")
         self._cross_section = value
 
     @property
@@ -468,11 +468,11 @@ class XmiStructuralCurveMember(XmiBaseEntity):
             cross_section_found = processed_data['cross_section']
             if cross_section_found is None:
                 exceptions.append(XmiMissingReferenceInstanceError(
-                    "Please provide cross_section value of type XmiStructuralCrossSection"))
+                    "Please provide cross_section value of type XmiCrossSection"))
                 return None, exceptions
-            if not isinstance(cross_section_found, XmiStructuralCrossSection):
+            if not isinstance(cross_section_found, XmiCrossSection):
                 exceptions.append(XmiInconsistentDataTypeError(
-                    "cross_section provided need to be of instance XmiStructuralCrossSection"))
+                    "cross_section provided need to be of instance XmiCrossSection"))
                 return None, exceptions
 
             # check for nodes
@@ -623,7 +623,7 @@ class XmiStructuralCurveMember(XmiBaseEntity):
     # additional parameters are used to inject reference elements
     @classmethod
     def from_xmi_dict_obj(cls, xmi_dict_obj: dict,
-                          cross_section: XmiStructuralCrossSection = None,
+                          cross_section: XmiCrossSection = None,
                           nodes: list[XmiStructuralPointConnection] = None,
                           segments: list[XmiBaseEntity] = None,
                           ) -> XmiStructuralCurveMember:

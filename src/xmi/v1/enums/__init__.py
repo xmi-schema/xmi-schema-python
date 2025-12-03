@@ -1,5 +1,5 @@
 # from .xmi_enums import XmiEnum, XmiSegmentTypeEnum, XmiUnitEnum
-# from .xmi_structural_cross_section_enums import XmiStructuralCrossSectionShapeEnum
+# from .xmi_structural_cross_section_enums import XmiCrossSectionShapeEnum
 # from .xmi_structural_curve_member_enums import XmiStructuralCurveMemberSystemLineEnum, XmiStructuralCurveMemberTypeEnum
 # from .xmi_structural_material_enums import XmiStructuralMaterialTypeEnum
 # from .xmi_structural_surface_member_enums import XmiStructuralSurfaceMemberTypeEnum, XmiStructuralSurfaceMemberSpanTypeEnum, XmiStructuralSurfaceMemberSystemPlaneEnum

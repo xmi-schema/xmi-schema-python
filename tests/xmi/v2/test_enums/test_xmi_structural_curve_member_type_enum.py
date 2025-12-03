@@ -1,4 +1,4 @@
-from src.xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
+from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 
 def test_enum_values():
     assert XmiStructuralCurveMemberTypeEnum.BEAM.value == "Beam"
