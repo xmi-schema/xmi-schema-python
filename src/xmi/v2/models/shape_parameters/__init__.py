@@ -65,3 +65,25 @@ __all__ = [
     "get_required_parameters",
     "SHAPE_PARAMETER_CLASS_MAP",
 ]
+
+# Rebuild models now that XmiUnitEnum is fully defined
+from ..enums.xmi_unit_enum import XmiUnitEnum
+BaseShapeParameters.model_rebuild()
+CircularShapeParameters.model_rebuild()
+RectangularShapeParameters.model_rebuild()
+LShapeParameters.model_rebuild()
+TShapeParameters.model_rebuild()
+CShapeParameters.model_rebuild()
+IShapeParameters.model_rebuild()
+CircularHollowShapeParameters.model_rebuild()
+SquareHollowShapeParameters.model_rebuild()
+RectangularHollowShapeParameters.model_rebuild()
+TrapeziumShapeParameters.model_rebuild()
+PolygonShapeParameters.model_rebuild()
+EqualAngleShapeParameters.model_rebuild()
+UnequalAngleShapeParameters.model_rebuild()
+FlatBarShapeParameters.model_rebuild()
+SquareBarShapeParameters.model_rebuild()
+RoundBarShapeParameters.model_rebuild()
+DeformedBarShapeParameters.model_rebuild()
+CustomShapeParameters.model_rebuild()
