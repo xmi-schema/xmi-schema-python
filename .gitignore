@@ -5,3 +5,10 @@ build/
 **/__pycache__/
 .venv/
 **/*.egg-info/
+
+# Coverage reports
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.hypothesis/

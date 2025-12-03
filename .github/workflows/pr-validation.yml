@@ -49,13 +49,104 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction
 
-      - name: Run unit tests
-        run: poetry run pytest -v --tb=short
+      - name: Run unit tests with coverage
+        run: poetry run pytest -v --tb=short --cov=src/xmi --cov-report=xml --cov-report=html --cov-report=term
 
-      - name: Check code quality (optional)
+      - name: Generate coverage badge
+        if: matrix.python-version == '3.12'
         run: |
-          echo "Unit tests passed for Python ${{ matrix.python-version }}"
-        continue-on-error: true
+          COVERAGE=$(poetry run coverage report | grep TOTAL | awk '{print $NF}' | sed 's/%//')
+          echo "Coverage: ${COVERAGE}%"
+
+          # Determine badge color
+          if (( $(echo "$COVERAGE >= 90" | bc -l) )); then
+            COLOR="brightgreen"
+          elif (( $(echo "$COVERAGE >= 75" | bc -l) )); then
+            COLOR="green"
+          elif (( $(echo "$COVERAGE >= 60" | bc -l) )); then
+            COLOR="yellowgreen"
+          elif (( $(echo "$COVERAGE >= 40" | bc -l) )); then
+            COLOR="yellow"
+          else
+            COLOR="red"
+          fi
+
+          echo "COVERAGE_PERCENT=${COVERAGE}" >> $GITHUB_ENV
+          echo "COVERAGE_COLOR=${COLOR}" >> $GITHUB_ENV
+
+      - name: Upload coverage reports
+        if: matrix.python-version == '3.12'
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: |
+            htmlcov/
+            coverage.xml
+          retention-days: 30
+
+      - name: Comment coverage on PR
+        if: github.event_name == 'pull_request' && matrix.python-version == '3.12'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const coverage = process.env.COVERAGE_PERCENT;
+            const color = process.env.COVERAGE_COLOR;
+
+            // Read coverage report
+            const coverageXml = fs.readFileSync('coverage.xml', 'utf8');
+            const totalLine = coverageXml.match(/line-rate="([0-9.]+)"/);
+            const branchLine = coverageXml.match(/branch-rate="([0-9.]+)"/);
+
+            const lineRate = totalLine ? (parseFloat(totalLine[1]) * 100).toFixed(1) : coverage;
+            const branchRate = branchLine ? (parseFloat(branchLine[1]) * 100).toFixed(1) : 'N/A';
+
+            const body = `## Coverage Report
+
+            ![Coverage](https://img.shields.io/badge/coverage-${coverage}%25-${color})
+
+            | Metric | Percentage |
+            |--------|------------|
+            | Line Coverage | ${lineRate}% |
+            | Branch Coverage | ${branchRate}% |
+
+            **Test Results**: ✅ All tests passed
+            **Python Version**: 3.12
+
+            <details>
+            <summary>View detailed coverage report</summary>
+
+            Download the coverage artifact from this workflow run to view the full HTML report.
+
+            </details>`;
+
+            // Find existing comment
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+
+            const botComment = comments.find(comment =>
+              comment.user.type === 'Bot' &&
+              comment.body.includes('Coverage Report')
+            );
+
+            if (botComment) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: body
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: body
+              });
+            }
 
   test-summary:
     runs-on: ubuntu-latest

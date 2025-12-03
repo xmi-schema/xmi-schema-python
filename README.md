@@ -4,7 +4,6 @@
 [![Python Version](https://img.shields.io/pypi/pyversions/xmi.svg)](https://pypi.org/project/xmi/)
 [![License](https://img.shields.io/github/license/xmi-schema/xmi-schema-python)](https://github.com/xmi-schema/xmi-schema-python/blob/main/LICENSE)
 [![Tests](https://github.com/xmi-schema/xmi-schema-python/workflows/Pull%20Request%20Validation/badge.svg)](https://github.com/xmi-schema/xmi-schema-python/actions)
-[![Coverage](https://img.shields.io/badge/coverage-72%25-yellowgreen.svg)](htmlcov/index.html)
 
 A Python library for interpreting and managing XMI (Cross Model Information) schema data. XMI is an open-source schema for representing built environment information using graph methodology.
 
@@ -195,12 +194,39 @@ poetry run pytest tests/xmi/v2/test_entities/test_xmi_structural_material.py
 
 ### Test Coverage
 
-Current test coverage: **72%** (138 tests passing)
+Current test coverage: **~72%** (188 tests passing)
 
 - **v1 Coverage**: ~75% average
 - **v2 Coverage**: ~85% average
-- **Total Tests**: 138 passing
+- **Total Tests**: 188 passing
 - **Coverage Report**: Generated in `htmlcov/index.html`
+
+#### Generating Coverage Reports Locally
+
+```bash
+# Generate coverage report with HTML output
+poetry run pytest --cov=src/xmi --cov-report=html --cov-report=term
+
+# Open the HTML report in your browser
+open htmlcov/index.html  # macOS
+xdg-open htmlcov/index.html  # Linux
+start htmlcov/index.html  # Windows
+```
+
+#### Coverage in CI/CD
+
+Coverage is automatically calculated on every PR:
+- **PR Validation**: Runs tests with coverage on Python 3.12
+- **Coverage Comment**: Bot comments coverage metrics on PRs
+- **Artifacts**: HTML coverage reports are uploaded as workflow artifacts
+- **No Cloud Service**: All coverage processing happens locally in GitHub Actions
+
+The PR validation workflow will:
+1. Run all tests with coverage tracking
+2. Generate XML and HTML coverage reports
+3. Calculate coverage percentage
+4. Post a comment on the PR with coverage metrics
+5. Upload the full HTML report as an artifact (downloadable for 30 days)
 
 ### Building the Package
 
