@@ -7,7 +7,8 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
+  pull-requests: write  # Needed to post coverage comments
+  issues: write  # Needed to post PR comments (PRs are issues)
 
 jobs:
   test:
