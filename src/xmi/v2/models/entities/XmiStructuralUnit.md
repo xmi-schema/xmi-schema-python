@@ -450,7 +450,7 @@ If your application requires units not in `XmiUnitEnum`, you can:
 
 ### Entity Classes
 - [`XmiStructuralMaterial`](./XmiStructuralMaterial.md) - Material definitions with measurable properties
-- [`XmiStructuralCrossSection`](./XmiStructuralCrossSection.md) - Cross-sections with area and inertia properties
+- [`XmiCrossSection`](./XmiCrossSection.md) - Cross-sections with area and inertia properties
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Nodes with coordinates
 - [`XmiStructuralStorey`](./XmiStructuralStorey.md) - Storeys with elevation values
 

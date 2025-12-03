@@ -257,7 +257,7 @@ The enum values use `^` for exponents (e.g., "mm^2") rather than superscript cha
 
 ### Entity Classes
 - [`XmiStructuralUnit`](../entities/XmiStructuralUnit.md) - Uses this enum
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Section properties have units
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Section properties have units
 
 ### Base Classes
 - [`XmiBaseEnum`](../bases/XmiBaseEnum.md)

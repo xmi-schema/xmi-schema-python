@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from .entities.xmi_segment import XmiSegment
 
-from .entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from .entities.xmi_structural_cross_section import XmiCrossSection
 from .entities.xmi_structural_point_connection import XmiStructuralPointConnection
 from .entities.xmi_structural_material import XmiStructuralMaterial
 from .entities.xmi_structural_curve_member import XmiStructuralCurveMember
@@ -18,7 +18,7 @@ from .geometries.xmi_base_geometry import XmiBaseGeometry
 
 from .relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 from .relationships.xmi_has_structural_node import XmiHasStructuralNode
-from .relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from .relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 from .relationships.xmi_has_segment import XmiHasSegment
 from .relationships.xmi_has_geometry import XmiHasGeometry
 
@@ -116,12 +116,12 @@ class XmiManager():
                             None
                         )
 
-                        xmi_structural_cross_section, error_logs = XmiStructuralCrossSection.from_xmi_dict_obj(
+                        xmi_structural_cross_section, error_logs = XmiCrossSection.from_xmi_dict_obj(
                             xmi_structural_cross_section_obj,
                             material=xmi_structural_material_found_in_xmi_manager
                         )
                         xmi_model.errors.extend(error_logs)
-                        if xmi_structural_cross_section and isinstance(xmi_structural_cross_section, XmiStructuralCrossSection):
+                        if xmi_structural_cross_section and isinstance(xmi_structural_cross_section, XmiCrossSection):
                             xmi_model.entities.append(
                                 xmi_structural_cross_section)
                             xmi_model.create_relationship(
@@ -147,7 +147,7 @@ class XmiManager():
                         xmi_structural_cross_section_found_in_xmi_manager = next(
                             (inst for inst in xmi_model.entities
                                 if inst.name == xmi_structural_cross_section_name_to_find
-                                and isinstance(inst, XmiStructuralCrossSection)), None)
+                                and isinstance(inst, XmiCrossSection)), None)
 
                         # find referenced structural_point_connections
                         xmi_structural_point_connections_name_str_to_find: str = xmi_structural_curve_member_obj[
@@ -239,7 +239,7 @@ class XmiManager():
                             xmi_model.entities.append(
                                 xmi_structural_curve_member)
                             xmi_model.create_relationship(
-                                XmiHasStructuralCrossSection, xmi_structural_curve_member, xmi_structural_curve_member.cross_section)
+                                XmiHasCrossSection, xmi_structural_curve_member, xmi_structural_curve_member.cross_section)
                             for segment in xmi_structural_curve_member.segments:
                                 xmi_model.create_relationship(
                                     XmiHasSegment, xmi_structural_curve_member, segment)

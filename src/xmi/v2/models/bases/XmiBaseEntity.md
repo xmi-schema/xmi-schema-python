@@ -418,7 +418,7 @@ IFC GUIDs are 22-character Base64-encoded GUIDs:
 ### Direct Subclasses (Entities)
 - [`XmiStructuralMaterial`](../entities/XmiStructuralMaterial.md)
 - [`XmiStructuralPointConnection`](../entities/XmiStructuralPointConnection.md)
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md)
+- [`XmiCrossSection`](../entities/XmiCrossSection.md)
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md)
 - [`XmiStructuralSurfaceMember`](../entities/XmiStructuralSurfaceMember.md)
 - [`XmiSegment`](../entities/XmiSegment.md)

@@ -539,7 +539,7 @@ Inheriting from both `str` and `Enum` provides:
 ### Entity Classes Using Enums
 - [`XmiStructuralMaterial`](../entities/XmiStructuralMaterial.md) - Uses MaterialType enum
 - [`XmiSegment`](../entities/XmiSegment.md) - Uses SegmentType enum
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Uses CrossSectionShape enum
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Uses CrossSectionShape enum
 
 ## Examples of Real XMI Enums
 

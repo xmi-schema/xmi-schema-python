@@ -43,7 +43,7 @@ class XmiBaseEntity(BaseModel, ABC):
 
     Note:
         This is an abstract base class and cannot be instantiated directly.
-        Use concrete subclasses like XmiStructuralMaterial, XmiStructuralCrossSection, etc.
+        Use concrete subclasses like XmiStructuralMaterial, XmiCrossSection, etc.
     """
     id: str = Field(default_factory=lambda: str(uuid.uuid4()), alias="ID")
     name: Optional[str] = Field(None, alias="Name")

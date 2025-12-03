@@ -35,7 +35,7 @@ Both versions follow an entity-relationship architecture:
 ### Key Entity Types
 - `XmiStructuralMaterial`: Material definitions (concrete, steel, etc.)
 - `XmiStructuralPointConnection`: Nodal points in 3D space
-- `XmiStructuralCrossSection`: Cross-section definitions with material references
+- `XmiCrossSection`: Cross-section definitions with material references
 - `XmiStructuralCurveMember`: Linear structural members (beams, columns) with segments
 - `XmiStructuralSurfaceMember`: Surface elements (slabs, walls) with edge definitions
 - `XmiSegment`: Individual geometric segments (lines, arcs) connecting nodes
@@ -109,7 +109,7 @@ Both versions use `ErrorLog` objects to track parsing errors without stopping ex
 ### Relationship Creation
 Relationships are explicitly created to track connections between entities:
 - `XmiHasStructuralMaterial`: Links cross-sections/surfaces to materials
-- `XmiHasStructuralCrossSection`: Links curve members to cross-sections
+- `XmiHasCrossSection`: Links curve members to cross-sections
 - `XmiHasStructuralNode`: Links members/segments to point connections
 - `XmiHasSegment`: Links members to their segments
 - `XmiHasGeometry`: Links entities to geometric elements

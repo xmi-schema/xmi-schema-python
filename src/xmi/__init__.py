@@ -4,7 +4,7 @@ from .v1.xmi_manager import XmiManager, ErrorLog
 from .v1.xmi_base import XmiBaseEntity, XmiBaseRelationship
 from .v1.xmi_utilities import *
 from .v1.xmi_model import XmiModel
-from .v1.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from .v1.entities.xmi_structural_cross_section import XmiCrossSection
 from .v1.entities.xmi_structural_curve_member import XmiStructuralCurveMember
 from .v1.entities.xmi_structural_material import XmiStructuralMaterial
 from .v1.entities.xmi_structural_point_connection import XmiStructuralPointConnection
@@ -22,7 +22,7 @@ from .v1.geometries.xmi_point_3d import XmiPoint3D
 from .v1.geometries.xmi_base_geometry import XmiBaseGeometry
 from .v1.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 from .v1.relationships.xmi_has_structural_node import XmiHasStructuralNode
-from .v1.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from .v1.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 from .v1.relationships.xmi_has_point_3d import XmiHasPoint3D
 from .v1.relationships.xmi_has_segment import XmiHasSegment
 from .v1.relationships.xmi_has_geometry import XmiHasGeometry

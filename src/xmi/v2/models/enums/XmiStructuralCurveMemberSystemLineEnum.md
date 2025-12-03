@@ -141,9 +141,9 @@ def calculate_eccentricity(cross_section, system_line):
     return eccentricities.get(system_line, (0, 0))
 
 # Usage
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
-section = XmiStructuralCrossSection(width=300, height=500)
+section = XmiCrossSection(width=300, height=500)
 ecc_y, ecc_z = calculate_eccentricity(section, XmiStructuralCurveMemberSystemLineEnum.TOP_MIDDLE)
 print(f"Eccentricity: y={ecc_y}mm, z={ecc_z}mm")  # y=250mm, z=0mm
 ```
@@ -222,7 +222,7 @@ System line affects:
 
 ### Entity Classes
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md) - Uses this enum
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Defines cross-section geometry
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Defines cross-section geometry
 
 ### Other Enums
 - [`XmiStructuralCurveMemberTypeEnum`](./XmiStructuralCurveMemberTypeEnum.md) - Curve member types

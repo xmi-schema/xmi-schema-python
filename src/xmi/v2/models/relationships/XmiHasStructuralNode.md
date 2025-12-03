@@ -268,7 +268,7 @@ The `XmiManager`:
 - [`XmiStructuralPointConnection`](../entities/XmiStructuralPointConnection.md) - Node definition
 
 ### Related Relationship Classes
-- [`XmiHasStructuralCrossSection`](./XmiHasStructuralCrossSection.md) - Links members to cross-sections
+- [`XmiHasCrossSection`](./XmiHasCrossSection.md) - Links members to cross-sections
 - [`XmiHasSegment`](./XmiHasSegment.md) - Links members to segments
 - [`XmiHasGeometry`](./XmiHasGeometry.md) - Links nodes to point geometry
 

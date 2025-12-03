@@ -43,7 +43,7 @@ json_xmi_data = {
             "IFCGUID": "ac57991d-73eb-402c-abe6-9e3d3ff9c128-00055c1c",
             "NativeId": "351260",
             "Description": "",
-            "EntityType": "XmiStructuralCrossSection",
+            "EntityType": "XmiCrossSection",
             "Shape": "Unknown",
             "Area": 0.0,
             "SecondMomentOfAreaXAxis": 0.0,
@@ -121,9 +121,9 @@ json_xmi_data = {
             "ID": "c4dbe00c-d343-489a-956c-2af3a4eb8dc2",
             "Source": "defc7646-29f3-4f12-93b9-b85142ec1cdf",
             "Target": "790540c5-9df3-4fe4-8b88-7035456cc572",
-            "Name": "XmiHasStructuralCrossSection",
+            "Name": "XmiHasCrossSection",
             "Description": "",
-            "EntityType": "XmiHasStructuralCrossSection",
+            "EntityType": "XmiHasCrossSection",
             "UmlType": "Association"
         },
         {

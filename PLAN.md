@@ -92,7 +92,7 @@ For each entity class, create tests covering:
 
 **Entity Classes to Test** (both v1 and v2):
 - `XmiSegment`
-- `XmiStructuralCrossSection`
+- `XmiCrossSection`
 - `XmiStructuralCurveMember`
 - `XmiStructuralMaterial`
 - `XmiStructuralPointConnection`
@@ -146,7 +146,7 @@ For each relationship class:
 **Relationship Classes to Test**:
 - `XmiHasGeometry`
 - `XmiHasStructuralMaterial`
-- `XmiHasStructuralCrossSection`
+- `XmiHasCrossSection`
 - `XmiHasStructuralNode`
 - `XmiHasSegment`
 - `XmiHasPoint3D`
@@ -200,7 +200,7 @@ src/xmi/v1/entities/
 ├── xmi_structural_material.py
 ├── XmiStructuralMaterial.md          # New
 ├── xmi_structural_cross_section.py
-├── XmiStructuralCrossSection.md      # New
+├── XmiCrossSection.md      # New
 └── ...
 
 src/xmi/v2/Models/entities/
@@ -276,7 +276,7 @@ List of relationships this entity participates in:
 **High Priority** (Core entities users interact with directly):
 1. `XmiStructuralMaterial`
 2. `XmiStructuralPointConnection`
-3. `XmiStructuralCrossSection`
+3. `XmiCrossSection`
 4. `XmiStructuralCurveMember`
 5. `XmiStructuralSurfaceMember`
 6. `XmiManager`

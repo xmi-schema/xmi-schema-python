@@ -28,7 +28,7 @@ class XmiBaseRelationship(BaseModel):
     Examples:
         >>> from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
         >>> from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-        >>> from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+        >>> from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
         >>>
         >>> # Create entities
         >>> material = XmiStructuralMaterial(
@@ -37,7 +37,7 @@ class XmiBaseRelationship(BaseModel):
         ...     material_type="Concrete",
         ...     grade="C30"
         ... )
-        >>> cross_section = XmiStructuralCrossSection(
+        >>> cross_section = XmiCrossSection(
         ...     id="cs-001",
         ...     name="RECT_300x500",
         ...     shape="Rectangle"

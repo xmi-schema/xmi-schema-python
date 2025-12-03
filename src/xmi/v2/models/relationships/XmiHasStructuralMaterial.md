@@ -42,7 +42,7 @@ This relationship serves to:
 ### Common Source Entities
 
 Typical source entities include:
-- **`XmiStructuralCrossSection`**: Cross-sections reference materials
+- **`XmiCrossSection`**: Cross-sections reference materials
 - **`XmiStructuralSurfaceMember`**: Surface members (slabs, walls) reference materials
 
 ### Target Entity
@@ -56,7 +56,7 @@ The target is always:
 [Source Entity] --hasStructuralMaterial--> [XmiStructuralMaterial]
 
 Examples:
-[XmiStructuralCrossSection] --hasStructuralMaterial--> [XmiStructuralMaterial]
+[XmiCrossSection] --hasStructuralMaterial--> [XmiStructuralMaterial]
 [XmiStructuralSurfaceMember] --hasStructuralMaterial--> [XmiStructuralMaterial]
 ```
 
@@ -65,7 +65,7 @@ Examples:
 ### Creating Relationships Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 
@@ -77,7 +77,7 @@ concrete = XmiStructuralMaterial(
 )
 
 # Create cross-section
-cross_section = XmiStructuralCrossSection(
+cross_section = XmiCrossSection(
     name="CS_300x600",
     cross_section_type="Rectangular"
 )
@@ -99,7 +99,7 @@ print(f"Relationship: {material_rel.source.name} uses {material_rel.target.name}
 def create_cross_section_with_material(cs_dict, material):
     """Create cross-section and link to material."""
     # Create cross-section
-    cross_section = XmiStructuralCrossSection.from_dict(cs_dict)
+    cross_section = XmiCrossSection.from_dict(cs_dict)
 
     # Create relationship
     material_rel = XmiHasStructuralMaterial(
@@ -203,7 +203,7 @@ for material_name, elements in by_material.items():
 ```python
 def calculate_material_usage(xmi_model, material):
     """Calculate total usage of a material."""
-    from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+    from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
     from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
     from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
 
@@ -219,7 +219,7 @@ def calculate_material_usage(xmi_model, material):
     }
 
     for elem in elements:
-        if isinstance(elem, XmiStructuralCrossSection):
+        if isinstance(elem, XmiCrossSection):
             stats["cross_sections"] += 1
 
             # Find curve members using this cross-section
@@ -248,13 +248,13 @@ print(f"  Surface members: {usage['surface_members']}")
 ```python
 def validate_material_assignments(xmi_model):
     """Check that all elements requiring materials have them assigned."""
-    from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+    from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
     from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     issues = []
 
     # Get all entities that should have materials
-    cross_sections = [e for e in xmi_model.entities if isinstance(e, XmiStructuralCrossSection)]
+    cross_sections = [e for e in xmi_model.entities if isinstance(e, XmiCrossSection)]
     surface_members = [e for e in xmi_model.entities if isinstance(e, XmiStructuralSurfaceMember)]
 
     for cs in cross_sections:
@@ -421,14 +421,14 @@ In some cases, material assignment is implicit:
 ## Related Classes
 
 ### Source Entity Classes
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Primary source entity
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Primary source entity
 - [`XmiStructuralSurfaceMember`](../entities/XmiStructuralSurfaceMember.md) - Surface element source
 
 ### Target Entity Class
 - [`XmiStructuralMaterial`](../entities/XmiStructuralMaterial.md) - Material definition
 
 ### Related Relationship Classes
-- `XmiHasStructuralCrossSection` - Links curve members to cross-sections
+- `XmiHasCrossSection` - Links curve members to cross-sections
 - `XmiHasGeometry` - Links elements to geometric definitions
 - `XmiHasStructuralNode` - Links members to nodes
 

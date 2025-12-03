@@ -200,7 +200,7 @@ print(f"Errors: {len(model.errors)}")
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
 from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 model = XmiModel()
@@ -208,7 +208,7 @@ model.load_from_dict(xmi_data)
 
 # Filter entities
 materials = [e for e in model.entities if isinstance(e, XmiStructuralMaterial)]
-cross_sections = [e for e in model.entities if isinstance(e, XmiStructuralCrossSection)]
+cross_sections = [e for e in model.entities if isinstance(e, XmiCrossSection)]
 points = [e for e in model.entities if isinstance(e, XmiPoint3D)]
 
 print(f"Materials: {len(materials)}")
@@ -244,7 +244,7 @@ else:
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 
 model = XmiModel()
 model.load_from_dict(xmi_data)
@@ -253,7 +253,7 @@ model.load_from_dict(xmi_data)
 material_rels = [r for r in model.relationships
                  if isinstance(r, XmiHasStructuralMaterial)]
 cross_section_rels = [r for r in model.relationships
-                      if isinstance(r, XmiHasStructuralCrossSection)]
+                      if isinstance(r, XmiHasCrossSection)]
 
 print(f"Material relationships: {len(material_rels)}")
 print(f"Cross-section relationships: {len(cross_section_rels)}")
@@ -311,14 +311,14 @@ print("Model exported to exported_model.json")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 model = XmiModel()
 model.load_from_dict(xmi_data)
 
 # Find a cross-section
 cross_section = next((e for e in model.entities
-                      if isinstance(e, XmiStructuralCrossSection)), None)
+                      if isinstance(e, XmiCrossSection)), None)
 
 if cross_section:
     # Find relationships where cross-section is the source
@@ -487,7 +487,7 @@ Entities are resolved using `ENTITY_CLASS_MAPPING` from `xmi.v2.utils.xmi_entity
 ```python
 ENTITY_CLASS_MAPPING = {
     "XmiStructuralMaterial": XmiStructuralMaterial,
-    "XmiStructuralCrossSection": XmiStructuralCrossSection,
+    "XmiCrossSection": XmiCrossSection,
     "XmiStructuralCurveMember": XmiStructuralCurveMember,
     "XmiStructuralSurfaceMember": XmiStructuralSurfaceMember,
     "XmiStructuralPointConnection": XmiStructuralPointConnection,
@@ -506,7 +506,7 @@ Relationships are resolved using `RELATIONSHIP_CLASS_MAPPING`:
 ```python
 RELATIONSHIP_CLASS_MAPPING = {
     "XmiHasStructuralMaterial": XmiHasStructuralMaterial,
-    "XmiHasStructuralCrossSection": XmiHasStructuralCrossSection,
+    "XmiHasCrossSection": XmiHasCrossSection,
     "XmiHasStructuralPointConnection": XmiHasStructuralPointConnection,
     "XmiHasStructuralStorey": XmiHasStructuralStorey,
     "XmiHasGeometry": XmiHasGeometry,
@@ -701,8 +701,8 @@ for source_id, connections in graph.items():
 - **`XmiBaseEntity`**: Base class for all entity types
 - **`XmiBaseRelationship`**: Base class for all relationship types
 - **`ErrorLog`**: Pydantic model for tracking parsing errors
-- **Entity classes**: XmiStructuralMaterial, XmiStructuralCrossSection, XmiStructuralCurveMember, etc.
-- **Relationship classes**: XmiHasStructuralMaterial, XmiHasStructuralCrossSection, etc.
+- **Entity classes**: XmiStructuralMaterial, XmiCrossSection, XmiStructuralCurveMember, etc.
+- **Relationship classes**: XmiHasStructuralMaterial, XmiHasCrossSection, etc.
 
 ## See Also
 

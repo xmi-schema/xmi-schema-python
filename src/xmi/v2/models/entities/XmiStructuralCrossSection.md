@@ -1,8 +1,8 @@
-# XmiStructuralCrossSection
+# XmiCrossSection
 
 ## Overview
 
-`XmiStructuralCrossSection` represents a structural cross-section profile in the XMI schema. Cross-sections define the geometric shape and sectional properties of structural members like beams, columns, and braces. This class stores both the basic shape definition (shape type and parameters) and calculated sectional properties (area, moments of inertia, moduli, etc.).
+`XmiCrossSection` represents a structural cross-section profile in the XMI schema. Cross-sections define the geometric shape and sectional properties of structural members like beams, columns, and braces. This class stores both the basic shape definition (shape type and parameters) and calculated sectional properties (area, moments of inertia, moduli, etc.).
 
 Cross-sections are fundamental to structural analysis as they:
 - **Define member geometry**: Shape and dimensions of structural elements
@@ -49,14 +49,14 @@ Cross-sections are fundamental to structural analysis as they:
 | `description` | `str` | `None` | Detailed description | No |
 | `ifcguid` | `str` | `None` | IFC GUID for interoperability | No |
 | `native_id` | `str` | `None` | Native ID from source application | No |
-| `entity_type` | `str` | `"XmiStructuralCrossSection"` | Entity type identifier | No |
+| `entity_type` | `str` | `"XmiCrossSection"` | Entity type identifier | No |
 
 ## Relationships
 
-`XmiStructuralCrossSection` participates in the following relationships:
+`XmiCrossSection` participates in the following relationships:
 
 - **XmiHasStructuralMaterial**: Links cross-sections to materials (source: cross-section, target: material)
-- **XmiHasStructuralCrossSection**: Referenced by `XmiStructuralCurveMember` to define member cross-section (source: member, target: cross-section)
+- **XmiHasCrossSection**: Referenced by `XmiStructuralCurveMember` to define member cross-section (source: member, target: cross-section)
 
 ## Shape Types and Parameters
 
@@ -88,11 +88,11 @@ The `from_dict()` method automatically converts from string format to tuple form
 ### Creating a Rectangular Cross-Section
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Create rectangular section: 300mm x 600mm
-rect_section = XmiStructuralCrossSection(
+rect_section = XmiCrossSection(
     id="cs_rect_001",
     name="300x600 Beam",
     shape=XmiShapeEnum.RECTANGULAR,
@@ -112,7 +112,7 @@ print(f"Area: {rect_section.area} mm²")
 ### Loading from Dictionary (XMI Format)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 # Dictionary from XMI file
 section_dict = {
@@ -128,7 +128,7 @@ section_dict = {
 }
 
 # Load and validate
-section, errors = XmiStructuralCrossSection.from_dict(section_dict)
+section, errors = XmiCrossSection.from_dict(section_dict)
 
 if section:
     print(f"Loaded: {section.name}")
@@ -141,11 +141,11 @@ else:
 ### Creating a Circular Section
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Create circular section: 500mm diameter
-circular_section = XmiStructuralCrossSection(
+circular_section = XmiCrossSection(
     id="cs_circ_001",
     name="500mm Circular Column",
     shape=XmiShapeEnum.CIRCULAR,
@@ -164,12 +164,12 @@ print(f"Diameter: {circular_section.parameters[0]} mm")
 ### Creating an I-Shape (Steel Beam)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Create I-beam: W-shape profile
 # Parameters: [overall_width, overall_height, web_thickness, flange_thickness, fillet_radius, flange_width]
-i_section = XmiStructuralCrossSection(
+i_section = XmiCrossSection(
     id="cs_i_001",
     name="W24x76",
     shape=XmiShapeEnum.I_SHAPE,
@@ -192,11 +192,11 @@ print(f"Plastic modulus Zx: {i_section.plastic_modulus_x_axis} mm³")
 ### Creating a Rectangular Hollow Section
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # RHS: 200x100x8mm
-rhs_section = XmiStructuralCrossSection(
+rhs_section = XmiCrossSection(
     id="cs_rhs_001",
     name="RHS 200x100x8",
     shape=XmiShapeEnum.RECTANGULAR_HOLLOW,
@@ -215,11 +215,11 @@ print(f"Dimensions: {rhs_section.parameters[0]}x{rhs_section.parameters[1]}x{rhs
 ### Minimal Cross-Section (Required Fields Only)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Minimum viable cross-section
-minimal_section = XmiStructuralCrossSection(
+minimal_section = XmiCrossSection(
     id="cs_min_001",
     name="Simple Section",
     shape=XmiShapeEnum.UNKNOWN,
@@ -233,7 +233,7 @@ print(f"Has area defined? {minimal_section.area is not None}")  # False
 ### Handling Validation Errors
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 # Missing required fields
 invalid_dict = {
@@ -243,7 +243,7 @@ invalid_dict = {
     # Missing: Shape and Parameters
 }
 
-section, errors = XmiStructuralCrossSection.from_dict(invalid_dict)
+section, errors = XmiCrossSection.from_dict(invalid_dict)
 
 if not section:
     print("Validation failed:")
@@ -256,12 +256,12 @@ if not section:
 ### Negative Parameter Validation
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 try:
     # Negative parameters are not allowed
-    invalid_section = XmiStructuralCrossSection(
+    invalid_section = XmiCrossSection(
         id="cs_neg",
         name="Invalid",
         shape=XmiShapeEnum.RECTANGULAR,
@@ -275,10 +275,10 @@ except ValueError as e:
 ### Accessing Sectional Properties
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
-section = XmiStructuralCrossSection(
+section = XmiCrossSection(
     id="cs_props",
     name="Test Section",
     shape=XmiShapeEnum.RECTANGULAR,
@@ -297,16 +297,16 @@ has_plastic_modulus = section.plastic_modulus_x_axis is not None
 print(f"Plastic modulus defined? {has_plastic_modulus}")  # False
 ```
 
-### Using with XmiHasStructuralCrossSection Relationship
+### Using with XmiHasCrossSection Relationship
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Create cross-section
-section = XmiStructuralCrossSection(
+section = XmiCrossSection(
     id="cs_001",
     name="300x600 Beam Section",
     shape=XmiShapeEnum.RECTANGULAR,
@@ -321,7 +321,7 @@ beam = XmiStructuralCurveMember(
 )
 
 # Create relationship linking beam to cross-section
-relationship = XmiHasStructuralCrossSection(
+relationship = XmiHasCrossSection(
     source=beam,
     target=section
 )
@@ -333,11 +333,11 @@ print(f"Section shape: {relationship.target.shape.value}")
 ### Converting Parameters String to Tuple
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 # Use the utility method for manual conversion
 parameter_string = "400;800;12;20"
-parameter_tuple = XmiStructuralCrossSection.convert_parameter_string_to_tuple(parameter_string)
+parameter_tuple = XmiCrossSection.convert_parameter_string_to_tuple(parameter_string)
 
 print(f"String: '{parameter_string}'")
 print(f"Tuple: {parameter_tuple}")
@@ -351,7 +351,7 @@ section_dict = {
     "Parameters": "400;800;12;20"  # String format
 }
 
-section, _ = XmiStructuralCrossSection.from_dict(section_dict)
+section, _ = XmiCrossSection.from_dict(section_dict)
 print(f"Converted parameters: {section.parameters}")
 # Output: (400.0, 800.0, 12.0, 20.0)
 ```
@@ -359,26 +359,26 @@ print(f"Converted parameters: {section.parameters}")
 ### Creating Multiple Standard Sections
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Build a library of standard sections
 standard_sections = {
-    "300x300_COL": XmiStructuralCrossSection(
+    "300x300_COL": XmiCrossSection(
         id="cs_std_col_300",
         name="300x300 Column",
         shape=XmiShapeEnum.RECTANGULAR,
         parameters=(300.0, 300.0),
         area=90000.0
     ),
-    "300x600_BEAM": XmiStructuralCrossSection(
+    "300x600_BEAM": XmiCrossSection(
         id="cs_std_beam_300x600",
         name="300x600 Beam",
         shape=XmiShapeEnum.RECTANGULAR,
         parameters=(300.0, 600.0),
         area=180000.0
     ),
-    "500_CIRC": XmiStructuralCrossSection(
+    "500_CIRC": XmiCrossSection(
         id="cs_std_circ_500",
         name="500mm Circular",
         shape=XmiShapeEnum.CIRCULAR,
@@ -470,7 +470,7 @@ The class does not enforce specific units, but typical conventions are:
 
 ```python
 import json
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 # Load from XMI JSON file
 with open("cross_sections.json") as f:
@@ -480,7 +480,7 @@ sections = []
 errors_log = []
 
 for section_dict in xmi_data.get("StructuralCrossSection", []):
-    section, errors = XmiStructuralCrossSection.from_dict(section_dict)
+    section, errors = XmiCrossSection.from_dict(section_dict)
     if section:
         sections.append(section)
     else:
@@ -496,16 +496,16 @@ if errors_log:
 ### 2. Creating a Cross-Section Library
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 from typing import Dict
 
 class CrossSectionLibrary:
     def __init__(self):
-        self.sections: Dict[str, XmiStructuralCrossSection] = {}
+        self.sections: Dict[str, XmiCrossSection] = {}
 
-    def add_rectangular(self, name: str, width: float, height: float) -> XmiStructuralCrossSection:
-        section = XmiStructuralCrossSection(
+    def add_rectangular(self, name: str, width: float, height: float) -> XmiCrossSection:
+        section = XmiCrossSection(
             id=f"cs_{name}",
             name=name,
             shape=XmiShapeEnum.RECTANGULAR,
@@ -517,10 +517,10 @@ class CrossSectionLibrary:
         self.sections[name] = section
         return section
 
-    def add_circular(self, name: str, diameter: float) -> XmiStructuralCrossSection:
+    def add_circular(self, name: str, diameter: float) -> XmiCrossSection:
         import math
         radius = diameter / 2
-        section = XmiStructuralCrossSection(
+        section = XmiCrossSection(
             id=f"cs_{name}",
             name=name,
             shape=XmiShapeEnum.CIRCULAR,
@@ -532,7 +532,7 @@ class CrossSectionLibrary:
         self.sections[name] = section
         return section
 
-    def get_section(self, name: str) -> XmiStructuralCrossSection:
+    def get_section(self, name: str) -> XmiCrossSection:
         return self.sections.get(name)
 
 # Usage
@@ -548,14 +548,14 @@ print(f"Beam section area: {beam_section.area} mm²")
 ### 3. Finding Sections by Shape Type
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 from typing import List
 
 def filter_sections_by_shape(
-    sections: List[XmiStructuralCrossSection],
+    sections: List[XmiCrossSection],
     shape_type: XmiShapeEnum
-) -> List[XmiStructuralCrossSection]:
+) -> List[XmiCrossSection]:
     """Filter cross-sections by shape type"""
     return [s for s in sections if s.shape == shape_type]
 
@@ -597,7 +597,7 @@ The class performs validation but not geometric calculation.
 
 Cross-sections are typically linked to materials via `XmiHasStructuralMaterial` relationships:
 ```
-XmiStructuralCrossSection --[XmiHasStructuralMaterial]--> XmiStructuralMaterial
+XmiCrossSection --[XmiHasStructuralMaterial]--> XmiStructuralMaterial
 ```
 
 This allows the same cross-section geometry to be used with different materials, or the same material to be shared across multiple cross-sections.
@@ -637,7 +637,7 @@ For large models with thousands of cross-sections:
 - **`XmiShapeEnum`**: Enum defining valid cross-section shapes
 - **`XmiStructuralMaterial`**: Materials linked to cross-sections via relationships
 - **`XmiStructuralCurveMember`**: Structural members that reference cross-sections
-- **`XmiHasStructuralCrossSection`**: Relationship linking members to cross-sections
+- **`XmiHasCrossSection`**: Relationship linking members to cross-sections
 - **`XmiHasStructuralMaterial`**: Relationship linking cross-sections to materials
 
 ## See Also

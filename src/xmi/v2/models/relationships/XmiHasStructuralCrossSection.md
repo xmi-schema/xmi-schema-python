@@ -1,8 +1,8 @@
-# XmiHasStructuralCrossSection
+# XmiHasCrossSection
 
 ## Overview
 
-`XmiHasStructuralCrossSection` is a relationship class that links structural curve members to their cross-section definitions. It establishes which cross-sectional properties (area, inertia, shape) apply to beams, columns, braces, and other linear structural elements. This relationship is essential for structural analysis, as cross-sectional properties directly affect element stiffness, strength, and capacity.
+`XmiHasCrossSection` is a relationship class that links structural curve members to their cross-section definitions. It establishes which cross-sectional properties (area, inertia, shape) apply to beams, columns, braces, and other linear structural elements. This relationship is essential for structural analysis, as cross-sectional properties directly affect element stiffness, strength, and capacity.
 
 ## Class Hierarchy
 
@@ -17,7 +17,7 @@
 | Property | Type | Description | Validation |
 |----------|------|-------------|------------|
 | `source` | `XmiBaseEntity` | Curve member that uses the cross-section | Must be XmiBaseEntity (typically XmiStructuralCurveMember) |
-| `target` | `XmiStructuralCrossSection` | The cross-section definition | Must be XmiStructuralCrossSection |
+| `target` | `XmiCrossSection` | The cross-section definition | Must be XmiCrossSection |
 
 ### Inherited Properties
 
@@ -47,12 +47,12 @@ Typical source entities:
 ### Target Entity
 
 The target is always:
-- **`XmiStructuralCrossSection`**: Cross-section definition with geometric properties
+- **`XmiCrossSection`**: Cross-section definition with geometric properties
 
 ## Relationship Direction
 
 ```
-[XmiStructuralCurveMember] --hasStructuralCrossSection--> [XmiStructuralCrossSection]
+[XmiStructuralCurveMember] --hasStructuralCrossSection--> [XmiCrossSection]
 
 Example:
 [Beam B01] --hasStructuralCrossSection--> [Cross-Section CS_300x600]
@@ -64,11 +64,11 @@ Example:
 
 ```python
 from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 
 # Create cross-section
-cross_section = XmiStructuralCrossSection(
+cross_section = XmiCrossSection(
     name="CS_300x600",
     cross_section_type="Rectangular"
 )
@@ -82,7 +82,7 @@ beam = XmiStructuralCurveMember(
 )
 
 # Create relationship linking beam to cross-section
-cs_rel = XmiHasStructuralCrossSection(
+cs_rel = XmiHasCrossSection(
     source=beam,
     target=cross_section
 )
@@ -101,7 +101,7 @@ def create_curve_member_with_cross_section(member_dict, cross_section):
     curve_member = XmiStructuralCurveMember.from_dict(member_dict)
 
     # Create relationship
-    cs_rel = XmiHasStructuralCrossSection(
+    cs_rel = XmiHasCrossSection(
         source=curve_member,
         target=cross_section,
         name="hasStructuralCrossSection"
@@ -115,14 +115,14 @@ def create_curve_member_with_cross_section(member_dict, cross_section):
 #### Finding Cross-Section for a Member
 
 ```python
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 
 def find_cross_section_for_member(xmi_model, member):
     """Find the cross-section referenced by a curve member."""
     # Find cross-section relationships where member is the source
     relationships = xmi_model.find_relationships_by_source(
         member,
-        relationship_type=XmiHasStructuralCrossSection
+        relationship_type=XmiHasCrossSection
     )
 
     if relationships:
@@ -148,7 +148,7 @@ def find_members_using_cross_section(xmi_model, cross_section):
     # Find cross-section relationships where cross-section is the target
     relationships = xmi_model.find_relationships_by_target(
         cross_section,
-        relationship_type=XmiHasStructuralCrossSection
+        relationship_type=XmiHasCrossSection
     )
 
     # Extract source curve members
@@ -177,7 +177,7 @@ def group_members_by_cross_section(xmi_model):
     # Find all cross-section relationships
     cs_rels = [
         rel for rel in xmi_model.relationships
-        if isinstance(rel, XmiHasStructuralCrossSection)
+        if isinstance(rel, XmiHasCrossSection)
     ]
 
     for rel in cs_rels:
@@ -266,7 +266,7 @@ def replace_cross_section(xmi_model, old_cross_section, new_cross_section):
     # Find all relationships using old cross-section
     relationships = xmi_model.find_relationships_by_target(
         old_cross_section,
-        relationship_type=XmiHasStructuralCrossSection
+        relationship_type=XmiHasCrossSection
     )
 
     count = 0
@@ -357,7 +357,7 @@ if props:
 ### Type Validation
 
 - **Source**: Must be any `XmiBaseEntity` subclass (typically `XmiStructuralCurveMember`)
-- **Target**: Must be `XmiStructuralCrossSection`
+- **Target**: Must be `XmiCrossSection`
 - Attempting to create a relationship with wrong types raises `TypeError`
 
 ### Required Fields
@@ -365,13 +365,13 @@ if props:
 Both source and target are required:
 ```python
 # Valid
-rel = XmiHasStructuralCrossSection(
+rel = XmiHasCrossSection(
     source=curve_member,
     target=cross_section
 )
 
 # Invalid - will raise validation error
-# rel = XmiHasStructuralCrossSection(source=curve_member)  # Missing target
+# rel = XmiHasCrossSection(source=curve_member)  # Missing target
 ```
 
 ### Automatic Defaults
@@ -402,8 +402,8 @@ Relationships are created during XMI parsing when curve members define their cro
 
 The `XmiManager`:
 1. Parses curve member dictionary
-2. Resolves `"StructuralCrossSection": "CS_300x600"` to actual `XmiStructuralCrossSection` object
-3. Creates `XmiHasStructuralCrossSection` relationship linking member to cross-section
+2. Resolves `"StructuralCrossSection": "CS_300x600"` to actual `XmiCrossSection` object
+3. Creates `XmiHasCrossSection` relationship linking member to cross-section
 
 ### Dependency Order
 
@@ -411,7 +411,7 @@ Cross-sections must be parsed before members that reference them:
 1. Parse `StructuralMaterial` entities
 2. Parse `StructuralCrossSection` entities (which reference materials)
 3. Parse `StructuralCurveMember` entities
-4. Create `XmiHasStructuralCrossSection` relationships
+4. Create `XmiHasCrossSection` relationships
 
 ## Notes
 
@@ -465,7 +465,7 @@ Common workflow:
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md) - Curve member (beam, column, brace)
 
 ### Target Entity Class
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Cross-section definition
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Cross-section definition
 
 ### Related Relationship Classes
 - [`XmiHasStructuralMaterial`](./XmiHasStructuralMaterial.md) - Links cross-sections to materials

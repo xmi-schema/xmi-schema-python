@@ -43,7 +43,7 @@
 
 `XmiStructuralMaterial` participates in the following relationships:
 
-- **XmiHasStructuralMaterial**: Referenced by `XmiStructuralCrossSection` and `XmiStructuralSurfaceMember` to define material properties
+- **XmiHasStructuralMaterial**: Referenced by `XmiCrossSection` and `XmiStructuralSurfaceMember` to define material properties
 - Materials are source entities that get linked to cross-sections and surface members
 
 ## Usage Examples
@@ -251,7 +251,7 @@ The `from_dict()` method returns a tuple: `(instance, error_logs)`
 
 - **`XmiBaseEntity`**: Parent class providing common entity properties
 - **`XmiStructuralMaterialTypeEnum`**: Enum defining valid material types
-- **`XmiStructuralCrossSection`**: References materials via `XmiHasStructuralMaterial` relationship
+- **`XmiCrossSection`**: References materials via `XmiHasStructuralMaterial` relationship
 - **`XmiStructuralSurfaceMember`**: Can reference materials directly
 - **`XmiHasStructuralMaterial`**: Relationship class linking materials to other entities
 
@@ -304,6 +304,6 @@ def is_high_strength_concrete(material: XmiStructuralMaterial) -> bool:
 
 ## See Also
 
-- [XmiStructuralCrossSection.md](XmiStructuralCrossSection.md) - Cross-sections that use materials
+- [XmiCrossSection.md](XmiCrossSection.md) - Cross-sections that use materials
 - [XmiBaseEntity.md](../bases/XmiBaseEntity.md) - Base entity documentation
 - [XmiStructuralMaterialTypeEnum.md](../enums/XmiStructuralMaterialTypeEnum.md) - Material type enumeration

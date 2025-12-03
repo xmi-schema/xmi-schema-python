@@ -79,11 +79,11 @@ shape = XmiShapeEnum.from_attribute_get_enum("Rectangular")  # XmiShapeEnum.RECT
 ### Creating Cross-Section with Shape
 
 ```python
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 
 # Rectangular concrete beam
-rect_section = XmiStructuralCrossSection(
+rect_section = XmiCrossSection(
     name="RECT_300x500",
     shape=XmiShapeEnum.RECTANGULAR,
     width=300,  # mm
@@ -91,14 +91,14 @@ rect_section = XmiStructuralCrossSection(
 )
 
 # Circular concrete column
-circ_section = XmiStructuralCrossSection(
+circ_section = XmiCrossSection(
     name="CIRC_400",
     shape=XmiShapeEnum.CIRCULAR,
     diameter=400  # mm
 )
 
 # Steel I-beam
-i_section = XmiStructuralCrossSection(
+i_section = XmiCrossSection(
     name="W12x26",
     shape=XmiShapeEnum.I_SHAPE,
     # ... I-section dimensions
@@ -128,11 +128,11 @@ shape = parse_cross_section_shape("invalid")      # XmiShapeEnum.UNKNOWN
 ```python
 def get_sections_by_shape(xmi_model, shape: XmiShapeEnum):
     """Get all cross-sections of a specific shape."""
-    from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+    from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
     sections = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralCrossSection) and entity.shape == shape
+        if isinstance(entity, XmiCrossSection) and entity.shape == shape
     ]
     return sections
 
@@ -175,11 +175,11 @@ for shape in XmiShapeEnum:
 def analyze_section_shapes(xmi_model):
     """Analyze distribution of cross-section shapes."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+    from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
     sections = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralCrossSection)
+        if isinstance(entity, XmiCrossSection)
     ]
 
     shape_counts = Counter(sec.shape for sec in sections)
@@ -204,11 +204,11 @@ analyze_section_shapes(xmi_model)
 def get_common_combinations(xmi_model):
     """Get common material-shape combinations."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+    from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
     sections = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralCrossSection)
+        if isinstance(entity, XmiCrossSection)
     ]
 
     # Get material for each section (via relationship)
@@ -265,7 +265,7 @@ def validate_section_dimensions(section):
     return errors
 
 # Usage
-section = XmiStructuralCrossSection(
+section = XmiCrossSection(
     name="RECT_300x500",
     shape=XmiShapeEnum.RECTANGULAR,
     width=300
@@ -311,7 +311,7 @@ def calculate_area(section):
         return section.area if hasattr(section, 'area') else None
 
 # Usage
-rect_section = XmiStructuralCrossSection(
+rect_section = XmiCrossSection(
     shape=XmiShapeEnum.RECTANGULAR,
     width=300,
     height=500
@@ -352,10 +352,10 @@ Cross-section shapes appear in XMI dictionaries:
 }
 ```
 
-### Usage in XmiStructuralCrossSection
+### Usage in XmiCrossSection
 
 ```python
-class XmiStructuralCrossSection(XmiBaseEntity):
+class XmiCrossSection(XmiBaseEntity):
     shape: XmiShapeEnum = Field(..., alias="Shape")
     # ... other fields
 ```
@@ -391,7 +391,7 @@ Use `UNKNOWN` when:
 ## Related Classes
 
 ### Entity Classes
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Uses this enum for shape field
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Uses this enum for shape field
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md) - References cross-sections with shapes
 
 ### Base Classes
@@ -405,5 +405,5 @@ Use `UNKNOWN` when:
 
 ## See Also
 
-- [XMI Cross-Section Documentation](../entities/XmiStructuralCrossSection.md)
+- [XMI Cross-Section Documentation](../entities/XmiCrossSection.md)
 - [XMI Schema Specification](https://github.com/IfcOpenShell/xmi-schema)

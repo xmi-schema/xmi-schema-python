@@ -168,7 +168,7 @@ def test_error_with_empty_problem_data():
 def test_error_with_complex_problem_data():
     """Test XmiError with complex nested problem data"""
     problem_data = {
-        "entity": "XmiStructuralCrossSection",
+        "entity": "XmiCrossSection",
         "errors": [
             {"field": "material_id", "issue": "not_found"},
             {"field": "dimensions", "issue": "invalid_format"}

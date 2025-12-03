@@ -1,5 +1,5 @@
 import pytest
-from xmi.v1.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v1.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v1.entities.xmi_structural_material import XmiStructuralMaterial
 from xmi.v1.enums.xmi_structural_material_enums import XmiStructuralMaterialTypeEnum
 from xmi.v1.shapes.xmi_shape import *
@@ -44,16 +44,16 @@ def test_xmi_structural_cross_section_ok_1():
 
     shape = XmiShapeEnum.from_attribute_get_enum(
         xmi_structural_cross_section_obj['Shape'])
-    parameters_expected = XmiStructuralCrossSection.convert_parameter_string_to_tuple(
+    parameters_expected = XmiCrossSection.convert_parameter_string_to_tuple(
         # value is shown in mm for testing purposes
         xmi_structural_cross_section_obj['Parameters'])
-    xmi_structural_cross_section = XmiStructuralCrossSection(
+    xmi_structural_cross_section = XmiCrossSection(
         material=xmi_structural_material,
         shape=shape,
         parameters=parameters_expected
     )
 
-    assert isinstance(xmi_structural_cross_section, XmiStructuralCrossSection)
+    assert isinstance(xmi_structural_cross_section, XmiCrossSection)
     assert xmi_structural_cross_section.material == xmi_structural_material
     assert xmi_structural_cross_section.parameters == parameters_expected
     assert xmi_structural_cross_section.shape == shape
@@ -98,16 +98,16 @@ def test_xmi_structural_cross_section_ok_2():
 
     shape = XmiShapeEnum.from_attribute_get_enum(
         xmi_structural_cross_section_obj['Shape'])
-    parameters_expected = XmiStructuralCrossSection.convert_parameter_string_to_tuple(
+    parameters_expected = XmiCrossSection.convert_parameter_string_to_tuple(
         # value is shown in mm for testing purposes
         xmi_structural_cross_section_obj['Parameters'])
-    xmi_structural_cross_section = XmiStructuralCrossSection(
+    xmi_structural_cross_section = XmiCrossSection(
         material=xmi_structural_material,
         shape=shape,
         parameters=parameters_expected
     )
 
-    assert isinstance(xmi_structural_cross_section, XmiStructuralCrossSection)
+    assert isinstance(xmi_structural_cross_section, XmiCrossSection)
     assert xmi_structural_cross_section.material == xmi_structural_material
     assert xmi_structural_cross_section.parameters == parameters_expected
     assert xmi_structural_cross_section.shape == shape
@@ -151,7 +151,7 @@ def test_xmi_structural_cross_section_fail():
     shape = XmiShapeEnum.CIRCULAR
     parameters = (100, 100)  # value is shown in mm for testing purposes
     with pytest.raises(XmiInconsistentDataTypeError, match="The parameter length is different than required XmiShape's parameter_quantity value"):
-        xmi_structural_cross_section = XmiStructuralCrossSection(
+        xmi_structural_cross_section = XmiCrossSection(
             material=xmi_structural_material,
             shape=shape,
             parameters=parameters

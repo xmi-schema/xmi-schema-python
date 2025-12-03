@@ -120,7 +120,7 @@ else:
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
 from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 manager = XmiManager()
 model = manager.read_xmi_dict(xmi_data)
@@ -132,7 +132,7 @@ for mat in materials:
     print(f"  - {mat.name}: {mat.material_type.value}")
 
 # Find all cross-sections
-cross_sections = [e for e in model.entities if isinstance(e, XmiStructuralCrossSection)]
+cross_sections = [e for e in model.entities if isinstance(e, XmiCrossSection)]
 print(f"Cross-sections: {len(cross_sections)}")
 ```
 
@@ -165,7 +165,7 @@ invalid_xmi_data = {
         {
             "ID": "cs_001",
             "Name": "300x600mm",
-            "EntityType": "XmiStructuralCrossSection",
+            "EntityType": "XmiCrossSection",
             "Shape": "Rectangular",
             "Area": 0.18
         }
@@ -236,7 +236,7 @@ print(f"Total Members: {len(curve_members) + len(surface_members)}")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 
 manager = XmiManager()
@@ -244,7 +244,7 @@ model = manager.read_xmi_dict(xmi_data)
 
 # Find a specific cross-section
 cross_section = next((e for e in model.entities
-                      if isinstance(e, XmiStructuralCrossSection)
+                      if isinstance(e, XmiCrossSection)
                       and e.name == "300x600mm"), None)
 
 if cross_section:
@@ -353,11 +353,11 @@ StructuralSurfaceMember (references Material and PointConnection via relationshi
 {
   "Entities": [
     {"ID": "beam_001", "EntityType": "XmiStructuralCurveMember", ...},
-    {"ID": "cs_001", "EntityType": "XmiStructuralCrossSection", ...},
+    {"ID": "cs_001", "EntityType": "XmiCrossSection", ...},
     {"ID": "mat_001", "EntityType": "XmiStructuralMaterial", ...}
   ],
   "Relationships": [
-    {"Source": "beam_001", "Target": "cs_001", "EntityType": "XmiHasStructuralCrossSection"}
+    {"Source": "beam_001", "Target": "cs_001", "EntityType": "XmiHasCrossSection"}
   ]
 }
 ```
@@ -595,4 +595,4 @@ def merge_models(xmi_data_list: list) -> dict:
 - [XmiModel.md](XmiModel.md) - Detailed model documentation (to be created)
 - [XmiStructuralMaterial.md](../entities/XmiStructuralMaterial.md) - Material entity documentation
 - [XmiStructuralPointConnection.md](../entities/XmiStructuralPointConnection.md) - Point connection documentation
-- [XmiStructuralCrossSection.md](../entities/XmiStructuralCrossSection.md) - Cross-section documentation (to be created)
+- [XmiCrossSection.md](../entities/XmiCrossSection.md) - Cross-section documentation (to be created)

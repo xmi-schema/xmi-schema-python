@@ -78,7 +78,7 @@ Defines the reference line position on the cross-section:
 
 ### Source Relationships (this entity is the source):
 
-- **`XmiHasStructuralCrossSection`**: Links the curve member to its `XmiStructuralCrossSection`
+- **`XmiHasCrossSection`**: Links the curve member to its `XmiCrossSection`
 - **`XmiHasStructuralNode`**: Links to begin and end `XmiStructuralPointConnection` nodes (with `is_begin` and `is_end` attributes)
 - **`XmiHasSegment`**: Links to multiple `XmiSegment` objects representing the geometric path between nodes
 
@@ -251,12 +251,12 @@ print(f"Beams: {len(beams)}")
 #### Finding Cross-Section for a Curve Member
 
 ```python
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasStructuralCrossSection
+from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 
 # Find cross-section relationship
 cs_relationships = xmi_model.find_relationships_by_source(
     curve_member,
-    relationship_type=XmiHasStructuralCrossSection
+    relationship_type=XmiHasCrossSection
 )
 
 if cs_relationships:
@@ -352,7 +352,7 @@ Example valid formats:
 
 `XmiStructuralCurveMember` depends on:
 1. `XmiStructuralPointConnection` (begin/end nodes must exist)
-2. `XmiStructuralCrossSection` (cross-section must exist)
+2. `XmiCrossSection` (cross-section must exist)
 
 These dependencies must be loaded before curve members during parsing.
 
@@ -396,13 +396,13 @@ The `system_line` property affects how the member is positioned relative to node
 ## Related Classes
 
 ### Entity Classes
-- [`XmiStructuralCrossSection`](./XmiStructuralCrossSection.md) - Cross-section definition
+- [`XmiCrossSection`](./XmiCrossSection.md) - Cross-section definition
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Node connections
 - [`XmiSegment`](../segments/XmiSegment.md) - Geometric segments
 - [`XmiStructuralStorey`](./XmiStructuralStorey.md) - Story organization
 
 ### Relationship Classes
-- `XmiHasStructuralCrossSection` - Links to cross-section
+- `XmiHasCrossSection` - Links to cross-section
 - `XmiHasStructuralNode` - Links to nodes
 - `XmiHasSegment` - Links to segments
 

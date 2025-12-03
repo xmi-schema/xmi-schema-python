@@ -1,9 +1,9 @@
 from pydantic import field_validator, model_validator
 from ..bases.xmi_base_relationship import XmiBaseRelationship
 from ..bases.xmi_base_entity import XmiBaseEntity
-from ..entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from ..entities.xmi_structural_cross_section import XmiCrossSection
 
-class XmiHasStructuralCrossSection(XmiBaseRelationship):
+class XmiHasCrossSection(XmiBaseRelationship):
     @field_validator("source", mode="before")
     @classmethod
     def validate_source(cls, v):
@@ -14,8 +14,8 @@ class XmiHasStructuralCrossSection(XmiBaseRelationship):
     @field_validator("target", mode="before")
     @classmethod
     def validate_target(cls, v):
-        if not isinstance(v, XmiStructuralCrossSection):
-            raise TypeError("Target must be of type XmiStructuralCrossSection")
+        if not isinstance(v, XmiCrossSection):
+            raise TypeError("Target must be of type XmiCrossSection")
         return v
 
     @model_validator(mode="before")

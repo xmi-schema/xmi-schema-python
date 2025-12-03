@@ -331,7 +331,7 @@ Segments must be ordered by `position` to properly represent the member path:
 ### Related Relationship Classes
 - [`XmiHasStructuralPointConnection`](./XmiHasStructuralNode.md) - Links segments to nodes
 - [`XmiHasGeometry`](./XmiHasGeometry.md) - Links segments to geometric definitions (Line3D, Arc3D)
-- [`XmiHasStructuralCrossSection`](./XmiHasStructuralCrossSection.md) - Links members to cross-sections
+- [`XmiHasCrossSection`](./XmiHasCrossSection.md) - Links members to cross-sections
 
 ### Geometry Classes
 - [`XmiLine3D`](../geometries/XmiLine3D.md) - Line segment geometry

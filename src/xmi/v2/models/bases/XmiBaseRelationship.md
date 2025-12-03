@@ -71,7 +71,7 @@ The `validate_fields` validator ensures:
 
 ```python
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiStructuralCrossSection
+from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
 
 # Create entities
@@ -82,7 +82,7 @@ material = XmiStructuralMaterial(
     grade="C30"
 )
 
-cross_section = XmiStructuralCrossSection(
+cross_section = XmiCrossSection(
     id="cs-001",
     name="RECT_300x500",
     shape="Rectangle"
@@ -330,7 +330,7 @@ In the v2 implementation, relationships are typically created programmatically d
 ```python
 # In XmiManager.read_xmi_dict():
 for cross_section_dict in xmi_dict.get("StructuralCrossSection", []):
-    cross_section, errors = XmiStructuralCrossSection.from_dict(cross_section_dict)
+    cross_section, errors = XmiCrossSection.from_dict(cross_section_dict)
 
     # Find material by ID
     material_id = cross_section_dict.get("MaterialID")
@@ -349,7 +349,7 @@ for cross_section_dict in xmi_dict.get("StructuralCrossSection", []):
 ### Common Relationship Types
 
 1. **XmiHasStructuralMaterial**: Links cross-sections/surfaces to materials
-2. **XmiHasStructuralCrossSection**: Links curve members to cross-sections
+2. **XmiHasCrossSection**: Links curve members to cross-sections
 3. **XmiHasStructuralNode**: Links members/segments to point connections
 4. **XmiHasSegment**: Links members to their geometric segments
 5. **XmiHasGeometry**: Links entities to geometric primitives
@@ -431,7 +431,7 @@ The configuration includes `arbitrary_types_allowed=True` (implicitly) to allow 
 
 ### Direct Subclasses (Relationships)
 - `XmiHasStructuralMaterial` - Links entities to materials
-- `XmiHasStructuralCrossSection` - Links members to cross-sections
+- `XmiHasCrossSection` - Links members to cross-sections
 - `XmiHasStructuralNode` - Links entities to point connections
 - `XmiHasSegment` - Links members to segments
 - `XmiHasGeometry` - Links entities to geometric primitives
@@ -439,7 +439,7 @@ The configuration includes `arbitrary_types_allowed=True` (implicitly) to allow 
 ### Entity Classes
 - [`XmiBaseEntity`](./XmiBaseEntity.md) - Base class for all entities (source/target)
 - [`XmiStructuralMaterial`](../entities/XmiStructuralMaterial.md) - Common target for material relationships
-- [`XmiStructuralCrossSection`](../entities/XmiStructuralCrossSection.md) - Common source/target
+- [`XmiCrossSection`](../entities/XmiCrossSection.md) - Common source/target
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md) - Common source
 
 ### Model Classes
