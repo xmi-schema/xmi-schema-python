@@ -1,0 +1,120 @@
+physical_model_data = {
+    "Name": "PhysicalModel",
+    "XmiVersion": "2.0",
+    "ApplicationName": "FeatureParityHarness",
+    "ApplicationVersion": "0.1",
+    "Entities": [
+        {
+            "ID": "beam-001",
+            "Name": "Beam 1",
+            "Description": "Physical beam",
+            "EntityType": "XmiBeam",
+            "SystemLine": "TopMiddle",
+            "Length": 6000.0,
+            "LocalAxisX": "1,0,0",
+            "LocalAxisY": "0,1,0",
+            "LocalAxisZ": "0,0,1",
+            "BeginNodeXOffset": 0.0,
+            "EndNodeXOffset": 0.0,
+            "BeginNodeYOffset": 0.0,
+            "EndNodeYOffset": 0.0,
+            "BeginNodeZOffset": 0.0,
+            "EndNodeZOffset": 0.0,
+            "EndFixityStart": "FFFFFF",
+            "EndFixityEnd": "FFFFFF"
+        },
+        {
+            "ID": "column-001",
+            "Name": "Column 1",
+            "Description": "Physical column",
+            "EntityType": "XmiColumn",
+            "SystemLine": "MiddleMiddle",
+            "Length": 3000.0,
+            "LocalAxisX": "1,0,0",
+            "LocalAxisY": "0,1,0",
+            "LocalAxisZ": "0,0,1",
+            "BeginNodeXOffset": 0.0,
+            "EndNodeXOffset": 0.0,
+            "BeginNodeYOffset": 0.0,
+            "EndNodeYOffset": 0.0,
+            "BeginNodeZOffset": 0.0,
+            "EndNodeZOffset": 0.0,
+            "EndFixityStart": "FFFFFF",
+            "EndFixityEnd": "FFFFFF"
+        },
+        {
+            "ID": "slab-001",
+            "Name": "Slab 1",
+            "Description": "Physical slab",
+            "EntityType": "XmiSlab"
+        },
+        {
+            "ID": "wall-001",
+            "Name": "Wall 1",
+            "Description": "Physical wall",
+            "EntityType": "XmiWall"
+        },
+        {
+            "ID": "curve-001",
+            "Name": "Curve Member Beam",
+            "Description": "Analytical member for beam",
+            "EntityType": "XmiStructuralCurveMember",
+            "CurveMemberType": "Beam",
+            "SystemLine": "TopMiddle",
+            "Length": 6000.0,
+            "LocalAxisX": "1,0,0",
+            "LocalAxisY": "0,1,0",
+            "LocalAxisZ": "0,0,1",
+            "BeginNodeXOffset": 0.0,
+            "EndNodeXOffset": 0.0,
+            "BeginNodeYOffset": 0.0,
+            "EndNodeYOffset": 0.0,
+            "BeginNodeZOffset": 0.0,
+            "EndNodeZOffset": 0.0,
+            "EndFixityStart": "FFFFFF",
+            "EndFixityEnd": "FFFFFF"
+        },
+        {
+            "ID": "curve-002",
+            "Name": "Curve Member Column",
+            "Description": "Analytical member for column",
+            "EntityType": "XmiStructuralCurveMember",
+            "CurveMemberType": "Column",
+            "SystemLine": "MiddleMiddle",
+            "Length": 3000.0,
+            "LocalAxisX": "1,0,0",
+            "LocalAxisY": "0,1,0",
+            "LocalAxisZ": "0,0,1",
+            "BeginNodeXOffset": 0.0,
+            "EndNodeXOffset": 0.0,
+            "BeginNodeYOffset": 0.0,
+            "EndNodeYOffset": 0.0,
+            "BeginNodeZOffset": 0.0,
+            "EndNodeZOffset": 0.0,
+            "EndFixityStart": "FFFFFF",
+            "EndFixityEnd": "FFFFFF"
+        }
+    ],
+    "Relationships": [
+        {
+            "ID": "rel-001",
+            "Source": "beam-001",
+            "Target": "curve-001",
+            "Name": "hasStructuralCurveMember",
+            "Description": "Beam linked to analytical curve",
+            "EntityType": "XmiHasStructuralCurveMember",
+            "UmlType": "Association"
+        },
+        {
+            "ID": "rel-002",
+            "Source": "column-001",
+            "Target": "curve-002",
+            "Name": "hasStructuralCurveMember",
+            "Description": "Column linked to analytical curve",
+            "EntityType": "XmiHasStructuralCurveMember",
+            "UmlType": "Association"
+        }
+    ],
+    "Histories": [],
+    "Errors": []
+}
