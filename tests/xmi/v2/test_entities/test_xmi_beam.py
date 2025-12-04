@@ -63,9 +63,7 @@ def test_beam_with_all_properties():
         begin_node_y_offset=5.0,
         end_node_y_offset=5.0,
         begin_node_z_offset=0.0,
-        end_node_z_offset=0.0,
-        end_fixity_start="Fixed",
-        end_fixity_end="Pinned"
+        end_node_z_offset=0.0
     )
 
     assert beam.id == "beam-002"
@@ -79,8 +77,6 @@ def test_beam_with_all_properties():
     assert beam.local_axis_z == (0.0, 0.0, 1.0)
     assert beam.begin_node_x_offset == 10.0
     assert beam.end_node_x_offset == 15.0
-    assert beam.end_fixity_start == "Fixed"
-    assert beam.end_fixity_end == "Pinned"
 
 
 def test_beam_default_values():
@@ -99,8 +95,6 @@ def test_beam_default_values():
     assert beam.end_node_y_offset == 0.0
     assert beam.begin_node_z_offset == 0.0
     assert beam.end_node_z_offset == 0.0
-    assert beam.end_fixity_start is None
-    assert beam.end_fixity_end is None
 
 
 def test_beam_axis_parsing_from_string():
@@ -139,8 +133,7 @@ def test_beam_serialization():
         id="beam-003",
         name="Serialization Test",
         system_line=XmiStructuralCurveMemberSystemLineEnum.TOP_RIGHT,
-        length=7000.0,
-        end_fixity_start="Fixed"
+        length=7000.0
     )
 
     data = beam.model_dump()
@@ -164,9 +157,7 @@ def test_beam_deserialization_pascalcase():
         "LocalAxisY": "0.0, 1.0, 0.0",
         "LocalAxisZ": "0.0, 0.0, 1.0",
         "BeginNodeXOffset": 5.0,
-        "EndNodeXOffset": 10.0,
-        "EndFixityStart": "Pinned",
-        "EndFixityEnd": "Fixed"
+        "EndNodeXOffset": 10.0
     }
 
     beam = XmiBeam.model_validate(data)
@@ -177,8 +168,6 @@ def test_beam_deserialization_pascalcase():
     assert beam.length == 5500.0
     assert beam.begin_node_x_offset == 5.0
     assert beam.end_node_x_offset == 10.0
-    assert beam.end_fixity_start == "Pinned"
-    assert beam.end_fixity_end == "Fixed"
 
 
 def test_beam_from_dict_method():

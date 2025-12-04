@@ -19,9 +19,7 @@ physical_model_data = {
             "BeginNodeYOffset": 0.0,
             "EndNodeYOffset": 0.0,
             "BeginNodeZOffset": 0.0,
-            "EndNodeZOffset": 0.0,
-            "EndFixityStart": "FFFFFF",
-            "EndFixityEnd": "FFFFFF"
+            "EndNodeZOffset": 0.0
         },
         {
             "ID": "column-001",

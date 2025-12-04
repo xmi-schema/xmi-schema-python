@@ -22,11 +22,10 @@
 | `Length` | `float` | `None` | Member length in model units |
 | `LocalAxisX/Y/Z` | `tuple[float, float, float]` | `None` | Direction cosines of the local axes (strings such as `"1,0,0"` are parsed automatically) |
 | `BeginNode*Offset` / `EndNode*Offset` | `float` | `0.0` | Translational offsets relative to analytical nodes |
-| `EndFixityStart` / `EndFixityEnd` | `str` | `None` | Fixity code (`FFFFFF`, etc.) describing end releases |
 
 ## Relationships
 - `XmiHasStructuralCurveMember` (physical → analytical curve)
-- `XmiHasStructuralMaterial` (indirect via cross-section relationships)
+- `XmiHasMaterial` (indirect via cross-section relationships)
 - `XmiHasStructuralNode` / `XmiHasSegment` (through its paired curve member)
 
 ## Usage
@@ -69,3 +68,4 @@ bridge = XmiHasStructuralCurveMember(source=beam, target=curve)
 - Axis vectors accept either comma-delimited strings or numeric tuples.
 - `SystemLine` strings are coerced to enums; invalid values surface as validation errors.
 - All offsets default to `0.0`, so supplying them is optional unless a physical extent mismatch exists.
+- End fixity metadata now resides on the analytical `XmiStructuralCurveMember` rather than the physical beam.
