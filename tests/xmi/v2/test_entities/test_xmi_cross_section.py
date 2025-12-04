@@ -1,6 +1,6 @@
 from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
-from tests.xmi.v2.test_inputs.xmi_structural_cross_section_input import valid_cross_section_input
+from tests.xmi.v2.test_inputs.xmi_cross_section_input import valid_cross_section_input
 
 def test_cross_section_without_material():
     instance, errors = XmiCrossSection.from_dict(valid_cross_section_input)
