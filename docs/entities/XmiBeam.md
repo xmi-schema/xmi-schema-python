@@ -21,7 +21,7 @@
 | `SystemLine` | `XmiStructuralCurveMemberSystemLineEnum` | `None` | Alignment line that controls offsets vs. the analytical curve |
 | `Length` | `float` | `None` | Member length in model units |
 | `LocalAxisX/Y/Z` | `tuple[float, float, float]` | `None` | Direction cosines of the local axes (strings such as `"1,0,0"` are parsed automatically) |
-| `BeginNode*Offset` / `EndNode*Offset` | `float` | `0.0` | Translational offsets relative to analytical nodes |
+| `BeginNode*Offset` / `EndNode*Offset` | `float` | `0.0` | Translational offsets between the native click location (where the user drew the beam) and the analytical nodes after the authoring tool’s placement adjustments |
 
 ## Relationships
 - `XmiHasStructuralCurveMember` (physical → analytical curve)
@@ -67,5 +67,5 @@ bridge = XmiHasStructuralCurveMember(source=beam, target=curve)
 ## Validation Notes
 - Axis vectors accept either comma-delimited strings or numeric tuples.
 - `SystemLine` strings are coerced to enums; invalid values surface as validation errors.
-- All offsets default to `0.0`, so supplying them is optional unless a physical extent mismatch exists.
+- All offsets default to `0.0`. Keep them when the native design tool applied an offset after the user’s pick point so the physical metadata preserves that context; otherwise omit them for a direct analytical alignment.
 - End fixity metadata now resides on the analytical `XmiStructuralCurveMember` rather than the physical beam.

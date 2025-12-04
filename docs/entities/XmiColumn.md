@@ -21,8 +21,7 @@
 | `SystemLine` | `XmiStructuralCurveMemberSystemLineEnum` | `None` | Cross-section reference line used to align to the analytical axis |
 | `Length` | `float` | `None` | Column height |
 | `LocalAxisX/Y/Z` | `tuple[float, float, float]` | `None` | Local axis orientation; accepts comma-separated strings |
-| `BeginNode*Offset`, `EndNode*Offset` | `float` | `0.0` | Translational offsets from analytical node positions |
-| `EndFixityStart`, `EndFixityEnd` | `str` | `None` | Boundary condition string (`FFFFFF`, etc.) |
+| `BeginNode*Offset`, `EndNode*Offset` | `float` | `0.0` | Translational offsets from the native authoring click location to the analytical node after the software applies its placement adjustments |
 
 ## Relationships
 - `XmiHasStructuralCurveMember` (column → analytical curve)
@@ -65,4 +64,5 @@ bridge = XmiHasStructuralCurveMember(source=column, target=curve)
 ## Validation Notes
 - Axis vectors are normalized when supplied in string form.
 - Missing bridge relationships surface as `XmiHasStructuralCurveMember` errors during model loading.
-- Optional offsets allow modeling overhangs or embeds; omit them for a direct analytical alignment.
+- Optional offsets mirror whatever the native tool applied after the user clicked to place the element—keep them when the physical pick location differs from the analytical nodes, omit them for a direct alignment.
+- Physical columns no longer accept `EndFixity*` fields; supply those on the analytical member if the exporter captures them.

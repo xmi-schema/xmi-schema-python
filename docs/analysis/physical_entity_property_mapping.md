@@ -47,6 +47,6 @@ Slabs and walls are metadata containers only—no bespoke fields beyond the base
 
 ## Gaps / Follow-ups
 
-1. Physical beams now defer all fixity data to their analytical counterparts. Future parity checks should confirm that this split remains consistent in the C# repo (or document intentional divergence).
+1. Physical beams and columns now defer all fixity data to their analytical counterparts. Future parity checks should confirm that this split remains consistent in the C# repo (or document intentional divergence).
 2. No additional physical metadata exists in C#. If future 0.9.x releases add more fields (e.g., profile references), repeat this exercise to keep the table current.
 3. `LocalAxis*` conversions currently live in `XmiBeam`/`XmiColumn.from_dict`. If other languages emit arrays instead of strings, consider extending serializers so the mapping table remains valid for future integrations.

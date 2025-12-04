@@ -63,9 +63,7 @@ def test_column_with_all_properties():
         begin_node_y_offset=0.0,
         end_node_y_offset=0.0,
         begin_node_z_offset=5.0,
-        end_node_z_offset=10.0,
-        end_fixity_start="Fixed",
-        end_fixity_end="Fixed"
+        end_node_z_offset=10.0
     )
 
     assert column.id == "column-002"
@@ -79,8 +77,6 @@ def test_column_with_all_properties():
     assert column.local_axis_z == (0.0, 0.0, 1.0)
     assert column.begin_node_z_offset == 5.0
     assert column.end_node_z_offset == 10.0
-    assert column.end_fixity_start == "Fixed"
-    assert column.end_fixity_end == "Fixed"
 
 
 def test_column_default_values():
@@ -99,8 +95,6 @@ def test_column_default_values():
     assert column.end_node_y_offset == 0.0
     assert column.begin_node_z_offset == 0.0
     assert column.end_node_z_offset == 0.0
-    assert column.end_fixity_start is None
-    assert column.end_fixity_end is None
 
 
 def test_column_axis_parsing_from_string():
@@ -139,8 +133,7 @@ def test_column_serialization():
         id="column-003",
         name="Serialization Test",
         system_line=XmiStructuralCurveMemberSystemLineEnum.TOP_RIGHT,
-        length=3100.0,
-        end_fixity_start="Pinned"
+        length=3100.0
     )
 
     data = column.model_dump()
@@ -164,9 +157,7 @@ def test_column_deserialization_pascalcase():
         "LocalAxisY": "0.0, 1.0, 0.0",
         "LocalAxisZ": "0.0, 0.0, 1.0",
         "BeginNodeZOffset": 2.0,
-        "EndNodeZOffset": 5.0,
-        "EndFixityStart": "Fixed",
-        "EndFixityEnd": "Pinned"
+        "EndNodeZOffset": 5.0
     }
 
     column = XmiColumn.model_validate(data)
@@ -177,8 +168,6 @@ def test_column_deserialization_pascalcase():
     assert column.length == 3400.0
     assert column.begin_node_z_offset == 2.0
     assert column.end_node_z_offset == 5.0
-    assert column.end_fixity_start == "Fixed"
-    assert column.end_fixity_end == "Pinned"
 
 
 def test_column_from_dict_method():
