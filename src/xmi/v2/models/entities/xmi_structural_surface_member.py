@@ -1,12 +1,12 @@
 from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Dict, Any, List, Optional, Tuple, Union
-from ..bases.xmi_base_entity import XmiBaseEntity
+from ..bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
 from ..enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
 from ..enums.xmi_structural_surface_member_system_plane_enum import XmiStructuralSurfaceMemberSystemPlaneEnum
 from ...utils.xmi_errors import *
 
-class XmiStructuralSurfaceMember(XmiBaseEntity):
-    surface_member_type: XmiStructuralSurfaceMemberTypeEnum = Field(..., alias="Type")
+class XmiStructuralSurfaceMember(XmiBaseStructuralAnalyticalEntity):
+    surface_member_type: XmiStructuralSurfaceMemberTypeEnum = Field(..., alias="SurfaceMemberType")
     thickness: Union[float, int] = Field(..., alias="Thickness")
     system_plane: XmiStructuralSurfaceMemberSystemPlaneEnum = Field(..., alias="SystemPlane")
     area: Optional[Union[float, int]] = Field(None, alias="Area")

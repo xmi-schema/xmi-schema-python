@@ -28,7 +28,7 @@ Point connections serve as:
 
 | Property | Type | Default | Description | Validation |
 |----------|------|---------|-------------|------------|
-| `storey` | `XmiStructuralStorey` | `None` | Associated building storey/level | Must be XmiStructuralStorey instance or None |
+| `storey` | `XmiStorey` | `None` | Associated building storey/level | Must be XmiStorey instance or None |
 
 ### Inherited Properties (from XmiBaseEntity)
 
@@ -46,7 +46,7 @@ Point connections serve as:
 
 - **XmiHasStructuralPointConnection**: Referenced by `XmiStructuralCurveMember` and `XmiStructuralSurfaceMember` to define member endpoints and vertices
 - **XmiHasPoint3D**: Owns a `XmiPoint3D` geometry defining its 3D location
-- **XmiHasStructuralStorey**: Can be associated with a `XmiStructuralStorey` to indicate floor level
+- **XmiHasStructuralStorey**: Can be associated with a `XmiStorey` to indicate floor level
 
 ## Usage Examples
 
@@ -130,11 +130,11 @@ print(f"Created {len(nodes)} nodes")
 
 ```python
 from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
-from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_storey import XmiStorey
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 # Create a storey
-ground_floor = XmiStructuralStorey(
+ground_floor = XmiStorey(
     id="storey_ground",
     name="Ground Floor",
     elevation=0.0
@@ -208,7 +208,7 @@ print(f"Modified: ({node.point.X}, {node.point.Y}, {node.point.Z})")
 
 ### Type Validation
 - `point`: Must be an instance of `XmiPoint3D` (not a dictionary or other type)
-- `storey`: Must be an instance of `XmiStructuralStorey` or None
+- `storey`: Must be an instance of `XmiStorey` or None
 
 ### Required Fields (via from_dict)
 The `from_dict()` method enforces these requirements:
@@ -369,7 +369,7 @@ Point connections serve as the reference points for:
 
 - **`XmiBaseEntity`**: Parent class providing common entity properties
 - **`XmiPoint3D`**: Geometry class defining 3D coordinates
-- **`XmiStructuralStorey`**: Optional storey/level association
+- **`XmiStorey`**: Optional storey/level association
 - **`XmiStructuralCurveMember`**: References point connections as begin/end nodes
 - **`XmiStructuralSurfaceMember`**: References point connections as vertices
 - **`XmiHasStructuralPointConnection`**: Relationship class linking nodes to members
@@ -378,6 +378,6 @@ Point connections serve as the reference points for:
 ## See Also
 
 - [XmiPoint3D.md](../geometries/XmiPoint3D.md) - 3D point geometry
-- [XmiStructuralStorey.md](XmiStructuralStorey.md) - Building storey/level
+- [XmiStorey.md](XmiStorey.md) - Building storey/level
 - [XmiStructuralCurveMember.md](XmiStructuralCurveMember.md) - Members using point connections
 - [XmiBaseEntity.md](../bases/XmiBaseEntity.md) - Base entity documentation

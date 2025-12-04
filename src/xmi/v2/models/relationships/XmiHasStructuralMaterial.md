@@ -342,7 +342,7 @@ Relationships are created during XMI parsing when:
 1. **Cross-section defines material**:
    ```json
    {
-     "StructuralCrossSection": [
+     "CrossSection": [
        {
          "Name": "CS_300x600",
          "StructuralMaterial": "MAT_C30",
@@ -371,7 +371,7 @@ The `XmiManager` resolves material names to `XmiStructuralMaterial` objects and 
 
 Materials must be parsed before elements that reference them:
 1. Parse `StructuralMaterial` entities
-2. Parse `StructuralCrossSection` and `StructuralSurfaceMember`
+2. Parse `CrossSection` and `StructuralSurfaceMember`
 3. Create `XmiHasStructuralMaterial` relationships
 
 ## Notes

@@ -5,7 +5,7 @@ from ..bases.xmi_base_entity import XmiBaseEntity
 from ..enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
 
 
-class XmiStructuralMaterial(XmiBaseEntity):
+class XmiMaterial(XmiBaseEntity):
     material_type: XmiStructuralMaterialTypeEnum = Field(..., alias="MaterialType")
     grade: Optional[float] = Field(None, alias="Grade")
     unit_weight: Optional[float] = Field(None, alias="UnitWeight")
@@ -45,7 +45,7 @@ class XmiStructuralMaterial(XmiBaseEntity):
         return values
 
     @classmethod
-    def from_dict(cls, obj: dict) -> Tuple[Optional["XmiStructuralMaterial"], List[Exception]]:
+    def from_dict(cls, obj: dict) -> Tuple[Optional["XmiMaterial"], List[Exception]]:
         error_logs: List[Exception] = []
         processed = {}
 

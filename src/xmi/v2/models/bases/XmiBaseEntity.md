@@ -422,8 +422,8 @@ IFC GUIDs are 22-character Base64-encoded GUIDs:
 - [`XmiStructuralCurveMember`](../entities/XmiStructuralCurveMember.md)
 - [`XmiStructuralSurfaceMember`](../entities/XmiStructuralSurfaceMember.md)
 - [`XmiSegment`](../entities/XmiSegment.md)
-- [`XmiStructuralUnit`](../entities/XmiStructuralUnit.md)
-- [`XmiStructuralStorey`](../entities/XmiStructuralStorey.md)
+- [`XmiUnit`](../entities/XmiUnit.md)
+- [`XmiStorey`](../entities/XmiStorey.md)
 
 ### Sibling Base Classes
 - [`XmiBaseGeometry`](./XmiBaseGeometry.md) - Base class for geometric primitives

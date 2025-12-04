@@ -1,9 +1,9 @@
 from pydantic import Field, field_validator, model_validator
 from ..bases.xmi_base_relationship import XmiBaseRelationship
 from ..bases.xmi_base_entity import XmiBaseEntity
-from ..entities.xmi_structural_material import XmiStructuralMaterial
+from ..entities.xmi_material import XmiMaterial
 
-class XmiHasStructuralMaterial(XmiBaseRelationship):
+class XmiHasMaterial(XmiBaseRelationship):
     @field_validator("source", mode="before")
     @classmethod
     def validate_source(cls, v):
@@ -14,7 +14,7 @@ class XmiHasStructuralMaterial(XmiBaseRelationship):
     @field_validator("target", mode="before")
     @classmethod
     def validate_target(cls, v):
-        if not isinstance(v, XmiStructuralMaterial):
+        if not isinstance(v, XmiMaterial):
             raise TypeError("Target must be of type XmiStructuralMaterial")
         return v
 

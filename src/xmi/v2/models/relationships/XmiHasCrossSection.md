@@ -23,9 +23,9 @@
 
 Inherits from `XmiBaseRelationship`:
 - `id`: Unique identifier (auto-generated UUID)
-- `name`: Relationship name (default: "hasStructuralCrossSection")
+- `name`: Relationship name (default: "hasCrossSection")
 - `description`: Optional description
-- `entity_type`: Type identifier (set to "XmiRelHasStructuralCrossSection")
+- `entity_type`: Type identifier (set to "XmiRelHasCrossSection")
 - `uml_type`: UML relationship type (optional)
 
 ## Purpose and Usage
@@ -52,10 +52,10 @@ The target is always:
 ## Relationship Direction
 
 ```
-[XmiStructuralCurveMember] --hasStructuralCrossSection--> [XmiCrossSection]
+[XmiStructuralCurveMember] --hasCrossSection--> [XmiCrossSection]
 
 Example:
-[Beam B01] --hasStructuralCrossSection--> [Cross-Section CS_300x600]
+[Beam B01] --hasCrossSection--> [Cross-Section CS_300x600]
 ```
 
 ## Usage Examples
@@ -104,7 +104,7 @@ def create_curve_member_with_cross_section(member_dict, cross_section):
     cs_rel = XmiHasCrossSection(
         source=curve_member,
         target=cross_section,
-        name="hasStructuralCrossSection"
+        name="hasCrossSection"
     )
 
     return curve_member, cs_rel
@@ -376,8 +376,8 @@ rel = XmiHasCrossSection(
 
 ### Automatic Defaults
 
-- `name` defaults to "hasStructuralCrossSection"
-- `entity_type` automatically set to "XmiRelHasStructuralCrossSection"
+- `name` defaults to "hasCrossSection"
+- `entity_type` automatically set to "XmiRelHasCrossSection"
 
 ## Integration with XMI Schema
 
@@ -390,7 +390,7 @@ Relationships are created during XMI parsing when curve members define their cro
   "StructuralCurveMember": [
     {
       "Name": "B01",
-      "StructuralCrossSection": "CS_300x600",
+      "CrossSection": "CS_300x600",
       "CurveMemberType": "Beam",
       "Nodes": "N1;N2",
       "Segments": "Line",
@@ -402,14 +402,14 @@ Relationships are created during XMI parsing when curve members define their cro
 
 The `XmiManager`:
 1. Parses curve member dictionary
-2. Resolves `"StructuralCrossSection": "CS_300x600"` to actual `XmiCrossSection` object
+2. Resolves `"CrossSection": "CS_300x600"` to actual `XmiCrossSection` object
 3. Creates `XmiHasCrossSection` relationship linking member to cross-section
 
 ### Dependency Order
 
 Cross-sections must be parsed before members that reference them:
 1. Parse `StructuralMaterial` entities
-2. Parse `StructuralCrossSection` entities (which reference materials)
+2. Parse `CrossSection` entities (which reference materials)
 3. Parse `StructuralCurveMember` entities
 4. Create `XmiHasCrossSection` relationships
 

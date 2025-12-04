@@ -1,4 +1,4 @@
-valid_structural_unit_input = {
+valid_unit_input = {
     "Entity": "Beam",
     "Attribute": "Length",
     "Unit": "m"

@@ -44,7 +44,7 @@ invalid_start_point_input = {
         "IFCGUID": "ac57991d-73eb-402c-abe6-9e3d3ff9c128-00055c52",
         "NativeId": "351314",
         "Description": "",
-        "EntityType": "XmiStructuralStorey",
+        "EntityType": "XmiStorey",
         "StoreyElevation": 6000.0,
         "StoreyMass": 1.0
     },

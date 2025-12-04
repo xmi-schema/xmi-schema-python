@@ -328,7 +328,7 @@ Cross-section shapes appear in XMI dictionaries:
 
 ```json
 {
-  "StructuralCrossSection": [
+  "CrossSection": [
     {
       "Name": "RECT_300x500",
       "Shape": "Rectangular",

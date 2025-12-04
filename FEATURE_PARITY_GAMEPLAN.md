@@ -72,7 +72,7 @@
   - XmiStructuralCurveMember
   - XmiStructuralSurfaceMember
   - XmiStructuralPointConnection
-  - XmiStructuralStorey
+  - XmiStorey
 - **Verify**: Automatic entity_type assignment works
 - **Tests**: Update existing test files to verify new inheritance
 
@@ -455,7 +455,7 @@ src/xmi/v2/models/entities/
 ├── xmi_structural_curve_member.py (UPDATE - inherit from new base)
 ├── xmi_structural_surface_member.py (UPDATE - inherit from new base)
 ├── xmi_structural_point_connection.py (UPDATE - inherit from new base)
-└── xmi_structural_storey.py (UPDATE - inherit from new base)
+└── xmi_storey.py (UPDATE - inherit from new base)
 
 CLAUDE.md (UPDATE - document new features)
 README.md (UPDATE - update features and examples)

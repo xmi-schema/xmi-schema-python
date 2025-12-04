@@ -479,7 +479,7 @@ with open("cross_sections.json") as f:
 sections = []
 errors_log = []
 
-for section_dict in xmi_data.get("StructuralCrossSection", []):
+for section_dict in xmi_data.get("CrossSection", []):
     section, errors = XmiCrossSection.from_dict(section_dict)
     if section:
         sections.append(section)

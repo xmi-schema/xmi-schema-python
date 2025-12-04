@@ -3,7 +3,7 @@ from uuid import uuid4
 from ..enums.xmi_unit_enum import XmiUnitEnum
 from ..bases.xmi_base_entity import XmiBaseEntity
 
-class XmiStructuralUnit(XmiBaseEntity):
+class XmiUnit(XmiBaseEntity):
     entity: str = Field(..., alias="Entity")
     attribute: str = Field(..., alias="Attribute")
     unit: XmiUnitEnum = Field(..., alias="Unit")
@@ -36,5 +36,5 @@ class XmiStructuralUnit(XmiBaseEntity):
             values["id"] = str(uuid4())
         if "name" not in values or not values["name"]:
             values["name"] = f"{cls.__name__}_{values['id']}"
-        values.setdefault("entity_type", "XmiStructuralUnit")
+        values.setdefault("entity_type", "XmiUnit")
         return values

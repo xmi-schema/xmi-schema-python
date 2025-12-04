@@ -71,22 +71,22 @@ unit = XmiUnitEnum("mm^2")   # Returns MILLIMETER2
 ### Specifying Units in Entities
 
 ```python
-from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+from xmi.v2.models.entities.xmi_unit import XmiUnit
 
 # Define length unit
-length_unit = XmiStructuralUnit(
+length_unit = XmiUnit(
     name="LengthUnit",
     unit=XmiUnitEnum.MILLIMETER
 )
 
 # Define area unit
-area_unit = XmiStructuralUnit(
+area_unit = XmiUnit(
     name="AreaUnit",
     unit=XmiUnitEnum.MILLIMETER2
 )
 
 # Define moment of inertia unit
-inertia_unit = XmiStructuralUnit(
+inertia_unit = XmiUnit(
     name="InertiaUnit",
     unit=XmiUnitEnum.MILLIMETER4
 )
@@ -180,11 +180,11 @@ print(f"Valid: {is_valid}, Error: {error}")  # False, Invalid unit m^3 for coord
 ```python
 def get_model_units(xmi_model):
     """Extract the unit system used in the model."""
-    from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+    from xmi.v2.models.entities.xmi_unit import XmiUnit
 
     units = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralUnit)
+        if isinstance(entity, XmiUnit)
     ]
 
     unit_system = {}
@@ -226,10 +226,10 @@ for name, unit in units.items():
 }
 ```
 
-### Usage in XmiStructuralUnit
+### Usage in XmiUnit
 
 ```python
-class XmiStructuralUnit(XmiBaseEntity):
+class XmiUnit(XmiBaseEntity):
     unit: XmiUnitEnum = Field(..., alias="Unit")
 ```
 
@@ -256,7 +256,7 @@ The enum values use `^` for exponents (e.g., "mm^2") rather than superscript cha
 ## Related Classes
 
 ### Entity Classes
-- [`XmiStructuralUnit`](../entities/XmiStructuralUnit.md) - Uses this enum
+- [`XmiUnit`](../entities/XmiUnit.md) - Uses this enum
 - [`XmiCrossSection`](../entities/XmiCrossSection.md) - Section properties have units
 
 ### Base Classes

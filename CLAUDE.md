@@ -45,7 +45,7 @@ Both versions follow an entity-relationship architecture:
 When parsing XMI dictionaries, entities must be created in dependency order:
 1. `StructuralMaterial` (no dependencies)
 2. `StructuralPointConnection` (creates `XmiPoint3D` geometry)
-3. `StructuralCrossSection` (references materials)
+3. `CrossSection` (references materials)
 4. `StructuralCurveMember` (references cross-sections and point connections)
 5. `StructuralSurfaceMember` (references materials and point connections)
 

@@ -96,9 +96,9 @@ For each entity class, create tests covering:
 - `XmiStructuralCurveMember`
 - `XmiStructuralMaterial`
 - `XmiStructuralPointConnection`
-- `XmiStructuralStorey`
+- `XmiStorey`
 - `XmiStructuralSurfaceMember`
-- `XmiStructuralUnit`
+- `XmiUnit`
 
 **Test Template**:
 ```python
@@ -287,8 +287,8 @@ List of relationships this entity participates in:
 2. `XmiPoint3D`
 3. `XmiLine3D`
 4. `XmiArc3D`
-5. `XmiStructuralUnit`
-6. `XmiStructuralStorey`
+5. `XmiUnit`
+6. `XmiStorey`
 
 **Lower Priority** (Base classes and relationships):
 1. `XmiBaseEntity`

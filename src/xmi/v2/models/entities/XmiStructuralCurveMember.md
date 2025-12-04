@@ -399,7 +399,7 @@ The `system_line` property affects how the member is positioned relative to node
 - [`XmiCrossSection`](./XmiCrossSection.md) - Cross-section definition
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Node connections
 - [`XmiSegment`](../segments/XmiSegment.md) - Geometric segments
-- [`XmiStructuralStorey`](./XmiStructuralStorey.md) - Story organization
+- [`XmiStorey`](./XmiStorey.md) - Story organization
 
 ### Relationship Classes
 - `XmiHasCrossSection` - Links to cross-section

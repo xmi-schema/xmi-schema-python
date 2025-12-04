@@ -502,7 +502,7 @@ Surface members are defined by:
 ### Entity Classes
 - [`XmiStructuralMaterial`](./XmiStructuralMaterial.md) - Material definition
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Boundary node connections
-- [`XmiStructuralStorey`](./XmiStructuralStorey.md) - Story organization
+- [`XmiStorey`](./XmiStorey.md) - Story organization
 - [`XmiStructuralCurveMember`](./XmiStructuralCurveMember.md) - Related linear members (beams, columns)
 
 ### Relationship Classes

@@ -1,7 +1,7 @@
 from pydantic import field_validator, model_validator
 from ..bases.xmi_base_relationship import XmiBaseRelationship
 from ..bases.xmi_base_entity import XmiBaseEntity
-from ..entities.xmi_structural_cross_section import XmiCrossSection
+from ..entities.xmi_cross_section import XmiCrossSection
 
 class XmiHasCrossSection(XmiBaseRelationship):
     @field_validator("source", mode="before")
@@ -21,6 +21,6 @@ class XmiHasCrossSection(XmiBaseRelationship):
     @model_validator(mode="before")
     @classmethod
     def set_defaults(cls, values):
-        values.setdefault("name", "hasStructuralCrossSection")
-        values.setdefault("entity_type", "XmiRelHasStructuralCrossSection")
+        values.setdefault("name", "hasCrossSection")
+        values.setdefault("entity_type", "XmiRelHasCrossSection")
         return values

@@ -1,14 +1,14 @@
-# XmiStructuralStorey
+# XmiStorey
 
 ## Overview
 
-`XmiStructuralStorey` represents a building level or floor in a multi-storey structural model. It defines the vertical organization of the structure by specifying elevation, mass, and optional reaction forces at each level. Storeys are fundamental for organizing structural elements by level, calculating mass distribution, and analyzing inter-storey drift in seismic or wind analysis.
+`XmiStorey` represents a building level or floor in a multi-storey structural model. It defines the vertical organization of the structure by specifying elevation, mass, and optional reaction forces at each level. Storeys are fundamental for organizing structural elements by level, calculating mass distribution, and analyzing inter-storey drift in seismic or wind analysis.
 
 ## Class Hierarchy
 
 - **Parent**: `XmiBaseEntity`
 - **Version**: v2 (Pydantic-based implementation)
-- **Module**: `src/xmi/v2/models/entities/xmi_structural_storey.py`
+- **Module**: `src/xmi/v2/models/entities/xmi_storey.py`
 
 ## Properties
 
@@ -33,12 +33,12 @@ Inherits from `XmiBaseEntity`:
 - `name`: Name/identifier of the storey (e.g., "Level 1", "Floor 2")
 - `id`: Unique identifier (GUID)
 - `ifcguid`: IFC GUID for interoperability
-- `entity_type`: Set to "XmiStructuralStorey"
+- `entity_type`: Set to "XmiStorey"
 - `description`: Optional description (e.g., "Ground Floor", "Typical Floor")
 
 ## Relationships
 
-`XmiStructuralStorey` typically participates in:
+`XmiStorey` typically participates in:
 
 ### Implicit Relationships
 - **Storey Membership**: Structural elements (nodes, members) reference storey names to indicate which level they belong to
@@ -66,10 +66,10 @@ Storeys provide:
 ### Creating Storeys Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_storey import XmiStorey
 
 # Ground floor at elevation 0
-ground_floor = XmiStructuralStorey(
+ground_floor = XmiStorey(
     name="339",
     storey_elevation=0.0,
     storey_mass=0.0,  # Mass TBD or calculated
@@ -78,7 +78,7 @@ ground_floor = XmiStructuralStorey(
 )
 
 # First floor at 3000mm (3m)
-first_floor = XmiStructuralStorey(
+first_floor = XmiStorey(
     name="2787",
     storey_elevation=3000.0,
     storey_mass=0.0,
@@ -87,7 +87,7 @@ first_floor = XmiStructuralStorey(
 )
 
 # Second floor at 6000mm (6m)
-second_floor = XmiStructuralStorey(
+second_floor = XmiStorey(
     name="351314",
     storey_elevation=6000.0,
     storey_mass=0.0,
@@ -102,7 +102,7 @@ print(f"{ground_floor.description} elevation: {ground_floor.storey_elevation} mm
 ### Loading from Dictionary (XMI Format)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_storey import XmiStorey
 
 # Dictionary format from XMI JSON
 storey_dict = {
@@ -115,7 +115,7 @@ storey_dict = {
 }
 
 # Parse using from_dict
-storey, errors = XmiStructuralStorey.from_dict(storey_dict)
+storey, errors = XmiStorey.from_dict(storey_dict)
 
 if storey and not errors:
     print(f"Storey: {storey.description}")
@@ -135,7 +135,7 @@ else:
 # Define a complete multi-storey building
 building_storeys = [
     # Basement
-    XmiStructuralStorey(
+    XmiStorey(
         name="BASEMENT",
         storey_elevation=-3000.0,
         storey_mass=50000.0,
@@ -143,7 +143,7 @@ building_storeys = [
     ),
 
     # Ground floor
-    XmiStructuralStorey(
+    XmiStorey(
         name="GROUND",
         storey_elevation=0.0,
         storey_mass=48000.0,
@@ -152,7 +152,7 @@ building_storeys = [
 
     # Typical floors (3m height each)
     *[
-        XmiStructuralStorey(
+        XmiStorey(
             name=f"FLOOR_{i}",
             storey_elevation=3000.0 * i,
             storey_mass=45000.0,
@@ -162,7 +162,7 @@ building_storeys = [
     ],
 
     # Roof
-    XmiStructuralStorey(
+    XmiStorey(
         name="ROOF",
         storey_elevation=33000.0,
         storey_mass=30000.0,
@@ -180,7 +180,7 @@ for storey in building_storeys:
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_storey import XmiStorey
 
 # Load XMI data
 xmi_manager = XmiManager()
@@ -189,7 +189,7 @@ xmi_model = xmi_manager.read_xmi_dict(xmi_dict)
 # Find all storeys
 storeys = [
     entity for entity in xmi_model.entities
-    if isinstance(entity, XmiStructuralStorey)
+    if isinstance(entity, XmiStorey)
 ]
 
 print(f"Total storeys: {len(storeys)}")
@@ -209,7 +209,7 @@ def find_storey_by_name(xmi_model, storey_name: str):
     """Find a storey by its name."""
     storeys = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralStorey)
+        if isinstance(entity, XmiStorey)
     ]
 
     for storey in storeys:
@@ -281,7 +281,7 @@ print(f"Total seismic mass: {total_mass:.0f} kg ({total_mass / 1000:.2f} tonnes)
 ```python
 from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
 
-def find_nodes_at_storey(xmi_model, storey: XmiStructuralStorey, tolerance: float = 10.0):
+def find_nodes_at_storey(xmi_model, storey: XmiStorey, tolerance: float = 10.0):
     """
     Find all nodes at a given storey elevation (within tolerance).
 
@@ -347,7 +347,7 @@ area = 500.0  # m²
 dead_load = 5.0  # kPa
 mass = calculate_storey_mass(area, dead_load)
 
-storey = XmiStructuralStorey(
+storey = XmiStorey(
     name="TYPICAL",
     storey_elevation=3000.0,
     storey_mass=mass,
@@ -361,13 +361,13 @@ print(f"Calculated mass: {storey.storey_mass:.0f} kg")
 
 ```python
 # Storeys are compared by native_id (case-insensitive)
-storey1 = XmiStructuralStorey(
+storey1 = XmiStorey(
     name="Level1",
     storey_elevation=0.0,
     storey_mass=45000.0
 )
 
-storey2 = XmiStructuralStorey(
+storey2 = XmiStorey(
     name="LEVEL1",  # Different case
     storey_elevation=0.0,
     storey_mass=45000.0
@@ -390,13 +390,13 @@ print(storey1 == storey2)  # True if native_id matches
 Both elevation and mass are required:
 ```python
 # Valid
-storey = XmiStructuralStorey(
+storey = XmiStorey(
     storey_elevation=3000.0,
     storey_mass=45000.0
 )
 
 # Invalid - will raise validation error
-# storey = XmiStructuralStorey(storey_elevation=3000.0)  # Missing storey_mass
+# storey = XmiStorey(storey_elevation=3000.0)  # Missing storey_mass
 ```
 
 ### Logical Validation
@@ -526,7 +526,7 @@ These are typically populated from analysis results rather than input.
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Nodes located at storey elevations
 - [`XmiStructuralCurveMember`](./XmiStructuralCurveMember.md) - Members spanning between storeys
 - [`XmiStructuralSurfaceMember`](./XmiStructuralSurfaceMember.md) - Slabs at storey levels
-- [`XmiStructuralUnit`](./XmiStructuralUnit.md) - Unit definitions for storey attributes
+- [`XmiUnit`](./XmiUnit.md) - Unit definitions for storey attributes
 
 ### Base Classes
 - `XmiBaseEntity` - Base entity class

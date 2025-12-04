@@ -89,7 +89,7 @@ materials = [e for e in xmi_model.entities
 |-------------|-----------|-----------|-------------|
 | **StructuralMaterial** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Material definitions (concrete, steel, timber, etc.) |
 | **StructuralPointConnection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Nodal points in 3D space with coordinates |
-| **StructuralCrossSection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Cross-section definitions with shape parameters |
+| **CrossSection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Cross-section definitions with shape parameters |
 | **StructuralCurveMember** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Linear structural members (beams, columns, braces) |
 | **StructuralSurfaceMember** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Surface elements (slabs, walls, plates) |
 | **StructuralStorey** | ![TODO](https://img.shields.io/badge/Status-TODO-red) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Building level/storey definitions |

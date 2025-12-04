@@ -1,4 +1,4 @@
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
+from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 from tests.xmi.v2.test_inputs.xmi_structural_cross_section_input import valid_cross_section_input
 

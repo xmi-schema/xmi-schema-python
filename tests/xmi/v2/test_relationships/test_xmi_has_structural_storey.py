@@ -1,11 +1,11 @@
 import pytest
-from xmi.v2.models.relationships.xmi_has_structural_storey import XmiHasStructuralStorey
+from xmi.v2.models.relationships.xmi_has_storey import XmiHasStorey
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
-from xmi.v2.models.entities.xmi_structural_storey import XmiStructuralStorey
+from xmi.v2.models.entities.xmi_storey import XmiStorey
 
-def test_has_structural_storey_valid_instantiation():
+def test_has_storey_valid_instantiation():
     source = XmiBaseEntity(id="E1", name="Building")
-    target = XmiStructuralStorey(
+    target = XmiStorey(
         id="S1",
         name="Storey 1",
         native_id="S1",
@@ -13,7 +13,7 @@ def test_has_structural_storey_valid_instantiation():
         storey_mass=1000.0,
     )
 
-    rel = XmiHasStructuralStorey(source=source, target=target)
+    rel = XmiHasStorey(source=source, target=target)
 
     assert rel.source == source
     assert rel.target == target
@@ -21,7 +21,7 @@ def test_has_structural_storey_valid_instantiation():
     assert rel.entity_type == "XmiRelHasStructuralStorey"
 
 def test_invalid_source_type():
-    target = XmiStructuralStorey(
+    target = XmiStorey(
         id="S1",
         name="Storey 1",
         native_id="S1",
@@ -30,13 +30,13 @@ def test_invalid_source_type():
     )
 
     with pytest.raises(TypeError, match="Source must be of type XmiBaseEntity"):
-        XmiHasStructuralStorey(source="invalid source", target=target)
+        XmiHasStorey(source="invalid source", target=target)
 
 def test_invalid_target_type():
     source = XmiBaseEntity(id="E1", name="Building")
 
-    with pytest.raises(TypeError, match="Target must be of type XmiStructuralStorey"):
-        XmiHasStructuralStorey(source=source, target="invalid target")
+    with pytest.raises(TypeError, match="Target must be of type XmiStorey"):
+        XmiHasStorey(source=source, target="invalid target")
 
 
-# .venv/bin/python -m pytest tests/xmi/v2/test_relationships/test_xmi_has_structural_storey.py
+# .venv/bin/python -m pytest tests/xmi/v2/test_relationships/test_xmi_has_storey.py

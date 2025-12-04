@@ -79,8 +79,8 @@ Internal method that reorders dictionary keys to ensure entities are created in 
 **Dependency Order**:
 1. `StructuralMaterial` - No dependencies
 2. `StructuralPointConnection` - No entity dependencies (creates own Point3D)
-3. `StructuralCrossSection` - Depends on StructuralMaterial
-4. `StructuralCurveMember` - Depends on StructuralCrossSection and StructuralPointConnection
+3. `CrossSection` - Depends on StructuralMaterial
+4. `StructuralCurveMember` - Depends on CrossSection and StructuralPointConnection
 5. `StructuralSurfaceMember` - Depends on StructuralMaterial and StructuralPointConnection
 6. All other entity types (if present)
 
@@ -338,7 +338,7 @@ StructuralMaterial (no dependencies)
     ↓
 StructuralPointConnection (no dependencies)
     ↓
-StructuralCrossSection (references Material via relationship)
+CrossSection (references Material via relationship)
     ↓
 StructuralCurveMember (references CrossSection and PointConnection via relationships)
     ↓

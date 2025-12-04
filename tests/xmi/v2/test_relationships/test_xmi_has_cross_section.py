@@ -1,7 +1,7 @@
 import pytest
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
+from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
+from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
 from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
 
 def test_has_structural_cross_section_valid_instantiation():
@@ -21,8 +21,8 @@ def test_has_structural_cross_section_valid_instantiation():
 
     assert rel.source == source
     assert rel.target == target
-    assert rel.name == "hasStructuralCrossSection"
-    assert rel.entity_type == "XmiRelHasStructuralCrossSection"
+    assert rel.name == "hasCrossSection"
+    assert rel.entity_type == "XmiRelHasCrossSection"
 
 
 def test_invalid_source_type():

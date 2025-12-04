@@ -1,8 +1,8 @@
 from pydantic import Field, model_validator
 from typing import Optional
-from ..bases.xmi_base_entity import XmiBaseEntity
+from ..bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
 
-class XmiStructuralStorey(XmiBaseEntity):
+class XmiStorey(XmiBaseStructuralAnalyticalEntity):
     storey_elevation: float = Field(..., alias="StoreyElevation")
     storey_mass: float = Field(..., alias="StoreyMass")
     storey_horizontal_reaction_x: Optional[str] = Field(default=None, alias="StoreyHorizontalReactionX")
@@ -12,11 +12,11 @@ class XmiStructuralStorey(XmiBaseEntity):
     @model_validator(mode="before")
     @classmethod
     def inject_entity_type(cls, values):
-        values.setdefault("entity_type", "XmiStructuralStorey")
+        values.setdefault("entity_type", "XmiStorey")
         return values
 
     def __eq__(self, other):
-        if not isinstance(other, XmiStructuralStorey):
+        if not isinstance(other, XmiStorey):
             return NotImplemented
         return self.native_id.lower() == other.native_id.lower()
 

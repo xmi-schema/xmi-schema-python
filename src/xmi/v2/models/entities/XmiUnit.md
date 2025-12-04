@@ -1,14 +1,14 @@
-# XmiStructuralUnit
+# XmiUnit
 
 ## Overview
 
-`XmiStructuralUnit` defines the physical units of measurement for specific attributes of XMI entities. It acts as metadata that specifies what unit system is being used for various properties throughout the model, such as lengths in millimeters, forces in kN, or periods in seconds. This allows different software tools to correctly interpret numerical values when exchanging structural data.
+`XmiUnit` defines the physical units of measurement for specific attributes of XMI entities. It acts as metadata that specifies what unit system is being used for various properties throughout the model, such as lengths in millimeters, forces in kN, or periods in seconds. This allows different software tools to correctly interpret numerical values when exchanging structural data.
 
 ## Class Hierarchy
 
 - **Parent**: `XmiBaseEntity`
 - **Version**: v2 (Pydantic-based implementation)
-- **Module**: `src/xmi/v2/models/entities/xmi_structural_unit.py`
+- **Module**: `src/xmi/v2/models/entities/xmi_unit.py`
 
 ## Properties
 
@@ -26,7 +26,7 @@ Inherits from `XmiBaseEntity`:
 - `name`: Name/identifier of the unit definition
 - `id`: Unique identifier (GUID)
 - `ifcguid`: IFC GUID for interoperability
-- `entity_type`: Set to "XmiStructuralUnit"
+- `entity_type`: Set to "XmiUnit"
 - `description`: Optional description
 
 ## Enums
@@ -57,13 +57,13 @@ Defines supported units of measurement:
 
 ## Relationships
 
-`XmiStructuralUnit` typically does not have explicit relationships to other entities. It serves as standalone metadata that describes the unit system used throughout the model.
+`XmiUnit` typically does not have explicit relationships to other entities. It serves as standalone metadata that describes the unit system used throughout the model.
 
 ## Purpose and Use Cases
 
 ### Unit System Documentation
 
-`XmiStructuralUnit` entries document the units used for specific attributes, enabling:
+`XmiUnit` entries document the units used for specific attributes, enabling:
 
 1. **Interoperability**: Different software can correctly interpret values
 2. **Validation**: Verify that expected units match actual units
@@ -79,7 +79,7 @@ Typical unit specifications include:
   - `Density` → "kg/m^3"
   - `ElasticModulus` → "MPa" or "GPa"
 
-- **StructuralCrossSection attributes**:
+- **CrossSection attributes**:
   - `SectionArea` → "mm^2"
   - `MomentOfInertia` → "mm^4"
   - `TorsionalConstant` → "mm^4"
@@ -104,11 +104,11 @@ Typical unit specifications include:
 ### Creating Unit Definitions Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+from xmi.v2.models.entities.xmi_unit import XmiUnit
 from xmi.v2.models.enums.xmi_unit_enum import XmiUnitEnum
 
 # Define unit for material thermal coefficient
-thermal_unit = XmiStructuralUnit(
+thermal_unit = XmiUnit(
     entity="StructuralMaterial",
     attribute="ThermalCoefficient",
     unit=XmiUnitEnum.from_attribute_get_enum("1/C"),
@@ -116,15 +116,15 @@ thermal_unit = XmiStructuralUnit(
 )
 
 # Define unit for cross-section area
-area_unit = XmiStructuralUnit(
-    entity="StructuralCrossSection",
+area_unit = XmiUnit(
+    entity="CrossSection",
     attribute="SectionArea",
     unit=XmiUnitEnum.MILLIMETER2,
     name="UNIT_AREA"
 )
 
 # Define unit for modal period
-period_unit = XmiStructuralUnit(
+period_unit = XmiUnit(
     entity="StructuralModelAnalysis",
     attribute="ModalPeriod",
     unit=XmiUnitEnum.SECOND,
@@ -141,7 +141,7 @@ print(f"Section area unit: {area_unit.unit.value}")
 ### Loading from Dictionary (XMI Format)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+from xmi.v2.models.entities.xmi_unit import XmiUnit
 
 # Dictionary format from XMI JSON
 unit_dict = {
@@ -151,7 +151,7 @@ unit_dict = {
 }
 
 # Parse using from_dict
-unit, errors = XmiStructuralUnit.from_dict(unit_dict)
+unit, errors = XmiUnit.from_dict(unit_dict)
 
 if unit and not errors:
     print(f"Entity: {unit.entity}")
@@ -173,28 +173,28 @@ else:
 # Create comprehensive unit definitions for a structural model
 unit_definitions = [
     # Coordinate units
-    XmiStructuralUnit(
+    XmiUnit(
         entity="StructuralPointConnection",
         attribute="Coordinate",
         unit=XmiUnitEnum.MILLIMETER
     ),
 
     # Material property units
-    XmiStructuralUnit(
+    XmiUnit(
         entity="StructuralMaterial",
         attribute="Density",
         unit=XmiUnitEnum.from_attribute_get_enum("kg/m^3")
     ),
 
     # Cross-section property units
-    XmiStructuralUnit(
-        entity="StructuralCrossSection",
+    XmiUnit(
+        entity="CrossSection",
         attribute="MomentOfInertia",
         unit=XmiUnitEnum.MILLIMETER4
     ),
 
     # Analysis result units
-    XmiStructuralUnit(
+    XmiUnit(
         entity="StructuralModelAnalysis",
         attribute="Displacement",
         unit=XmiUnitEnum.MILLIMETER
@@ -209,7 +209,7 @@ for unit_def in unit_definitions:
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
+from xmi.v2.models.entities.xmi_unit import XmiUnit
 
 # Load XMI data
 xmi_manager = XmiManager()
@@ -218,7 +218,7 @@ xmi_model = xmi_manager.read_xmi_dict(xmi_dict)
 # Find all unit definitions
 units = [
     entity for entity in xmi_model.entities
-    if isinstance(entity, XmiStructuralUnit)
+    if isinstance(entity, XmiUnit)
 ]
 
 print(f"Total unit definitions: {len(units)}")
@@ -243,7 +243,7 @@ def find_unit_for_attribute(xmi_model, entity_name: str, attribute_name: str):
     """Find the unit specification for a given entity and attribute."""
     units = [
         entity for entity in xmi_model.entities
-        if isinstance(entity, XmiStructuralUnit)
+        if isinstance(entity, XmiUnit)
     ]
 
     for unit in units:
@@ -339,14 +339,14 @@ print(f"1000mm = {result}m")
 All three fields are required:
 ```python
 # Valid
-unit = XmiStructuralUnit(
+unit = XmiUnit(
     entity="StructuralMaterial",
     attribute="Density",
     unit=XmiUnitEnum.from_attribute_get_enum("kg/m^3")
 )
 
 # Invalid - will raise validation error
-# unit = XmiStructuralUnit(entity="StructuralMaterial")  # Missing attribute and unit
+# unit = XmiUnit(entity="StructuralMaterial")  # Missing attribute and unit
 ```
 
 ### Unit Consistency
@@ -380,13 +380,13 @@ While not enforced by validation, ensure consistency:
       "Unit": "1/C"
     },
     {
-      "Entity": "StructuralCrossSection",
+      "Entity": "CrossSection",
       "Attribute": "MomentOfInertia",
       "Unit": "mm^4"
     }
   ],
   "StructuralMaterial": [...],
-  "StructuralCrossSection": [...]
+  "CrossSection": [...]
 }
 ```
 
@@ -452,7 +452,7 @@ If your application requires units not in `XmiUnitEnum`, you can:
 - [`XmiStructuralMaterial`](./XmiStructuralMaterial.md) - Material definitions with measurable properties
 - [`XmiCrossSection`](./XmiCrossSection.md) - Cross-sections with area and inertia properties
 - [`XmiStructuralPointConnection`](./XmiStructuralPointConnection.md) - Nodes with coordinates
-- [`XmiStructuralStorey`](./XmiStructuralStorey.md) - Storeys with elevation values
+- [`XmiStorey`](./XmiStorey.md) - Storeys with elevation values
 
 ### Enum Classes
 - `XmiUnitEnum` - Enumeration of supported unit types

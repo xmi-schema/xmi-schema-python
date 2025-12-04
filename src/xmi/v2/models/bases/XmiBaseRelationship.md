@@ -9,7 +9,7 @@
 - **Parent**: `BaseModel` (Pydantic)
 - **Version**: v2 (Pydantic-based implementation)
 - **Module**: `src/xmi/v2/models/bases/xmi_base_relationship.py`
-- **Children**: All XMI relationship classes (HasStructuralMaterial, HasStructuralCrossSection, HasStructuralNode, etc.)
+- **Children**: All XMI relationship classes (HasStructuralMaterial, HasCrossSection, HasStructuralNode, etc.)
 
 ## Properties
 
@@ -329,7 +329,7 @@ In the v2 implementation, relationships are typically created programmatically d
 
 ```python
 # In XmiManager.read_xmi_dict():
-for cross_section_dict in xmi_dict.get("StructuralCrossSection", []):
+for cross_section_dict in xmi_dict.get("CrossSection", []):
     cross_section, errors = XmiCrossSection.from_dict(cross_section_dict)
 
     # Find material by ID

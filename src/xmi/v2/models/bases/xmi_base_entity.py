@@ -2,6 +2,7 @@ from abc import ABC
 from pydantic import BaseModel, Field, model_validator, ConfigDict
 from typing import Optional
 import uuid
+from ..enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 
 class XmiBaseEntity(BaseModel, ABC):
     """
@@ -18,6 +19,7 @@ class XmiBaseEntity(BaseModel, ABC):
     - native_id: Original identifier from source application
     - description: Optional description or notes
     - entity_type: Type name of the entity (auto-set to class name)
+    - type: Domain classification (Physical, StructuralAnalytical, Geometry, etc.)
 
     The class uses Pydantic for validation and supports both PascalCase (JSON/XMI format)
     and snake_case (Python) field names through aliases.
@@ -51,6 +53,7 @@ class XmiBaseEntity(BaseModel, ABC):
     native_id: Optional[str] = Field(None, alias="NativeId")
     description: Optional[str] = Field(None, alias="Description")
     entity_type: Optional[str] = Field(None, alias="EntityType")
+    type: Optional[XmiBaseEntityDomainEnum] = Field(None, alias="Type")
 
     @model_validator(mode="before")
     @classmethod

@@ -2,14 +2,14 @@ import json
 import pytest
 from tests.xmi.v2.test_inputs.xmi_manager_input import json_xmi_data
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
+from xmi.v2.models.entities.xmi_material import XmiMaterial
+from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
 from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
-from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
-from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
-from xmi.v2.models.relationships.xmi_has_structural_storey import XmiHasStructuralStorey
+from xmi.v2.models.relationships.xmi_has_material import XmiHasMaterial
+from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection
+from xmi.v2.models.relationships.xmi_has_storey import XmiHasStorey
 
 
 def test_xmi_manager_parsing():
@@ -22,16 +22,16 @@ def test_xmi_manager_parsing():
     assert model is not None
     assert len(model.entities) == 7
 
-    assert any(isinstance(e, XmiStructuralMaterial) for e in model.entities)
+    assert any(isinstance(e, XmiMaterial) for e in model.entities)
     assert any(isinstance(e, XmiCrossSection) for e in model.entities)
     assert any(isinstance(e, XmiStructuralCurveMember) for e in model.entities)
     assert any(isinstance(e, XmiStructuralSurfaceMember) for e in model.entities)
     assert any(isinstance(e, XmiPoint3D) for e in model.entities)
 
     assert len(model.relationships) > 0
-    assert any(isinstance(r, XmiHasStructuralMaterial) for r in model.relationships)
+    assert any(isinstance(r, XmiHasMaterial) for r in model.relationships)
     assert any(isinstance(r, XmiHasCrossSection) for r in model.relationships)
-    assert any(isinstance(r, XmiHasStructuralStorey) for r in model.relationships)
+    assert any(isinstance(r, XmiHasStorey) for r in model.relationships)
 
 
 if __name__ == "__main__":

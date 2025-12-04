@@ -1,12 +1,12 @@
 from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Dict, Any, List, Optional, Tuple, Union
-from ..bases.xmi_base_entity import XmiBaseEntity
+from ..bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
 from ..enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 from ..enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 from ...utils.xmi_errors import *
 from ...utils.xmi_utilities import *
 
-class XmiStructuralCurveMember(XmiBaseEntity):
+class XmiStructuralCurveMember(XmiBaseStructuralAnalyticalEntity):
     curve_member_type: XmiStructuralCurveMemberTypeEnum = Field(..., alias="CurveMemberType")
     system_line: XmiStructuralCurveMemberSystemLineEnum = Field(..., alias="SystemLine")
 

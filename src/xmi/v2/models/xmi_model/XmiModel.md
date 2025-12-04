@@ -491,7 +491,7 @@ ENTITY_CLASS_MAPPING = {
     "XmiStructuralCurveMember": XmiStructuralCurveMember,
     "XmiStructuralSurfaceMember": XmiStructuralSurfaceMember,
     "XmiStructuralPointConnection": XmiStructuralPointConnection,
-    "XmiStructuralStorey": XmiStructuralStorey,
+    "XmiStorey": XmiStorey,
     "XmiPoint3D": XmiPoint3D,
     "XmiLine3D": XmiLine3D,
     "XmiArc3D": XmiArc3D,
