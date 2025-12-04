@@ -1,0 +1,182 @@
+{
+  "Name": "CompletePhysicalModel",
+  "XmiVersion": "2.0",
+  "ApplicationName": "FeatureParityHarness",
+  "ApplicationVersion": "0.5",
+  "Entities": [
+    {
+      "ID": "mat-001",
+      "Name": "Concrete C40",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Concrete",
+      "Grade": 40,
+      "UnitWeight": 2450.0,
+      "EModulus": "(32000000000,32000000000,32000000000)",
+      "GModulus": "(13000000000,13000000000,13000000000)",
+      "PoissonRatio": "(0.2,0.2,0.2)",
+      "ThermalCoefficient": 1.2e-05
+    },
+    {
+      "ID": "cs-rect-001",
+      "Name": "Rect 600x300",
+      "EntityType": "XmiCrossSection",
+      "Shape": "Rectangular",
+      "Area": 0.18,
+      "SecondMomentOfAreaXAxis": 0.0027,
+      "SecondMomentOfAreaYAxis": 0.00675,
+      "RadiusOfGyrationXAxis": 0.067,
+      "RadiusOfGyrationYAxis": 0.094,
+      "ElasticModulusXAxis": 0.0,
+      "ElasticModulusYAxis": 0.0,
+      "PlasticModulusXAxis": 0.0,
+      "PlasticModulusYAxis": 0.0,
+      "TorsionalConstant": 0.0,
+      "Parameters": "600;300"
+    },
+    {
+      "ID": "spc-complete-001",
+      "Name": "Node A",
+      "EntityType": "XmiStructuralPointConnection",
+      "Point": {"X": 0.0, "Y": 0.0, "Z": 0.0}
+    },
+    {
+      "ID": "spc-complete-002",
+      "Name": "Node B",
+      "EntityType": "XmiStructuralPointConnection",
+      "Point": {"X": 6.0, "Y": 0.0, "Z": 0.0}
+    },
+    {
+      "ID": "beam-complete",
+      "Name": "Beam Complete",
+      "EntityType": "XmiBeam",
+      "SystemLine": "TopMiddle",
+      "Length": 6000.0,
+      "LocalAxisX": "1,0,0",
+      "LocalAxisY": "0,1,0",
+      "LocalAxisZ": "0,0,1",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    },
+    {
+      "ID": "column-complete",
+      "Name": "Column Complete",
+      "EntityType": "XmiColumn",
+      "SystemLine": "MiddleMiddle",
+      "Length": 3500.0,
+      "LocalAxisX": "0,0,1",
+      "LocalAxisY": "1,0,0",
+      "LocalAxisZ": "0,1,0",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    },
+    {
+      "ID": "slab-complete",
+      "Name": "Slab Complete",
+      "EntityType": "XmiSlab"
+    },
+    {
+      "ID": "wall-complete",
+      "Name": "Wall Complete",
+      "EntityType": "XmiWall"
+    },
+    {
+      "ID": "curve-beam-complete",
+      "Name": "Curve Beam Complete",
+      "EntityType": "XmiStructuralCurveMember",
+      "CurveMemberType": "Beam",
+      "SystemLine": "TopMiddle",
+      "Length": 6000.0,
+      "LocalAxisX": "1,0,0",
+      "LocalAxisY": "0,1,0",
+      "LocalAxisZ": "0,0,1",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    },
+    {
+      "ID": "curve-column-complete",
+      "Name": "Curve Column Complete",
+      "EntityType": "XmiStructuralCurveMember",
+      "CurveMemberType": "Column",
+      "SystemLine": "MiddleMiddle",
+      "Length": 3500.0,
+      "LocalAxisX": "0,0,1",
+      "LocalAxisY": "1,0,0",
+      "LocalAxisZ": "0,1,0",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    }
+  ],
+  "Relationships": [
+    {
+      "ID": "rel-mat-cross-section",
+      "Source": "cs-rect-001",
+      "Target": "mat-001",
+      "EntityType": "XmiHasStructuralMaterial",
+      "Name": "CrossSectionMaterial",
+      "Description": "Cross-section uses concrete",
+      "UmlType": "Association"
+    },
+    {
+      "ID": "rel-curve-beam-cross-section",
+      "Source": "curve-beam-complete",
+      "Target": "cs-rect-001",
+      "EntityType": "XmiHasCrossSection",
+      "Name": "BeamCrossSection",
+      "Description": "Curve beam uses cross section",
+      "UmlType": "Association"
+    },
+    {
+      "ID": "rel-curve-column-cross-section",
+      "Source": "curve-column-complete",
+      "Target": "cs-rect-001",
+      "EntityType": "XmiHasCrossSection",
+      "Name": "ColumnCrossSection",
+      "Description": "Curve column uses cross section",
+      "UmlType": "Association"
+    },
+    {
+      "ID": "rel-beam-curve",
+      "Source": "beam-complete",
+      "Target": "curve-beam-complete",
+      "EntityType": "XmiHasStructuralCurveMember",
+      "Name": "BeamCurve",
+      "Description": "Beam mapped to analytical curve",
+      "UmlType": "Association"
+    },
+    {
+      "ID": "rel-column-curve",
+      "Source": "column-complete",
+      "Target": "curve-column-complete",
+      "EntityType": "XmiHasStructuralCurveMember",
+      "Name": "ColumnCurve",
+      "Description": "Column mapped to analytical curve",
+      "UmlType": "Association"
+    }
+  ],
+  "Histories": [],
+  "Errors": []
+}

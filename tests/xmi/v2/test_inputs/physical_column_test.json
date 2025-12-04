@@ -1,0 +1,57 @@
+{
+  "Name": "PhysicalColumnBridge",
+  "Entities": [
+    {
+      "ID": "column-bridge-001",
+      "Name": "Column Bridge",
+      "Description": "Physical column element",
+      "EntityType": "XmiColumn",
+      "SystemLine": "MiddleMiddle",
+      "Length": 3500.0,
+      "LocalAxisX": "1,0,0",
+      "LocalAxisY": "0,1,0",
+      "LocalAxisZ": "0,0,1",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    },
+    {
+      "ID": "curve-column-001",
+      "Name": "Analytical Column",
+      "Description": "Curve member for column",
+      "EntityType": "XmiStructuralCurveMember",
+      "CurveMemberType": "Column",
+      "SystemLine": "MiddleMiddle",
+      "Length": 3500.0,
+      "LocalAxisX": "0,0,1",
+      "LocalAxisY": "1,0,0",
+      "LocalAxisZ": "0,1,0",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    }
+  ],
+  "Relationships": [
+    {
+      "ID": "rel-column-curve",
+      "Source": "column-bridge-001",
+      "Target": "curve-column-001",
+      "Name": "ColumnBridge",
+      "Description": "Column linked to analytical curve",
+      "EntityType": "XmiHasStructuralCurveMember",
+      "UmlType": "Association"
+    }
+  ],
+  "Histories": [],
+  "Errors": []
+}

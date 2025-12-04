@@ -11,6 +11,10 @@ A Python library for interpreting and managing XMI (Cross Model Information) sch
 
 The `xmi-schema-python` library provides a robust framework for reading, parsing, and managing structural data from JSON dictionaries, converting them into structured Python objects that represent materials, cross-sections, members, connections, and geometric elements.
 
+## Feature Parity Status
+
+As of **v0.4.0**, Phase 5 of the feature-parity plan is complete: base physical entities, their analytical bridge (`XmiHasStructuralCurveMember`), and the coordinate deduplication point factory are all implemented and fully tested. Phase 6 adds end-to-end integration coverage plus documentation for the new graph patterns so downstream applications can rely on physical ↔ analytical mappings out of the box. This keeps the Python implementation aligned with the C# 0.8.0 reference and ready for the final parity push.
+
 ## Features
 
 - **Two parallel implementations** (v1 and v2) with different architectural approaches
@@ -62,6 +66,26 @@ if xmi_model.errors:
     for error in xmi_model.errors:
         print(f"Error: {error.message}")
 ```
+
+### Physical Entities & Analytical Bridges
+
+```python
+from xmi.v2.models.xmi_model.xmi_manager import XmiManager
+
+manager = XmiManager()
+xmi_model = manager.read_xmi_dict(physical_model_dict)  # contains XmiBeam/XmiColumn + curves
+
+beams = [e for e in xmi_model.entities if e.entity_type == "XmiBeam"]
+bridges = [
+    rel for rel in xmi_model.relationships
+    if rel.entity_type == "XmiHasStructuralCurveMember"
+]
+
+for bridge in bridges:
+    print(f"Physical {bridge.source.name} → Analytical {bridge.target.name}")
+```
+
+Each bridge guarantees that the physical entity shares a deduplicated coordinate graph with its analytical counterpart, so graph queries can follow identity relationships rather than re-computing geometry.
 
 ### Using v1 (Legacy - Slots-based)
 
@@ -379,6 +403,7 @@ Based on the XMI Schema specification and inspired by the C# implementation:
 
 ## Version History
 
+- **v0.4.0** - Physical entities + bridges, coordinate deduplication, Phase 6 docs/tests
 - **v0.3.0** - Added shape parameters, improved v2 implementation
 - **v0.2.x** - Enhanced entity support, improved testing
 - **v0.1.x** - Initial release with v1 implementation

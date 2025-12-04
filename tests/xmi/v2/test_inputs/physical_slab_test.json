@@ -1,0 +1,14 @@
+{
+  "Name": "PhysicalSlabStandalone",
+  "Entities": [
+    {
+      "ID": "slab-test-001",
+      "Name": "Slab Standalone",
+      "Description": "Physical slab without analytical bridge",
+      "EntityType": "XmiSlab"
+    }
+  ],
+  "Relationships": [],
+  "Histories": [],
+  "Errors": []
+}
