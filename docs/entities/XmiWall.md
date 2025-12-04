@@ -1,20 +1,46 @@
 # XmiWall
 
 ## Overview
-`XmiWall` captures vertical plate elements such as shear walls, facade panels, or load-bearing walls. It extends `XmiBasePhysicalEntity`, keeping the data structure consistent with other physical types and enabling straightforward linking to analytical shells or curve members.
+`XmiWall` captures vertical plate elements such as shear walls, cores, facade panels, or precast walls. It extends `XmiBasePhysicalEntity`, aligning with other physical types so downstream graph traversals can pivot between physical metadata and analytical shells.
+
+## Class Hierarchy
+- Parent: `XmiBasePhysicalEntity`
+- Common Analytical Bridge: `XmiHasStructuralCurveMember` or future shell relationships
 
 ## Properties
-Walls currently only require the base physical metadata. Geometry and analytical data live in separate entities to keep the graph modular. Common relationships include `XmiHasGeometry`, `XmiHasStructuralStorey`, and—when needed—`XmiHasStructuralCurveMember` or other analytical bridges.
+
+### Required
+| Property | Type | Description |
+|----------|------|-------------|
+| `ID` | `str` | Graph identifier |
+| `Name` | `str` | Display name |
+
+### Optional
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `Description` | `str` | `None` | Notes or annotations |
+| `IfcGuid` / `NativeID` | `str` | `None` | Source system identifiers |
+| `Type` | `Literal["Physical"]` | `Physical` | Domain classification |
+
+## Relationships
+- `XmiHasGeometry` → outlines or extrusions
+- `XmiHasStructuralStorey` → building level grouping
+- `XmiHasStructuralCurveMember` / shell bridge → analytical representation
+- `XmiHasStructuralMaterial` (indirect via linked analytical entities)
 
 ## Usage
+
 ```python
 from xmi.v2.models.entities.physical.xmi_wall import XmiWall
 
 wall, errors = XmiWall.from_dict({
     "ID": "wall-001",
     "Name": "Core Wall",
-    "Description": "Lift core wall"
+    "Description": "Lift core wall",
 })
+assert not errors
 ```
 
-Walls are frequently grouped by elevation/storey, matched with materials, and associated with analytical shell elements to support design coordination.
+## Validation Notes
+- No additional validation beyond the base class; walls serve as metadata nodes.
+- Analytical or geometric details should be linked through relationships to maintain a modular graph.

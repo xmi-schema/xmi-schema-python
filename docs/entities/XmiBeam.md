@@ -1,19 +1,36 @@
 # XmiBeam
 
 ## Overview
-`XmiBeam` models a physical beam element (horizontal or inclined member) within the XMI schema. It inherits from `XmiBasePhysicalEntity`, so its domain classification is automatically set to `Physical`. Each beam typically maps to an analytical `XmiStructuralCurveMember` through the `XmiHasStructuralCurveMember` relationship.
+`XmiBeam` models a physical beam element (horizontal or inclined member). It inherits from `XmiBasePhysicalEntity`, so domain metadata (`type="Physical"`) is populated automatically. Beams typically bridge to analytical `XmiStructuralCurveMember` objects to keep the physical graph synchronized with load-bearing analysis members.
 
-## Key Properties
-| Field | Type | Description |
-|-------|------|-------------|
-| `SystemLine` | `XmiStructuralCurveMemberSystemLineEnum` | Reference line (e.g., `TopMiddle`, `MiddleMiddle`) used for alignment with analytical geometry |
-| `Length` | `float` | Member length in model units |
-| `LocalAxisX/Y/Z` | `Tuple[float, float, float]` | Direction cosines of the local axes (string input such as `"1,0,0"` is parsed automatically) |
-| `BeginNode*Offset` / `EndNode*Offset` | `float` | Translational offsets between the analytical curve and physical extents |
-| `EndFixityStart/EndFixityEnd` | `Optional[str]` | Fixity string (e.g., `FFFFFF`) describing boundary conditions |
+## Class Hierarchy
+- Parent: `XmiBasePhysicalEntity`
+- Analytical Bridge: `XmiHasStructuralCurveMember` → `XmiStructuralCurveMember`
 
-## Construction
-Use `XmiBeam.from_dict()` when parsing raw dictionaries. Axis strings and enums are normalized during parsing, and validation errors are returned in a list instead of raising immediately.
+## Properties
+
+### Required
+| Property | Type | Description |
+|----------|------|-------------|
+| `ID` | `str` | Unique identifier shared across the graph |
+| `Name` | `str` | Human-readable label |
+
+### Optional / Domain-Specific
+| Property | Type | Default | Description |
+|----------|------|---------|-------------|
+| `SystemLine` | `XmiStructuralCurveMemberSystemLineEnum` | `None` | Alignment line that controls offsets vs. the analytical curve |
+| `Length` | `float` | `None` | Member length in model units |
+| `LocalAxisX/Y/Z` | `tuple[float, float, float]` | `None` | Direction cosines of the local axes (strings such as `"1,0,0"` are parsed automatically) |
+| `BeginNode*Offset` / `EndNode*Offset` | `float` | `0.0` | Translational offsets relative to analytical nodes |
+| `EndFixityStart` / `EndFixityEnd` | `str` | `None` | Fixity code (`FFFFFF`, etc.) describing end releases |
+
+## Relationships
+- `XmiHasStructuralCurveMember` (physical → analytical curve)
+- `XmiHasStructuralMaterial` (indirect via cross-section relationships)
+- `XmiHasStructuralNode` / `XmiHasSegment` (through its paired curve member)
+
+## Usage
+Use `from_dict()` to parse JSON dictionaries. Validation errors are returned as a list instead of raising.
 
 ```python
 from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
@@ -28,13 +45,11 @@ beam_dict = {
     "LocalAxisY": "0,1,0",
     "LocalAxisZ": "0,0,1",
 }
-
 beam, errors = XmiBeam.from_dict(beam_dict)
 assert not errors
 ```
 
-## Bridge Pattern
-Pair a beam with an analytical curve member:
+## Bridge Example
 
 ```python
 from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
@@ -45,9 +60,12 @@ curve, _ = XmiStructuralCurveMember.from_dict({
     "Name": "Analytical Beam",
     "EntityType": "XmiStructuralCurveMember",
     "CurveMemberType": "Beam",
-    "SystemLine": "TopMiddle"
+    "SystemLine": "TopMiddle",
 })
 bridge = XmiHasStructuralCurveMember(source=beam, target=curve)
 ```
 
-The bridge relationship keeps physical geometry aligned with analytical members when building graph traversals.
+## Validation Notes
+- Axis vectors accept either comma-delimited strings or numeric tuples.
+- `SystemLine` strings are coerced to enums; invalid values surface as validation errors.
+- All offsets default to `0.0`, so supplying them is optional unless a physical extent mismatch exists.

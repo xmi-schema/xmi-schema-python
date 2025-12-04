@@ -15,6 +15,20 @@ The `xmi-schema-python` library provides a robust framework for reading, parsing
 
 As of **v0.4.0**, Phase 5 of the feature-parity plan is complete: base physical entities, their analytical bridge (`XmiHasStructuralCurveMember`), and the coordinate deduplication point factory are all implemented and fully tested. Phase 6 adds end-to-end integration coverage plus documentation for the new graph patterns so downstream applications can rely on physical ↔ analytical mappings out of the box. This keeps the Python implementation aligned with the C# 0.8.0 reference and ready for the final parity push.
 
+## Phase 6 Updates (Testing & Docs)
+
+- ✅ Added integration suites (`tests/xmi/v2/test_integration/`) that exercise the entire physical → analytical bridge, including invalid relationship handling and complete model round trips.
+- ✅ Authored per-entity documentation covering metadata, relationships, and validation guidance for each physical type and its bridge relationship.
+- ✅ Surfaced the documentation in this README so consumers can jump directly into the new graph patterns.
+
+| Entity / Relationship | Documentation |
+|-----------------------|---------------|
+| `XmiBeam` | [`docs/entities/XmiBeam.md`](docs/entities/XmiBeam.md) |
+| `XmiColumn` | [`docs/entities/XmiColumn.md`](docs/entities/XmiColumn.md) |
+| `XmiSlab` | [`docs/entities/XmiSlab.md`](docs/entities/XmiSlab.md) |
+| `XmiWall` | [`docs/entities/XmiWall.md`](docs/entities/XmiWall.md) |
+| `XmiHasStructuralCurveMember` | [`docs/relationships/XmiHasStructuralCurveMember.md`](docs/relationships/XmiHasStructuralCurveMember.md) |
+
 ## Features
 
 - **Two parallel implementations** (v1 and v2) with different architectural approaches
@@ -393,7 +407,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **PyPI**: https://pypi.org/project/xmi/
 - **GitHub**: https://github.com/xmi-schema/xmi-schema-python
 - **XMI Schema**: https://xmi-schema.org
-- **Documentation**: [Coming soon]
+- **Documentation**: `docs/entities/` (per-class) and `docs/relationships/` (bridge patterns)
 
 ## Acknowledgments
 
@@ -403,7 +417,7 @@ Based on the XMI Schema specification and inspired by the C# implementation:
 
 ## Version History
 
-- **v0.4.0** - Physical entities + bridges, coordinate deduplication, Phase 6 docs/tests
+- **v0.4.0 (Phase 6)** - Physical entities + bridges, coordinate deduplication, integration coverage, per-entity documentation
 - **v0.3.0** - Added shape parameters, improved v2 implementation
 - **v0.2.x** - Enhanced entity support, improved testing
 - **v0.1.x** - Initial release with v1 implementation
