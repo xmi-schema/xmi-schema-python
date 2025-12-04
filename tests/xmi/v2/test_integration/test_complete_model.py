@@ -5,14 +5,14 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from xmi.v2.models.entities.xmi_beam import XmiBeam
-from xmi.v2.models.entities.xmi_column import XmiColumn
-from xmi.v2.models.entities.xmi_slab import XmiSlab
-from xmi.v2.models.entities.xmi_wall import XmiWall
+from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
+from xmi.v2.models.entities.physical.xmi_column import XmiColumn
+from xmi.v2.models.entities.physical.xmi_slab import XmiSlab
+from xmi.v2.models.entities.physical.xmi_wall import XmiWall
 from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection
 from xmi.v2.models.relationships.xmi_has_structural_curve_member import XmiHasStructuralCurveMember
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial

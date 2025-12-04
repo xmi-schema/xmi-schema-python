@@ -199,7 +199,7 @@ print(f"Errors: {len(model.errors)}")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
@@ -411,8 +411,8 @@ else:
 
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 # Create model
 model = XmiModel(
@@ -426,7 +426,7 @@ model = XmiModel(
 steel = XmiStructuralMaterial(
     id="mat_001",
     name="Steel S355",
-    material_type=XmiStructuralMaterialTypeEnum.STEEL,
+    material_type=XmiMaterialTypeEnum.STEEL,
     grade=355.0,
     unit_weight=7850.0
 )
@@ -434,7 +434,7 @@ steel = XmiStructuralMaterial(
 concrete = XmiStructuralMaterial(
     id="mat_002",
     name="Concrete C30",
-    material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+    material_type=XmiMaterialTypeEnum.CONCRETE,
     grade=30.0,
     unit_weight=2400.0
 )
@@ -610,7 +610,7 @@ def load_and_inspect(file_path: str):
 
 ```python
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
 def extract_beams(model: XmiModel) -> list:
     """Extract all curve members (beams/columns) from model"""

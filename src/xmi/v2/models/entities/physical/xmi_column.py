@@ -1,8 +1,8 @@
 from pydantic import Field, field_validator, model_validator, ConfigDict, field_serializer
 from typing import Dict, Any, List, Optional, Tuple, Union
-from ..bases.xmi_base_physical_entity import XmiBasePhysicalEntity
-from ..enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
-from ...utils.xmi_errors import *
+from ...bases.xmi_base_physical_entity import XmiBasePhysicalEntity
+from ...enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
+from ....utils.xmi_errors import *
 
 
 class XmiColumn(XmiBasePhysicalEntity):

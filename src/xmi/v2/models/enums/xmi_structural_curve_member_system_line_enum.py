@@ -32,7 +32,7 @@ class XmiStructuralCurveMemberSystemLineEnum(XmiBaseEnum):
         >>> line = XmiStructuralCurveMemberSystemLineEnum("topmiddle")  # Returns TOP_MIDDLE
         >>>
         >>> # Use in curve member
-        >>> from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
         >>> beam = XmiStructuralCurveMember(
         ...     name="B1",
         ...     system_line=XmiStructuralCurveMemberSystemLineEnum.TOP_MIDDLE

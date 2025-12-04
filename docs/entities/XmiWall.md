@@ -8,7 +8,7 @@ Walls currently only require the base physical metadata. Geometry and analytical
 
 ## Usage
 ```python
-from xmi.v2.models.entities.xmi_wall import XmiWall
+from xmi.v2.models.entities.physical.xmi_wall import XmiWall
 
 wall, errors = XmiWall.from_dict({
     "ID": "wall-001",

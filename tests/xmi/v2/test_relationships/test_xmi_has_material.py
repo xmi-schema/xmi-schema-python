@@ -2,13 +2,13 @@ import pytest
 from xmi.v2.models.relationships.xmi_has_material import XmiHasMaterial
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.entities.xmi_material import XmiMaterial
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 def test_has_material_valid_instantiation():
     source = XmiBaseEntity(id="E1", name="Column")
     material = XmiMaterial(
         id="M1",
-        material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+        material_type=XmiMaterialTypeEnum.CONCRETE,
         grade=30.0,
         unit_weight=25.0,
         e_modulus=(30000.0, 30000.0, 30000.0),
@@ -25,7 +25,7 @@ def test_has_material_valid_instantiation():
 def test_invalid_source_type():
     material = XmiMaterial(
         id="M1",
-        material_type=XmiStructuralMaterialTypeEnum.STEEL,
+        material_type=XmiMaterialTypeEnum.STEEL,
         grade=50.0,
         unit_weight=78.5,
         e_modulus=(200000.0, 200000.0, 200000.0),

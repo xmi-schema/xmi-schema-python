@@ -15,7 +15,7 @@ The relationship ensures that:
 from pydantic import field_validator, model_validator
 from ..bases.xmi_base_relationship import XmiBaseRelationship
 from ..bases.xmi_base_physical_entity import XmiBasePhysicalEntity
-from ..entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from ..entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
 
 class XmiHasStructuralCurveMember(XmiBaseRelationship):
@@ -37,8 +37,8 @@ class XmiHasStructuralCurveMember(XmiBaseRelationship):
         entity_type: Relationship type identifier (defaults to "XmiRelHasStructuralCurveMember")
 
     Examples:
-        >>> from xmi.v2.models.entities.xmi_beam import XmiBeam
-        >>> from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+        >>> from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
         >>> from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
         >>> from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
         >>>

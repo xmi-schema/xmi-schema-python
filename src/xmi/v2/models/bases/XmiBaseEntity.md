@@ -74,7 +74,7 @@ This guarantees that every entity has valid identification even with minimal inp
 ### Direct Instantiation (Subclass)
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 # Minimal creation - all fields auto-generated
 material1 = XmiStructuralMaterial(

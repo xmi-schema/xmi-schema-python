@@ -39,7 +39,7 @@ member_type = XmiStructuralCurveMemberTypeEnum("column")  # Returns COLUMN
 ### Creating Curve Members
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
 # Create beam
 beam = XmiStructuralCurveMember(
@@ -65,7 +65,7 @@ bracing = XmiStructuralCurveMember(
 ```python
 def get_members_by_type(xmi_model, member_type):
     """Get all curve members of a specific type."""
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     return [
         entity for entity in xmi_model.entities
@@ -87,7 +87,7 @@ print(f"Found {len(columns)} columns")
 def analyze_member_types(xmi_model):
     """Analyze distribution of curve member types."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     members = [
         entity for entity in xmi_model.entities

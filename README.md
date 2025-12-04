@@ -233,7 +233,7 @@ poetry run pytest --cov=src/xmi --cov-report=html --cov-report=term
 poetry run pytest tests/xmi/v2/
 
 # Run specific test file
-poetry run pytest tests/xmi/v2/test_entities/test_xmi_structural_material.py
+poetry run pytest tests/xmi/v2/test_entities/test_xmi_material.py
 ```
 
 ### Test Coverage

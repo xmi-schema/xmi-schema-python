@@ -72,7 +72,7 @@ The `validate_fields` validator ensures:
 ```python
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 # Create entities
 material = XmiStructuralMaterial(

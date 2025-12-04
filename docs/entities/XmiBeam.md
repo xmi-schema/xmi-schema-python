@@ -16,7 +16,7 @@
 Use `XmiBeam.from_dict()` when parsing raw dictionaries. Axis strings and enums are normalized during parsing, and validation errors are returned in a list instead of raising immediately.
 
 ```python
-from xmi.v2.models.entities.xmi_beam import XmiBeam
+from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
 
 beam_dict = {
     "ID": "beam-001",
@@ -37,7 +37,7 @@ assert not errors
 Pair a beam with an analytical curve member:
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.relationships.xmi_has_structural_curve_member import XmiHasStructuralCurveMember
 
 curve, _ = XmiStructuralCurveMember.from_dict({

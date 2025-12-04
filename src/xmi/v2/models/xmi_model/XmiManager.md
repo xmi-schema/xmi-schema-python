@@ -119,7 +119,7 @@ else:
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 manager = XmiManager()
@@ -217,8 +217,8 @@ print(f"Created by: {model.application_name} {model.application_version}")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
 manager = XmiManager()
 model = manager.read_xmi_dict(xmi_data)
@@ -496,7 +496,7 @@ is_valid = validate_xmi_file("structure.json")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 def extract_material_library(xmi_data: dict) -> dict:
     """Extract materials from XMI and convert to custom format"""

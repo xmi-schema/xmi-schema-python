@@ -1,7 +1,7 @@
 import pytest
 from xmi.v2.models.relationships.xmi_has_structural_point_connection import XmiHasStructuralPointConnection
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 def test_has_structural_point_connection_valid_instantiation():

@@ -301,7 +301,7 @@ print(f"Plastic modulus defined? {has_plastic_modulus}")  # False
 
 ```python
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 from xmi.v2.models.enums.xmi_shape_enum import XmiShapeEnum
 

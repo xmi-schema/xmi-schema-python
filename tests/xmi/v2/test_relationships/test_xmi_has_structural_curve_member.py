@@ -13,9 +13,9 @@ This module tests the XmiHasStructuralCurveMember relationship, verifying that:
 import pytest
 from pydantic import ValidationError
 from xmi.v2.models.relationships.xmi_has_structural_curve_member import XmiHasStructuralCurveMember
-from xmi.v2.models.entities.xmi_beam import XmiBeam
-from xmi.v2.models.entities.xmi_column import XmiColumn
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
+from xmi.v2.models.entities.physical.xmi_column import XmiColumn
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum

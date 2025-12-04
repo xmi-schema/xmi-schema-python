@@ -71,8 +71,8 @@ Examples:
 ### Creating Relationships with Begin/End Flags
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.relationships.xmi_has_structural_point_connection import XmiHasStructuralPointConnection
 
 # Create nodes

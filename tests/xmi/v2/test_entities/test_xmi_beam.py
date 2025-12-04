@@ -13,7 +13,7 @@ This module tests the XmiBeam class, verifying that:
 
 import pytest
 from pydantic import ValidationError
-from xmi.v2.models.entities.xmi_beam import XmiBeam
+from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
 from xmi.v2.models.enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 

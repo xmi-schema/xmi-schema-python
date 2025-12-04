@@ -10,7 +10,7 @@ This module tests the XmiWall class, verifying that:
 
 import pytest
 from pydantic import ValidationError
-from xmi.v2.models.entities.xmi_wall import XmiWall
+from xmi.v2.models.entities.physical.xmi_wall import XmiWall
 from xmi.v2.models.enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 
 

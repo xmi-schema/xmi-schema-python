@@ -3,7 +3,7 @@ from xmi.v2.models.relationships.xmi_has_segment import XmiHasSegment
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.entities.xmi_segment import XmiSegment
 from xmi.v2.models.bases.xmi_base_geometry import XmiBaseGeometry
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 

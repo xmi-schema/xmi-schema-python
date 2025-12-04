@@ -1,5 +1,5 @@
 import pytest
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from tests.xmi.v2.test_inputs import xmi_structural_point_connection_input as input_data
 
 

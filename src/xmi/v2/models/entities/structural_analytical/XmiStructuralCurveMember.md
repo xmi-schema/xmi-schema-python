@@ -116,7 +116,7 @@ Use cases:
 ### Creating an Instance Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 
@@ -153,7 +153,7 @@ beam = XmiStructuralCurveMember(
 ### Loading from Dictionary
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
 # Dictionary from XMI JSON input
 curve_member_dict = {

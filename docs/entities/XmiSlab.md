@@ -8,7 +8,7 @@ Slabs currently expose the base properties: `id`, `name`, `description`, `entity
 
 ## Usage
 ```python
-from xmi.v2.models.entities.xmi_slab import XmiSlab
+from xmi.v2.models.entities.physical.xmi_slab import XmiSlab
 
 slab, errors = XmiSlab.from_dict({
     "ID": "slab-001",

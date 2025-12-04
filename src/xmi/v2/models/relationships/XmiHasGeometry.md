@@ -67,7 +67,7 @@ Examples:
 ### Creating Point Geometry Relationship
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from xmi.v2.models.relationships.xmi_has_geometry import XmiHasGeometry
 
@@ -180,7 +180,7 @@ if entity:
 ### Get All Node Locations
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 def get_all_node_locations(xmi_model):

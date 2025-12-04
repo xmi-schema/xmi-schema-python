@@ -27,25 +27,25 @@
       ]
     },
     {
-      "name": "Python: pytest test_xmi_structural_material (Linux)",
+      "name": "Python: pytest test_xmi_material (Linux)",
       "type": "python",
       "request": "launch",
       "module": "pytest",
       "python": "${workspaceFolder}/myvenv3.10/bin/python", // for macOS/Linux
       "args": [
         "-vv", // optional, for verbose output
-        "${workspaceFolder}/tests/xmi/v1/test_scripts/test_xmi_structural_material.py"
+        "${workspaceFolder}/tests/xmi/v1/test_scripts/test_xmi_material.py"
       ]
     },
     {
-      "name": "Python: pytest test_xmi_structural_material (Windows)",
+      "name": "Python: pytest test_xmi_material (Windows)",
       "type": "python",
       "request": "launch",
       "module": "pytest",
       "python": "${workspaceFolder}/myvenv3.10/Scripts/python.exe", // for macOS/Linux
       "args": [
         "-vv", // optional, for verbose output
-        "${workspaceFolder}/tests/xmi/v1/test_scripts/test_xmi_structural_material.py"
+        "${workspaceFolder}/tests/xmi/v1/test_scripts/test_xmi_material.py"
       ]
     },
     {

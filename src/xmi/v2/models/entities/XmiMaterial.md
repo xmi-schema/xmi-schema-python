@@ -7,7 +7,7 @@
 ## Class Hierarchy
 
 - **Parent**: `XmiBaseEntity`
-- **Module**: `xmi.v2.models.entities.xmi_structural_material`
+- **Module**: `xmi.v2.models.entities.xmi_material`
 - **Implementation**: Pydantic model with validation
 
 ## Properties
@@ -16,7 +16,7 @@
 
 | Property | Type | Description | Validation |
 |----------|------|-------------|------------|
-| `material_type` | `XmiStructuralMaterialTypeEnum` | Type of material (Concrete, Steel, Timber, etc.) | Must be a valid enum value |
+| `material_type` | `XmiMaterialTypeEnum` | Type of material (Concrete, Steel, Timber, etc.) | Must be a valid enum value |
 
 ### Optional Properties
 
@@ -51,14 +51,14 @@
 ### Creating an Instance Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 # Create a concrete material
 material = XmiStructuralMaterial(
     id="mat_001",
     name="Concrete C35/45",
-    material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+    material_type=XmiMaterialTypeEnum.CONCRETE,
     grade=35.0,
     unit_weight=2400.0,
     e_modulus=(30000000000.0, 30000000000.0, 30000000000.0),
@@ -75,7 +75,7 @@ print(f"Grade: {material.grade}")
 ### Loading from Dictionary
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 # Dictionary from XMI file or database
 material_dict = {
@@ -103,13 +103,13 @@ else:
 ### Creating Different Material Types
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 # Steel material
 steel = XmiStructuralMaterial(
     name="Steel S355",
-    material_type=XmiStructuralMaterialTypeEnum.STEEL,
+    material_type=XmiMaterialTypeEnum.STEEL,
     grade=355.0,
     unit_weight=7850.0,
     e_modulus=(210000000000.0, 210000000000.0, 210000000000.0),
@@ -120,7 +120,7 @@ steel = XmiStructuralMaterial(
 # Timber material
 timber = XmiStructuralMaterial(
     name="Timber GL24h",
-    material_type=XmiStructuralMaterialTypeEnum.TIMBER,
+    material_type=XmiMaterialTypeEnum.TIMBER,
     grade=24.0,
     unit_weight=420.0,
     e_modulus=(11500000000.0, 9600000000.0, 300000000.0),
@@ -131,7 +131,7 @@ timber = XmiStructuralMaterial(
 # Aluminium material
 aluminium = XmiStructuralMaterial(
     name="Aluminium 6061-T6",
-    material_type=XmiStructuralMaterialTypeEnum.ALUMINIUM,
+    material_type=XmiMaterialTypeEnum.ALUMINIUM,
     grade=6061.0,
     unit_weight=2700.0,
     e_modulus=(69000000000.0, 69000000000.0, 69000000000.0)
@@ -141,7 +141,7 @@ aluminium = XmiStructuralMaterial(
 ### Handling Validation Errors
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 # Missing required material_type
 invalid_dict = {
@@ -163,7 +163,7 @@ if not material:
 ```python
 material = XmiStructuralMaterial(
     name="Concrete C30",
-    material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+    material_type=XmiMaterialTypeEnum.CONCRETE,
     grade=30.0,
     e_modulus=(32000000000.0, 32000000000.0, 32000000000.0)
 )
@@ -171,7 +171,7 @@ material = XmiStructuralMaterial(
 # Access properties
 print(f"Material name: {material.name}")
 print(f"Material type: {material.material_type.value}")
-print(f"Is concrete? {material.material_type == XmiStructuralMaterialTypeEnum.CONCRETE}")
+print(f"Is concrete? {material.material_type == XmiMaterialTypeEnum.CONCRETE}")
 
 # Access modulus values
 if material.e_modulus:
@@ -182,7 +182,7 @@ if material.e_modulus:
 ## Validation Rules
 
 ### Type Validation
-- `material_type`: Must be a valid `XmiStructuralMaterialTypeEnum` value
+- `material_type`: Must be a valid `XmiMaterialTypeEnum` value
 - `grade`, `unit_weight`, `thermal_coefficient`: Must be float, int, or None
 - `e_modulus`, `g_modulus`, `poisson_ratio`: Must be tuple of 3 numeric values or None
 
@@ -207,7 +207,7 @@ The `from_dict()` method automatically converts string tuples to proper tuple ob
 
 ## Material Type Enum Values
 
-Available material types (via `XmiStructuralMaterialTypeEnum`):
+Available material types (via `XmiMaterialTypeEnum`):
 - `CONCRETE`: "Concrete"
 - `STEEL`: "Steel"
 - `TIMBER`: "Timber"
@@ -250,7 +250,7 @@ The `from_dict()` method returns a tuple: `(instance, error_logs)`
 ## Related Classes
 
 - **`XmiBaseEntity`**: Parent class providing common entity properties
-- **`XmiStructuralMaterialTypeEnum`**: Enum defining valid material types
+- **`XmiMaterialTypeEnum`**: Enum defining valid material types
 - **`XmiCrossSection`**: References materials via `XmiHasStructuralMaterial` relationship
 - **`XmiStructuralSurfaceMember`**: Can reference materials directly
 - **`XmiHasStructuralMaterial`**: Relationship class linking materials to other entities
@@ -262,13 +262,13 @@ The `from_dict()` method returns a tuple: `(instance, error_logs)`
 materials = {
     "C30": XmiStructuralMaterial(
         name="Concrete C30/37",
-        material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+        material_type=XmiMaterialTypeEnum.CONCRETE,
         grade=30.0,
         unit_weight=2400.0
     ),
     "S355": XmiStructuralMaterial(
         name="Steel S355",
-        material_type=XmiStructuralMaterialTypeEnum.STEEL,
+        material_type=XmiMaterialTypeEnum.STEEL,
         grade=355.0,
         unit_weight=7850.0
     )
@@ -296,7 +296,7 @@ for mat_dict in xmi_data.get("StructuralMaterial", []):
 def is_high_strength_concrete(material: XmiStructuralMaterial) -> bool:
     """Check if material is high-strength concrete (grade > 50 MPa)"""
     return (
-        material.material_type == XmiStructuralMaterialTypeEnum.CONCRETE
+        material.material_type == XmiMaterialTypeEnum.CONCRETE
         and material.grade is not None
         and material.grade > 50.0
     )
@@ -306,4 +306,4 @@ def is_high_strength_concrete(material: XmiStructuralMaterial) -> bool:
 
 - [XmiCrossSection.md](XmiCrossSection.md) - Cross-sections that use materials
 - [XmiBaseEntity.md](../bases/XmiBaseEntity.md) - Base entity documentation
-- [XmiStructuralMaterialTypeEnum.md](../enums/XmiStructuralMaterialTypeEnum.md) - Material type enumeration
+- [XmiMaterialTypeEnum.md](../enums/XmiMaterialTypeEnum.md) - Material type enumeration

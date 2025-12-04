@@ -69,7 +69,7 @@ system_line = XmiStructuralCurveMemberSystemLineEnum("middle middle")  # Returns
 ### Creating Curve Members
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 
@@ -154,7 +154,7 @@ print(f"Eccentricity: y={ecc_y}mm, z={ecc_z}mm")  # y=250mm, z=0mm
 def analyze_system_lines(xmi_model):
     """Analyze distribution of system lines in model."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     members = [
         entity for entity in xmi_model.entities

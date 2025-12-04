@@ -1,5 +1,5 @@
 from xmi.v2.models.entities.xmi_material import XmiMaterial
-from tests.xmi.v2.test_inputs import xmi_structural_material_input as input_data
+from tests.xmi.v2.test_inputs import xmi_material_input as input_data
 
 
 def test_valid_material():

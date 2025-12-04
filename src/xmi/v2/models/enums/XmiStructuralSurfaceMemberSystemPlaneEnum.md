@@ -68,7 +68,7 @@ plane = XmiStructuralSurfaceMemberSystemPlaneEnum.from_attribute_get_enum("Botto
 ### Creating Surface Members with System Plane
 
 ```python
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.enums.xmi_structural_surface_member_system_plane_enum import XmiStructuralSurfaceMemberSystemPlaneEnum
 from xmi.v2.models.enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
 
@@ -182,7 +182,7 @@ print(f"Middle plane at: {new_z} mm")  # 3100 mm
 ```python
 def get_surfaces_by_plane(xmi_model, system_plane):
     """Get all surface members with specific system plane."""
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     surfaces = [
         entity for entity in xmi_model.entities
@@ -211,7 +211,7 @@ print(f"Surfaces with MIDDLE reference: {len(middle_ref)}")
 def analyze_system_planes(xmi_model):
     """Analyze distribution of system planes in model."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     surfaces = [
         entity for entity in xmi_model.entities

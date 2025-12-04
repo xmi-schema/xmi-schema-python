@@ -32,7 +32,7 @@ class XmiBaseStructuralAnalyticalEntity(XmiBaseEntity):
     - Are used for structural calculations and simulations
 
     Examples:
-        >>> from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
         >>> # Create an analytical curve member
         >>> member = XmiStructuralCurveMember(
         ...     id="member-001",

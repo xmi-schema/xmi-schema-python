@@ -238,7 +238,7 @@ def create_segment_with_geometry(start_node, end_node, segment_type_str="Line", 
     return segment
 
 # Usage
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 node1 = XmiStructuralPointConnection(x=0, y=0, z=0)
 node2 = XmiStructuralPointConnection(x=1000, y=0, z=0)

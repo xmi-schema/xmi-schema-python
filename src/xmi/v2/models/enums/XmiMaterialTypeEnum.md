@@ -1,15 +1,15 @@
-# XmiStructuralMaterialTypeEnum
+# XmiMaterialTypeEnum
 
 ## Overview
 
-`XmiStructuralMaterialTypeEnum` is an enumeration that defines the types of structural materials available in the XMI schema. This classification helps identify material properties, behavior, and appropriate design standards.
+`XmiMaterialTypeEnum` is an enumeration that defines the types of structural materials available in the XMI schema. This classification helps identify material properties, behavior, and appropriate design standards.
 
 ## Class Hierarchy
 
 - **Parent**: [`XmiBaseEnum`](../bases/XmiBaseEnum.md)
 - **Grandparent**: `str`, `Enum`
 - **Version**: v2 (Pydantic-based implementation)
-- **Module**: `src/xmi/v2/models/enums/xmi_structural_material_type_enum.py`
+- **Module**: `src/xmi/v2/models/enums/xmi_material_type_enum.py`
 
 ## Enum Values
 
@@ -48,26 +48,26 @@ Material types determine:
 ### Basic Usage
 
 ```python
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 # Direct access
-material_type = XmiStructuralMaterialTypeEnum.CONCRETE
+material_type = XmiMaterialTypeEnum.CONCRETE
 print(material_type.value)  # "Concrete"
 
 # Case-insensitive lookup
-material_type = XmiStructuralMaterialTypeEnum("steel")  # Returns STEEL
-material_type = XmiStructuralMaterialTypeEnum("CONCRETE")  # Returns CONCRETE
+material_type = XmiMaterialTypeEnum("steel")  # Returns STEEL
+material_type = XmiMaterialTypeEnum("CONCRETE")  # Returns CONCRETE
 ```
 
 ### Creating Materials
 
 ```python
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 # Concrete material
 concrete = XmiStructuralMaterial(
     name="C30",
-    material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+    material_type=XmiMaterialTypeEnum.CONCRETE,
     grade="C30/37",
     elastic_modulus=31000,  # MPa
     density=2400  # kg/m³
@@ -76,7 +76,7 @@ concrete = XmiStructuralMaterial(
 # Steel material
 steel = XmiStructuralMaterial(
     name="S355",
-    material_type=XmiStructuralMaterialTypeEnum.STEEL,
+    material_type=XmiMaterialTypeEnum.STEEL,
     grade="S355",
     elastic_modulus=210000,  # MPa
     density=7850  # kg/m³
@@ -85,7 +85,7 @@ steel = XmiStructuralMaterial(
 # Timber material
 timber = XmiStructuralMaterial(
     name="GL24h",
-    material_type=XmiStructuralMaterialTypeEnum.TIMBER,
+    material_type=XmiMaterialTypeEnum.TIMBER,
     grade="GL24h",
     elastic_modulus=11500,  # MPa
     density=420  # kg/m³
@@ -97,7 +97,7 @@ timber = XmiStructuralMaterial(
 ```python
 def get_materials_by_type(xmi_model, material_type):
     """Get all materials of a specific type."""
-    from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+    from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
     return [
         entity for entity in xmi_model.entities
@@ -106,8 +106,8 @@ def get_materials_by_type(xmi_model, material_type):
     ]
 
 # Usage
-concrete_materials = get_materials_by_type(xmi_model, XmiStructuralMaterialTypeEnum.CONCRETE)
-steel_materials = get_materials_by_type(xmi_model, XmiStructuralMaterialTypeEnum.STEEL)
+concrete_materials = get_materials_by_type(xmi_model, XmiMaterialTypeEnum.CONCRETE)
+steel_materials = get_materials_by_type(xmi_model, XmiMaterialTypeEnum.STEEL)
 
 print(f"Found {len(concrete_materials)} concrete materials")
 print(f"Found {len(steel_materials)} steel materials")
@@ -119,7 +119,7 @@ print(f"Found {len(steel_materials)} steel materials")
 def analyze_material_types(xmi_model):
     """Analyze distribution of material types in model."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+    from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
     materials = [
         entity for entity in xmi_model.entities
@@ -148,29 +148,29 @@ analyze_material_types(xmi_model)
 def get_typical_density(material_type):
     """Get typical density for a material type (kg/m³)."""
     densities = {
-        XmiStructuralMaterialTypeEnum.CONCRETE: 2400,
-        XmiStructuralMaterialTypeEnum.STEEL: 7850,
-        XmiStructuralMaterialTypeEnum.TIMBER: 500,
-        XmiStructuralMaterialTypeEnum.ALUMINIUM: 2700,
-        XmiStructuralMaterialTypeEnum.MASONRY: 1800,
+        XmiMaterialTypeEnum.CONCRETE: 2400,
+        XmiMaterialTypeEnum.STEEL: 7850,
+        XmiMaterialTypeEnum.TIMBER: 500,
+        XmiMaterialTypeEnum.ALUMINIUM: 2700,
+        XmiMaterialTypeEnum.MASONRY: 1800,
     }
     return densities.get(material_type, 2400)  # Default to concrete
 
 def get_typical_elastic_modulus(material_type):
     """Get typical elastic modulus for a material type (MPa)."""
     moduli = {
-        XmiStructuralMaterialTypeEnum.CONCRETE: 30000,
-        XmiStructuralMaterialTypeEnum.STEEL: 210000,
-        XmiStructuralMaterialTypeEnum.TIMBER: 10000,
-        XmiStructuralMaterialTypeEnum.ALUMINIUM: 70000,
-        XmiStructuralMaterialTypeEnum.MASONRY: 15000,
+        XmiMaterialTypeEnum.CONCRETE: 30000,
+        XmiMaterialTypeEnum.STEEL: 210000,
+        XmiMaterialTypeEnum.TIMBER: 10000,
+        XmiMaterialTypeEnum.ALUMINIUM: 70000,
+        XmiMaterialTypeEnum.MASONRY: 15000,
     }
     return moduli.get(material_type, 30000)  # Default to concrete
 
 # Usage
-for mat_type in [XmiStructuralMaterialTypeEnum.CONCRETE,
-                  XmiStructuralMaterialTypeEnum.STEEL,
-                  XmiStructuralMaterialTypeEnum.TIMBER]:
+for mat_type in [XmiMaterialTypeEnum.CONCRETE,
+                  XmiMaterialTypeEnum.STEEL,
+                  XmiMaterialTypeEnum.TIMBER]:
     density = get_typical_density(mat_type)
     modulus = get_typical_elastic_modulus(mat_type)
     print(f"{mat_type.value}: ρ={density} kg/m³, E={modulus} MPa")
@@ -182,20 +182,20 @@ for mat_type in [XmiStructuralMaterialTypeEnum.CONCRETE,
 def get_design_codes(material_type):
     """Get applicable design codes for a material type."""
     codes = {
-        XmiStructuralMaterialTypeEnum.CONCRETE: ["Eurocode 2", "ACI 318", "BS 8110"],
-        XmiStructuralMaterialTypeEnum.STEEL: ["Eurocode 3", "AISC 360", "BS 5950"],
-        XmiStructuralMaterialTypeEnum.TIMBER: ["Eurocode 5", "NDS", "BS 5268"],
-        XmiStructuralMaterialTypeEnum.MASONRY: ["Eurocode 6", "TMS 402"],
-        XmiStructuralMaterialTypeEnum.ALUMINIUM: ["Eurocode 9", "ADM"],
-        XmiStructuralMaterialTypeEnum.COMPOSITE: ["Eurocode 4", "AISC 360"],
+        XmiMaterialTypeEnum.CONCRETE: ["Eurocode 2", "ACI 318", "BS 8110"],
+        XmiMaterialTypeEnum.STEEL: ["Eurocode 3", "AISC 360", "BS 5950"],
+        XmiMaterialTypeEnum.TIMBER: ["Eurocode 5", "NDS", "BS 5268"],
+        XmiMaterialTypeEnum.MASONRY: ["Eurocode 6", "TMS 402"],
+        XmiMaterialTypeEnum.ALUMINIUM: ["Eurocode 9", "ADM"],
+        XmiMaterialTypeEnum.COMPOSITE: ["Eurocode 4", "AISC 360"],
     }
     return codes.get(material_type, [])
 
 # Usage
-for mat_type in XmiStructuralMaterialTypeEnum:
-    if mat_type not in [XmiStructuralMaterialTypeEnum.REBAR,
-                        XmiStructuralMaterialTypeEnum.TENDON,
-                        XmiStructuralMaterialTypeEnum.OTHERS]:
+for mat_type in XmiMaterialTypeEnum:
+    if mat_type not in [XmiMaterialTypeEnum.REBAR,
+                        XmiMaterialTypeEnum.TENDON,
+                        XmiMaterialTypeEnum.OTHERS]:
         codes = get_design_codes(mat_type)
         if codes:
             print(f"{mat_type.value}: {', '.join(codes)}")
@@ -212,17 +212,17 @@ def validate_material_member_compatibility(member, material):
     warnings = []
 
     # Steel is suitable for all member types
-    if material.material_type == XmiStructuralMaterialTypeEnum.STEEL:
+    if material.material_type == XmiMaterialTypeEnum.STEEL:
         return warnings
 
     # Timber rarely used for bracing in modern construction
-    if (material.material_type == XmiStructuralMaterialTypeEnum.TIMBER
+    if (material.material_type == XmiMaterialTypeEnum.TIMBER
         and hasattr(member, 'member_type')
         and member.member_type == XmiStructuralCurveMemberTypeEnum.BRACING):
         warnings.append("Timber bracing is uncommon in modern structures")
 
     # Aluminium less common for primary structural members
-    if material.material_type == XmiStructuralMaterialTypeEnum.ALUMINIUM:
+    if material.material_type == XmiMaterialTypeEnum.ALUMINIUM:
         warnings.append("Aluminium structures require specialized design")
 
     return warnings
@@ -257,7 +257,7 @@ def validate_material_member_compatibility(member, material):
 
 ```python
 class XmiStructuralMaterial(XmiBaseEntity):
-    material_type: XmiStructuralMaterialTypeEnum = Field(..., alias="MaterialType")
+    material_type: XmiMaterialTypeEnum = Field(..., alias="MaterialType")
 ```
 
 ## Notes

@@ -13,7 +13,7 @@ This module tests the XmiColumn class, verifying that:
 
 import pytest
 from pydantic import ValidationError
-from xmi.v2.models.entities.xmi_column import XmiColumn
+from xmi.v2.models.entities.physical.xmi_column import XmiColumn
 from xmi.v2.models.enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 

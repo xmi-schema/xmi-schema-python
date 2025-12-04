@@ -1,7 +1,7 @@
 """Tests for coordinate deduplication factory in XmiModel (Phase 5)."""
 
 from xmi.v2.models.xmi_model.xmi_model import XmiModel
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_line_3d import XmiLine3D
 
 

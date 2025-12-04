@@ -133,7 +133,7 @@ wall = XmiStructuralSurfaceMember(
 ### Creating an Instance Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
 from xmi.v2.models.enums.xmi_structural_surface_member_system_plane_enum import XmiStructuralSurfaceMemberSystemPlaneEnum
 
@@ -182,7 +182,7 @@ footing = XmiStructuralSurfaceMember(
 ### Loading from Dictionary
 
 ```python
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
 # Dictionary from XMI JSON input
 surface_member_dict = {

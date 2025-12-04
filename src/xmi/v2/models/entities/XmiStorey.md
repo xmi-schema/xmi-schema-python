@@ -279,7 +279,7 @@ print(f"Total seismic mass: {total_mass:.0f} kg ({total_mass / 1000:.2f} tonnes)
 #### Find Elements at Storey Level
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 def find_nodes_at_storey(xmi_model, storey: XmiStorey, tolerance: float = 10.0):
     """

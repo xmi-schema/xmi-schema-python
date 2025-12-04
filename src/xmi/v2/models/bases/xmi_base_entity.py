@@ -25,7 +25,7 @@ class XmiBaseEntity(BaseModel, ABC):
     and snake_case (Python) field names through aliases.
 
     Examples:
-        >>> from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+        >>> from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
         >>> # Minimal creation - all fields auto-generated
         >>> material = XmiStructuralMaterial(material_type="Concrete", grade="C30")
         >>> print(material.id)  # Auto-generated UUID

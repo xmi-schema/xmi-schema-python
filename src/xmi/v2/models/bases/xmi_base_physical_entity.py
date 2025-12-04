@@ -31,7 +31,7 @@ class XmiBasePhysicalEntity(XmiBaseEntity):
     - Correspond to actual construction elements
 
     Examples:
-        >>> from xmi.v2.models.entities.xmi_beam import XmiBeam
+        >>> from xmi.v2.models.entities.physical.xmi_beam import XmiBeam
         >>> # Create a physical beam
         >>> beam = XmiBeam(
         ...     id="beam-001",

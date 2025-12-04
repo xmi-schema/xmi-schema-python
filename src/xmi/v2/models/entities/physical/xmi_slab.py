@@ -1,6 +1,6 @@
 from pydantic import model_validator, ConfigDict
 from typing import Dict, Any, List, Optional, Tuple
-from ..bases.xmi_base_physical_entity import XmiBasePhysicalEntity
+from ...bases.xmi_base_physical_entity import XmiBasePhysicalEntity
 
 
 class XmiSlab(XmiBasePhysicalEntity):

@@ -1,8 +1,8 @@
 from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Optional, Tuple, List, Callable
-from ..bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
-from ..geometries.xmi_point_3d import XmiPoint3D
-from .xmi_storey import XmiStorey
+from ...bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
+from ...geometries.xmi_point_3d import XmiPoint3D
+from ..xmi_storey import XmiStorey
 
 class XmiStructuralPointConnection(XmiBaseStructuralAnalyticalEntity):
     point: XmiPoint3D = Field(..., alias="Point")

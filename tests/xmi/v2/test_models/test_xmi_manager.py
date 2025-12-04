@@ -4,8 +4,8 @@ from tests.xmi.v2.test_inputs.xmi_manager_input import json_xmi_data
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
 from xmi.v2.models.entities.xmi_material import XmiMaterial
 from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from xmi.v2.models.relationships.xmi_has_material import XmiHasMaterial
 from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection

@@ -63,7 +63,7 @@ Example:
 ### Creating Relationships Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 from xmi.v2.models.relationships.xmi_has_structural_cross_section import XmiHasCrossSection
 
@@ -231,7 +231,7 @@ for cs_name, length in sorted(lengths.items(), key=lambda x: -x[1]):
 ```python
 def validate_cross_section_assignments(xmi_model):
     """Check that all curve members have cross-sections assigned."""
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     issues = []
 
@@ -290,7 +290,7 @@ print(f"Replaced {replaced} cross-section references from {old_cs.name} to {new_
 ```python
 def find_members_by_section_type(xmi_model, section_type: str):
     """Find all members with a specific cross-section type."""
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     matching_members = []
 

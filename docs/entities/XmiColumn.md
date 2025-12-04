@@ -14,7 +14,7 @@
 
 ## Construction
 ```python
-from xmi.v2.models.entities.xmi_column import XmiColumn
+from xmi.v2.models.entities.physical.xmi_column import XmiColumn
 
 column_dict = {
     "ID": "column-001",

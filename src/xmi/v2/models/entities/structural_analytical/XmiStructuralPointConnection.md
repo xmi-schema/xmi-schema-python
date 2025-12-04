@@ -53,7 +53,7 @@ Point connections serve as:
 ### Creating a Point Connection Directly
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 # Create a 3D point geometry
@@ -74,7 +74,7 @@ print(f"Location: X={node.point.X}, Y={node.point.Y}, Z={node.point.Z}")
 ### Loading from Dictionary
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 # Dictionary from XMI file
 node_dict = {
@@ -102,7 +102,7 @@ else:
 ### Creating Multiple Nodes for a Grid
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 # Create a 3x3 grid of nodes at Z=0
@@ -129,7 +129,7 @@ print(f"Created {len(nodes)} nodes")
 ### With Storey Association
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.entities.xmi_storey import XmiStorey
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
@@ -157,7 +157,7 @@ print(f"Elevation: {node.storey.elevation if node.storey else node.point.Z}")
 ### Handling Validation Errors
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 # Missing required fields
 invalid_dict = {
@@ -179,7 +179,7 @@ if not node:
 ### Accessing and Modifying Point Coordinates
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 # Create node
@@ -247,7 +247,7 @@ These coordinates are typically in the **global coordinate system** of the struc
 ### 1. Creating Support Nodes
 
 ```python
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 # Fixed support at origin
@@ -263,7 +263,7 @@ support = XmiStructuralPointConnection(
 
 ```python
 import json
-from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from xmi.v2.models.entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 with open("nodes.json") as f:
     xmi_data = json.load(f)

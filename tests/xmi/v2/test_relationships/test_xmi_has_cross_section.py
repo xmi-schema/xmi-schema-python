@@ -2,7 +2,7 @@ import pytest
 from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.entities.xmi_cross_section import XmiCrossSection
-from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
+from xmi.v2.models.enums.xmi_material_type_enum import XmiMaterialTypeEnum
 
 def test_has_structural_cross_section_valid_instantiation():
     source = XmiBaseEntity(id="E1", name="Beam")
@@ -11,7 +11,7 @@ def test_has_structural_cross_section_valid_instantiation():
         id="CS1",
         description="Rectangular section",
         shape="rectangular",
-        material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+        material_type=XmiMaterialTypeEnum.CONCRETE,
         width=0.3,
         height=0.5,
         parameters=(300, 300)
@@ -29,7 +29,7 @@ def test_invalid_source_type():
     target = XmiCrossSection(
         id="CS1",
         shape="rectangular",
-        material_type=XmiStructuralMaterialTypeEnum.CONCRETE,
+        material_type=XmiMaterialTypeEnum.CONCRETE,
         width=0.3,
         height=0.5,
         parameters=(300, 300)
