@@ -66,7 +66,7 @@ Examples:
 
 ```python
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 from xmi.v2.models.relationships.xmi_has_structural_material import XmiHasStructuralMaterial
 
 # Create material
@@ -204,8 +204,8 @@ for material_name, elements in by_material.items():
 def calculate_material_usage(xmi_model, material):
     """Calculate total usage of a material."""
     from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 
     # Find all elements using this material
     elements = find_elements_using_material(xmi_model, material)
@@ -249,7 +249,7 @@ print(f"  Surface members: {usage['surface_members']}")
 def validate_material_assignments(xmi_model):
     """Check that all elements requiring materials have them assigned."""
     from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     issues = []
 
@@ -342,7 +342,7 @@ Relationships are created during XMI parsing when:
 1. **Cross-section defines material**:
    ```json
    {
-     "StructuralCrossSection": [
+     "CrossSection": [
        {
          "Name": "CS_300x600",
          "StructuralMaterial": "MAT_C30",
@@ -371,7 +371,7 @@ The `XmiManager` resolves material names to `XmiStructuralMaterial` objects and 
 
 Materials must be parsed before elements that reference them:
 1. Parse `StructuralMaterial` entities
-2. Parse `StructuralCrossSection` and `StructuralSurfaceMember`
+2. Parse `CrossSection` and `StructuralSurfaceMember`
 3. Create `XmiHasStructuralMaterial` relationships
 
 ## Notes

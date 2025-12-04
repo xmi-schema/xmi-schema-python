@@ -96,9 +96,9 @@ For each entity class, create tests covering:
 - `XmiStructuralCurveMember`
 - `XmiStructuralMaterial`
 - `XmiStructuralPointConnection`
-- `XmiStructuralStorey`
+- `XmiStorey`
 - `XmiStructuralSurfaceMember`
-- `XmiStructuralUnit`
+- `XmiUnit`
 
 **Test Template**:
 ```python
@@ -164,7 +164,7 @@ For each enum class:
 - `XmiUnitEnum`
 - `XmiStructuralCurveMemberSystemLineEnum`
 - `XmiStructuralCurveMemberTypeEnum`
-- `XmiStructuralMaterialTypeEnum`
+- `XmiMaterialTypeEnum`
 - `XmiStructuralSurfaceMemberTypeEnum`
 - `XmiStructuralSurfaceMemberSpanTypeEnum`
 - `XmiStructuralSurfaceMemberSystemPlaneEnum`
@@ -197,14 +197,14 @@ For each enum class:
 **Structure**:
 ```
 src/xmi/v1/entities/
-├── xmi_structural_material.py
+├── xmi_material.py
 ├── XmiStructuralMaterial.md          # New
 ├── xmi_structural_cross_section.py
 ├── XmiCrossSection.md      # New
 └── ...
 
 src/xmi/v2/Models/entities/
-├── xmi_structural_material.py
+├── xmi_material.py
 ├── XmiStructuralMaterial.md          # New
 └── ...
 ```
@@ -287,8 +287,8 @@ List of relationships this entity participates in:
 2. `XmiPoint3D`
 3. `XmiLine3D`
 4. `XmiArc3D`
-5. `XmiStructuralUnit`
-6. `XmiStructuralStorey`
+5. `XmiUnit`
+6. `XmiStorey`
 
 **Lower Priority** (Base classes and relationships):
 1. `XmiBaseEntity`
@@ -435,13 +435,13 @@ For each function/method:
 
 **Example**:
 ```python
-# File: tests/xmi/v1/test_entities/test_xmi_structural_material.py
+# File: tests/xmi/v1/test_entities/test_xmi_material.py
 
-def test_xmi_structural_material_init_valid():
+def test_xmi_material_init_valid():
     """Test XmiStructuralMaterial initialization with valid parameters."""
     pass
 
-def test_xmi_structural_material_init_missing_type():
+def test_xmi_material_init_missing_type():
     """Test XmiStructuralMaterial raises error when material_type is missing."""
     pass
 
@@ -457,8 +457,8 @@ class TestXmiStructuralMaterialValidation:
 
 Ensure tests mirror source structure:
 ```
-src/xmi/v1/entities/xmi_structural_material.py
-→ tests/xmi/v1/test_entities/test_xmi_structural_material.py
+src/xmi/v1/entities/xmi_material.py
+→ tests/xmi/v1/test_entities/test_xmi_material.py
 
 src/xmi/v2/Models/geometries/xmi_point_3d.py
 → tests/xmi/v2/test_geometries/test_xmi_point_3d.py

@@ -11,6 +11,24 @@ A Python library for interpreting and managing XMI (Cross Model Information) sch
 
 The `xmi-schema-python` library provides a robust framework for reading, parsing, and managing structural data from JSON dictionaries, converting them into structured Python objects that represent materials, cross-sections, members, connections, and geometric elements.
 
+## Feature Parity Status
+
+As of **v0.4.0**, Phase 5 of the feature-parity plan is complete: base physical entities, their analytical bridge (`XmiHasStructuralCurveMember`), and the coordinate deduplication point factory are all implemented and fully tested. Phase 6 adds end-to-end integration coverage plus documentation for the new graph patterns so downstream applications can rely on physical ↔ analytical mappings out of the box. This keeps the Python implementation aligned with the C# 0.8.0 reference and ready for the final parity push.
+
+## Phase 6 Updates (Testing & Docs)
+
+- ✅ Added integration suites (`tests/xmi/v2/test_integration/`) that exercise the entire physical → analytical bridge, including invalid relationship handling and complete model round trips.
+- ✅ Authored per-entity documentation covering metadata, relationships, and validation guidance for each physical type and its bridge relationship.
+- ✅ Surfaced the documentation in this README so consumers can jump directly into the new graph patterns.
+
+| Entity / Relationship | Documentation |
+|-----------------------|---------------|
+| `XmiBeam` | [`docs/entities/XmiBeam.md`](docs/entities/XmiBeam.md) |
+| `XmiColumn` | [`docs/entities/XmiColumn.md`](docs/entities/XmiColumn.md) |
+| `XmiSlab` | [`docs/entities/XmiSlab.md`](docs/entities/XmiSlab.md) |
+| `XmiWall` | [`docs/entities/XmiWall.md`](docs/entities/XmiWall.md) |
+| `XmiHasStructuralCurveMember` | [`docs/relationships/XmiHasStructuralCurveMember.md`](docs/relationships/XmiHasStructuralCurveMember.md) |
+
 ## Features
 
 - **Two parallel implementations** (v1 and v2) with different architectural approaches
@@ -63,6 +81,26 @@ if xmi_model.errors:
         print(f"Error: {error.message}")
 ```
 
+### Physical Entities & Analytical Bridges
+
+```python
+from xmi.v2.models.xmi_model.xmi_manager import XmiManager
+
+manager = XmiManager()
+xmi_model = manager.read_xmi_dict(physical_model_dict)  # contains XmiBeam/XmiColumn + curves
+
+beams = [e for e in xmi_model.entities if e.entity_type == "XmiBeam"]
+bridges = [
+    rel for rel in xmi_model.relationships
+    if rel.entity_type == "XmiHasStructuralCurveMember"
+]
+
+for bridge in bridges:
+    print(f"Physical {bridge.source.name} → Analytical {bridge.target.name}")
+```
+
+Each bridge guarantees that the physical entity shares a deduplicated coordinate graph with its analytical counterpart, so graph queries can follow identity relationships rather than re-computing geometry.
+
 ### Using v1 (Legacy - Slots-based)
 
 ```python
@@ -89,7 +127,7 @@ materials = [e for e in xmi_model.entities
 |-------------|-----------|-----------|-------------|
 | **StructuralMaterial** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Material definitions (concrete, steel, timber, etc.) |
 | **StructuralPointConnection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Nodal points in 3D space with coordinates |
-| **StructuralCrossSection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Cross-section definitions with shape parameters |
+| **CrossSection** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Cross-section definitions with shape parameters |
 | **StructuralCurveMember** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Linear structural members (beams, columns, braces) |
 | **StructuralSurfaceMember** | ![DONE](https://img.shields.io/badge/Status-DONE-green) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Surface elements (slabs, walls, plates) |
 | **StructuralStorey** | ![TODO](https://img.shields.io/badge/Status-TODO-red) | ![DONE](https://img.shields.io/badge/Status-DONE-green) | Building level/storey definitions |
@@ -174,6 +212,26 @@ The library supports 18 different cross-section shape types with strongly-typed 
 - **v1**: Procedural parsing with explicit entity creation logic
 - **v2**: Declarative mapping approach with automatic type resolution
 
+### Point Factory & Coordinate Deduplication
+
+The v2 model keeps a single source of truth for `Point3D` data by routing all coordinate creation through `XmiModel.create_point_3d()`. When `XmiModel.load_from_dict()` instantiates geometry-heavy entities (such as `XmiStructuralPointConnection`, `XmiLine3D`, and `XmiArc3D`), it injects this point factory into their `from_dict` loaders. The factory quantizes coordinates using a tight tolerance (default `1e-10`) and reuses an existing `XmiPoint3D` instance whenever the incoming coordinates match within that tolerance. This lightweight cache means:
+
+- Members, segments, and relationships that reference the same coordinates automatically share the same `XmiPoint3D` object, producing a graph-friendly topology.
+- Structural relationships like `XmiHasStructuralCurveMember` can rely on identity equality instead of manual coordinate comparisons when traversing the graph.
+- Geometry parsing remains deterministic even if the input JSON contains duplicate nodes, since the first occurrence becomes canonical.
+
+You can opt into the same behavior for custom loaders by exposing a `point_factory` parameter on your entity’s `from_dict()` function and calling it instead of instantiating `XmiPoint3D` directly:
+
+```python
+@classmethod
+def from_dict(cls, data: dict, point_factory: Callable[[float, float, float], XmiPoint3D]):
+    x, y, z = data["Point"]["X"], data["Point"]["Y"], data["Point"]["Z"]
+    point = point_factory(x, y, z)
+    return cls(point=point), []
+```
+
+This pattern keeps the object graph compact while still letting you model additional tolerances or caching strategies by swapping in a different factory.
+
 ## Development
 
 ### Running Tests
@@ -189,7 +247,7 @@ poetry run pytest --cov=src/xmi --cov-report=html --cov-report=term
 poetry run pytest tests/xmi/v2/
 
 # Run specific test file
-poetry run pytest tests/xmi/v2/test_entities/test_xmi_structural_material.py
+poetry run pytest tests/xmi/v2/test_entities/test_xmi_material.py
 ```
 
 ### Test Coverage
@@ -349,7 +407,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **PyPI**: https://pypi.org/project/xmi/
 - **GitHub**: https://github.com/xmi-schema/xmi-schema-python
 - **XMI Schema**: https://xmi-schema.org
-- **Documentation**: [Coming soon]
+- **Documentation**: `docs/entities/` (per-class) and `docs/relationships/` (bridge patterns)
 
 ## Acknowledgments
 
@@ -359,6 +417,7 @@ Based on the XMI Schema specification and inspired by the C# implementation:
 
 ## Version History
 
+- **v0.4.0 (Phase 6)** - Physical entities + bridges, coordinate deduplication, integration coverage, per-entity documentation
 - **v0.3.0** - Added shape parameters, improved v2 implementation
 - **v0.2.x** - Enhanced entity support, improved testing
 - **v0.1.x** - Initial release with v1 implementation

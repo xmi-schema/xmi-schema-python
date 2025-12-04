@@ -1,0 +1,80 @@
+﻿{
+  "nodes": [
+    {
+      "Id": "5f9c10fd-3987-4f11-8fac-7098011a2b7b",
+      "Name": "Default Wall",
+      "IfcGuid": "74e46f31-7d48-47ee-9207-931708e57a52-00000019",
+      "NativeId": "25",
+      "Description": "",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Unknown",
+      "Grade": 0.0,
+      "UnitWeight": 0.0,
+      "ElasticModulus": "",
+      "ShearModulus": "",
+      "PoissonRatio": "",
+      "ThermalCoefficient": 0.0
+    },
+    {
+      "Id": "faecc977-6159-437e-8751-68a2da64b8ca",
+      "Name": "Default Floor",
+      "IfcGuid": "74e46f31-7d48-47ee-9207-931708e57a52-00000281",
+      "NativeId": "641",
+      "Description": "",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Unknown",
+      "Grade": 0.0,
+      "UnitWeight": 0.0,
+      "ElasticModulus": "",
+      "ShearModulus": "",
+      "PoissonRatio": "",
+      "ThermalCoefficient": 0.0
+    },
+    {
+      "Id": "9065d34d-ee61-491d-ac1c-d5a935885dd6",
+      "Name": "Concrete, Cast-in-Place - C32/40",
+      "IfcGuid": "9e19074e-7f2f-4ff7-a1ab-289b4e6ed25d-000588d6",
+      "NativeId": "362710",
+      "Description": "Concrete 40 MPa",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Concrete",
+      "Grade": 0.0,
+      "UnitWeight": 2406.4576595395947,
+      "ElasticModulus": "(6248400000, 6248400000, 6248400000)",
+      "ShearModulus": "(3657600000, 3657600000, 3657600000)",
+      "PoissonRatio": "(0.2, 0.2, 0.2)",
+      "ThermalCoefficient": 9.999999999999999E-06
+    },
+    {
+      "Id": "72ed685a-8fff-4898-b9fe-f27ef6eb926e",
+      "Name": "Metal - Steel - 355 MPa",
+      "IfcGuid": "9e19074e-7f2f-4ff7-a1ab-289b4e6ed25d-00058921",
+      "NativeId": "362785",
+      "Description": "",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Unknown",
+      "Grade": 0.0,
+      "UnitWeight": 7851.8277591778815,
+      "ElasticModulus": "(60960000000, 60960000000, 60960000000)",
+      "ShearModulus": "(23627791200, 23627791200, 23627791200)",
+      "PoissonRatio": "(0.29, 0.29, 0.29)",
+      "ThermalCoefficient": 1.17E-05
+    },
+    {
+      "Id": "530f39f1-f3e4-4ebb-b158-a08d5fd78079",
+      "Name": "Analytical Panels",
+      "IfcGuid": "b7a3ba99-3141-43b1-b2bd-dd1d064e8750-000594e5",
+      "NativeId": "365797",
+      "Description": "",
+      "EntityType": "XmiStructuralMaterial",
+      "MaterialType": "Unknown",
+      "Grade": 0.0,
+      "UnitWeight": 0.0,
+      "ElasticModulus": "",
+      "ShearModulus": "",
+      "PoissonRatio": "",
+      "ThermalCoefficient": 0.0
+    }
+  ],
+  "edges": []
+}

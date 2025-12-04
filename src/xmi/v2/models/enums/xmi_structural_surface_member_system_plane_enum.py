@@ -28,7 +28,7 @@ class XmiStructuralSurfaceMemberSystemPlaneEnum(XmiBaseEnum):
         >>> plane = XmiStructuralSurfaceMemberSystemPlaneEnum("middle")  # Returns MIDDLE
         >>>
         >>> # Use in surface member
-        >>> from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
         >>> slab = XmiStructuralSurfaceMember(
         ...     name="SLAB_L1",
         ...     system_plane=XmiStructuralSurfaceMemberSystemPlaneEnum.BOTTOM,

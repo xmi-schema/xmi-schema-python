@@ -1,0 +1,55 @@
+{
+  "Name": "PhysicalBeamBridge",
+  "Entities": [
+    {
+      "ID": "beam-bridge-001",
+      "Name": "Beam Bridge",
+      "Description": "Physical beam element",
+      "EntityType": "XmiBeam",
+      "SystemLine": "TopMiddle",
+      "Length": 6000.0,
+      "LocalAxisX": "1,0,0",
+      "LocalAxisY": "0,1,0",
+      "LocalAxisZ": "0,0,1",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0
+    },
+    {
+      "ID": "curve-beam-001",
+      "Name": "Analytical Beam",
+      "Description": "Curve member for beam",
+      "EntityType": "XmiStructuralCurveMember",
+      "CurveMemberType": "Beam",
+      "SystemLine": "TopMiddle",
+      "Length": 6000.0,
+      "LocalAxisX": "1,0,0",
+      "LocalAxisY": "0,1,0",
+      "LocalAxisZ": "0,0,1",
+      "BeginNodeXOffset": 0.0,
+      "EndNodeXOffset": 0.0,
+      "BeginNodeYOffset": 0.0,
+      "EndNodeYOffset": 0.0,
+      "BeginNodeZOffset": 0.0,
+      "EndNodeZOffset": 0.0,
+      "EndFixityStart": "FFFFFF",
+      "EndFixityEnd": "FFFFFF"
+    }
+  ],
+  "Relationships": [
+    {
+      "ID": "rel-beam-curve",
+      "Source": "beam-bridge-001",
+      "Target": "curve-beam-001",
+      "Name": "BeamBridge",
+      "Description": "Beam linked to analytical curve",
+      "EntityType": "XmiHasStructuralCurveMember",
+      "UmlType": "Association"
+    }
+  ],
+  "Histories": [],
+  "Errors": []
+}

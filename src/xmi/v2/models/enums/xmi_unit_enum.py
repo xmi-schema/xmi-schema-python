@@ -63,8 +63,8 @@ class XmiUnitEnum(XmiBaseEnum):
         >>> print(unit.value)  # "in"
         >>>
         >>> # Use in structural unit
-        >>> from xmi.v2.models.entities.xmi_structural_unit import XmiStructuralUnit
-        >>> length_unit = XmiStructuralUnit(
+        >>> from xmi.v2.models.entities.xmi_unit import XmiUnit
+        >>> length_unit = XmiUnit(
         ...     name="LengthUnit",
         ...     unit=XmiUnitEnum.MILLIMETER
         ... )

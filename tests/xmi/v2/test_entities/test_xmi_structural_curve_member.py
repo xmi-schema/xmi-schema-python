@@ -1,4 +1,4 @@
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
 from tests.xmi.v2.test_inputs.xmi_structural_curve_member_input import valid_curve_member_input

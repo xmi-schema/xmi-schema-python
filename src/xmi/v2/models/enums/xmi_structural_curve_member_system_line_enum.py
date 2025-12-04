@@ -26,13 +26,13 @@ class XmiStructuralCurveMemberSystemLineEnum(XmiBaseEnum):
         >>> from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import XmiStructuralCurveMemberSystemLineEnum
         >>> # Direct access
         >>> line = XmiStructuralCurveMemberSystemLineEnum.MIDDLE_MIDDLE
-        >>> print(line.value)  # "Middle Middle"
+        >>> print(line.value)  # "MiddleMiddle"
         >>>
         >>> # Case-insensitive lookup
-        >>> line = XmiStructuralCurveMemberSystemLineEnum("top middle")  # Returns TOP_MIDDLE
+        >>> line = XmiStructuralCurveMemberSystemLineEnum("topmiddle")  # Returns TOP_MIDDLE
         >>>
         >>> # Use in curve member
-        >>> from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
         >>> beam = XmiStructuralCurveMember(
         ...     name="B1",
         ...     system_line=XmiStructuralCurveMemberSystemLineEnum.TOP_MIDDLE
@@ -42,13 +42,13 @@ class XmiStructuralCurveMemberSystemLineEnum(XmiBaseEnum):
         Beams often use TOP_MIDDLE (top of beam at slab level), while columns
         typically use MIDDLE_MIDDLE (centroid) for analytical models.
     """
-    TOP_LEFT = "Top Left"
-    TOP_MIDDLE = "Top Middle"
-    TOP_RIGHT = "Top Right"
-    MIDDLE_LEFT = "Middle Left"
-    MIDDLE_MIDDLE = "Middle Middle"
-    MIDDLE_RIGHT = "Middle Right"
-    BOTTOM_LEFT = "Bottom Left"
-    BOTTOM_MIDDLE = "Bottom Middle"
-    BOTTOM_RIGHT = "Bottom Right"
+    TOP_LEFT = "TopLeft"
+    TOP_MIDDLE = "TopMiddle"
+    TOP_RIGHT = "TopRight"
+    MIDDLE_LEFT = "MiddleLeft"
+    MIDDLE_MIDDLE = "MiddleMiddle"
+    MIDDLE_RIGHT = "MiddleRight"
+    BOTTOM_LEFT = "BottomLeft"
+    BOTTOM_MIDDLE = "BottomMiddle"
+    BOTTOM_RIGHT = "BottomRight"
     UNKNOWN = "Unknown"

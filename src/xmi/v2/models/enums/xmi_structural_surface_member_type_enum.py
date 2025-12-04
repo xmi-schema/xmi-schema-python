@@ -30,7 +30,7 @@ class XmiStructuralSurfaceMemberTypeEnum(XmiBaseEnum):
         >>> surface_type = XmiStructuralSurfaceMemberTypeEnum("wall")  # Returns WALL
         >>>
         >>> # Use in surface member
-        >>> from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
         >>> slab = XmiStructuralSurfaceMember(
         ...     name="SLAB_L2",
         ...     member_type=XmiStructuralSurfaceMemberTypeEnum.SLAB,

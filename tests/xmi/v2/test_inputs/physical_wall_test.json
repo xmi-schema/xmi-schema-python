@@ -1,0 +1,14 @@
+{
+  "Name": "PhysicalWallStandalone",
+  "Entities": [
+    {
+      "ID": "wall-test-001",
+      "Name": "Wall Standalone",
+      "Description": "Physical wall without analytical bridge",
+      "EntityType": "XmiWall"
+    }
+  ],
+  "Relationships": [],
+  "Histories": [],
+  "Errors": []
+}

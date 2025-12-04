@@ -14,7 +14,7 @@ Successfully integrated all V1 integration tests from `after_install_tests/` int
 ### 2. Test Integration Status
 ✅ Integration tests were ALREADY properly set up in `tests/xmi/v1/test_scripts/`:
 - `test_xmi_manager_v1.py` - 8 comprehensive XMI Manager tests
-- `test_xmi_structural_material.py` - 5 material validation tests
+- `test_xmi_material.py` - 5 material validation tests
 - `test_xmi_structural_cross_section.py` - 3 cross-section tests
 
 **No code changes needed** - tests were already using correct import paths!
@@ -106,7 +106,7 @@ poetry run pytest tests/xmi/v1/test_scripts/test_xmi_manager_v1.py::test_xmi_man
 - `xmi_manager.py`: 88% ✅
 - `xmi_base.py`: 86% ✅
 - `xmi_errors.py`: 89% ✅
-- `xmi_structural_material.py`: 85% ✅
+- `xmi_material.py`: 85% ✅
 - `xmi_structural_point_connection.py`: 81% ✅
 - `xmi_segment.py`: 79%
 - `xmi_structural_cross_section.py`: 76%
@@ -115,7 +115,7 @@ poetry run pytest tests/xmi/v1/test_scripts/test_xmi_manager_v1.py::test_xmi_man
 **Areas Needing Improvement:**
 - `xmi_arc_3d.py`: 33% ⚠️ (needs tests)
 - `xmi_has_line_3d.py`: 0% ⚠️ (needs tests)
-- `xmi_structural_unit.py`: 49% ⚠️ (needs tests)
+- `xmi_unit.py`: 49% ⚠️ (needs tests)
 
 **V2 Modules:**
 - Most entities: 76-97% ✅
@@ -159,7 +159,7 @@ Now that all tests are integrated and running:
 ### Phase 1 - Improve Test Coverage
 1. Add tests for `xmi_arc_3d.py` (currently 33%)
 2. Add tests for `xmi_has_line_3d.py` (currently 0%)
-3. Add tests for `xmi_structural_unit.py` (currently 49%)
+3. Add tests for `xmi_unit.py` (currently 49%)
 4. Target: 80%+ coverage for all modules
 
 ### Phase 2 - Documentation

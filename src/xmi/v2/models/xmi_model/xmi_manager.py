@@ -13,7 +13,7 @@ class XmiManager:
         desired_order = [
             'StructuralMaterial',
             'StructuralPointConnection',
-            'StructuralCrossSection',
+            'CrossSection',
             'StructuralCurveMember',
             'StructuralSurfaceMember'
         ]

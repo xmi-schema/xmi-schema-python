@@ -79,8 +79,8 @@ Internal method that reorders dictionary keys to ensure entities are created in 
 **Dependency Order**:
 1. `StructuralMaterial` - No dependencies
 2. `StructuralPointConnection` - No entity dependencies (creates own Point3D)
-3. `StructuralCrossSection` - Depends on StructuralMaterial
-4. `StructuralCurveMember` - Depends on StructuralCrossSection and StructuralPointConnection
+3. `CrossSection` - Depends on StructuralMaterial
+4. `StructuralCurveMember` - Depends on CrossSection and StructuralPointConnection
 5. `StructuralSurfaceMember` - Depends on StructuralMaterial and StructuralPointConnection
 6. All other entity types (if present)
 
@@ -119,7 +119,7 @@ else:
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 from xmi.v2.models.entities.xmi_structural_cross_section import XmiCrossSection
 
 manager = XmiManager()
@@ -217,8 +217,8 @@ print(f"Created by: {model.application_name} {model.application_version}")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
 manager = XmiManager()
 model = manager.read_xmi_dict(xmi_data)
@@ -338,7 +338,7 @@ StructuralMaterial (no dependencies)
     ↓
 StructuralPointConnection (no dependencies)
     ↓
-StructuralCrossSection (references Material via relationship)
+CrossSection (references Material via relationship)
     ↓
 StructuralCurveMember (references CrossSection and PointConnection via relationships)
     ↓
@@ -496,7 +496,7 @@ is_valid = validate_xmi_file("structure.json")
 
 ```python
 from xmi.v2.models.xmi_model.xmi_manager import XmiManager
-from xmi.v2.models.entities.xmi_structural_material import XmiStructuralMaterial
+from xmi.v2.models.entities.xmi_material import XmiStructuralMaterial
 
 def extract_material_library(xmi_data: dict) -> dict:
     """Extract materials from XMI and convert to custom format"""

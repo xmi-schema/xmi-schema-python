@@ -26,7 +26,7 @@ class XmiStructuralCurveMemberTypeEnum(XmiBaseEnum):
         >>> member_type = XmiStructuralCurveMemberTypeEnum("column")  # Returns COLUMN
         >>>
         >>> # Use in curve member
-        >>> from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
         >>> beam = XmiStructuralCurveMember(
         ...     name="B1",
         ...     member_type=XmiStructuralCurveMemberTypeEnum.BEAM

@@ -20,7 +20,7 @@
 
 3. **Test Files Integrated:**
    - `test_xmi_manager_v1.py` - 8 comprehensive integration tests
-   - `test_xmi_structural_material.py` - 5 material validation tests
+   - `test_xmi_material.py` - 5 material validation tests
    - `test_xmi_structural_cross_section.py` - 3 cross-section tests
    - **Total:** 16 integration tests now part of the main test suite
 
@@ -71,7 +71,7 @@ All functionality has been migrated to the main test suite.
 
 **Already Present (no changes needed):**
 - `tests/xmi/v1/test_scripts/test_xmi_manager_v1.py`
-- `tests/xmi/v1/test_scripts/test_xmi_structural_material.py`
+- `tests/xmi/v1/test_scripts/test_xmi_material.py`
 - `tests/xmi/v1/test_scripts/test_xmi_structural_cross_section.py`
 
 ### Verification

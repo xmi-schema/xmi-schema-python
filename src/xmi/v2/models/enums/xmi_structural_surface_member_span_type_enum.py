@@ -24,7 +24,7 @@ class XmiStructuralSurfaceMemberSpanTypeEnum(XmiBaseEnum):
         >>> span_type = XmiStructuralSurfaceMemberSpanTypeEnum("one way")  # Returns ONE_WAY
         >>>
         >>> # Use in surface member
-        >>> from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+        >>> from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
         >>> slab = XmiStructuralSurfaceMember(
         ...     name="SLAB_2W",
         ...     span_type=XmiStructuralSurfaceMemberSpanTypeEnum.TWO_WAY,

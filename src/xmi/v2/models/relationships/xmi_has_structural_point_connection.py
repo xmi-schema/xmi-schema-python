@@ -2,7 +2,7 @@ from pydantic import Field, field_validator, model_validator, ConfigDict
 from typing import Optional
 from ..bases.xmi_base_relationship import XmiBaseRelationship
 from ..bases.xmi_base_entity import XmiBaseEntity
-from ..entities.xmi_structural_point_connection import XmiStructuralPointConnection
+from ..entities.structural_analytical.xmi_structural_point_connection import XmiStructuralPointConnection
 
 class XmiHasStructuralPointConnection(XmiBaseRelationship):
     is_begin: Optional[bool] = Field(None, alias="IsBegin")

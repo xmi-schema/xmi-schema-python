@@ -102,7 +102,7 @@ json_xmi_data = {
             "IFCGUID": "74e46f31-7d48-47ee-9207-931708e57a52-00000153",
             "NativeId": "339",
             "Description": "",
-            "EntityType": "XmiStructuralStorey",
+            "EntityType": "XmiStorey",
             "StoreyElevation": 0.0,
             "StoreyMass": 1.0
         },

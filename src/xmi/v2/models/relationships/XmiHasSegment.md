@@ -64,7 +64,7 @@ Example:
 ### Creating Relationships
 
 ```python
-from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
 from xmi.v2.models.entities.xmi_segment import XmiSegment
 from xmi.v2.models.enums.xmi_segment_type_enum import XmiSegmentTypeEnum
 from xmi.v2.models.relationships.xmi_has_segment import XmiHasSegment
@@ -218,7 +218,7 @@ for seg in path:
 ```python
 def count_members_by_segment_count(xmi_model):
     """Count how many members have 1, 2, 3... segments."""
-    from xmi.v2.models.entities.xmi_structural_curve_member import XmiStructuralCurveMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_curve_member import XmiStructuralCurveMember
     from collections import Counter
 
     members = [

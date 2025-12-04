@@ -328,7 +328,7 @@ Cross-section shapes appear in XMI dictionaries:
 
 ```json
 {
-  "StructuralCrossSection": [
+  "CrossSection": [
     {
       "Name": "RECT_300x500",
       "Shape": "Rectangular",
@@ -398,7 +398,7 @@ Use `UNKNOWN` when:
 - [`XmiBaseEnum`](../bases/XmiBaseEnum.md) - Parent enum class
 
 ### Other Enums
-- [`XmiStructuralMaterialTypeEnum`](./XmiStructuralMaterialTypeEnum.md) - Material types often paired with shapes
+- [`XmiMaterialTypeEnum`](./XmiMaterialTypeEnum.md) - Material types often paired with shapes
 
 ### Manager Classes
 - [`XmiManager`](../xmi_model/XmiManager.md) - Parses shape from XMI data

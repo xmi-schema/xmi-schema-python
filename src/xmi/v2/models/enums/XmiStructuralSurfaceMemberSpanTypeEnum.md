@@ -61,7 +61,7 @@ span_type = XmiStructuralSurfaceMemberSpanTypeEnum("one way")  # Returns ONE_WAY
 ### Creating Surface Members with Span Type
 
 ```python
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.enums.xmi_structural_surface_member_type_enum import XmiStructuralSurfaceMemberTypeEnum
 
 # One-way slab (long rectangular slab)
@@ -109,7 +109,7 @@ def determine_span_type(surface_member, aspect_ratio_threshold=2.0):
 ```python
 def get_surfaces_by_span(xmi_model, span_type):
     """Get all surface members with specific span type."""
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     return [
         entity for entity in xmi_model.entities
@@ -131,7 +131,7 @@ print(f"Two-way slabs: {len(two_way)}")
 def analyze_span_types(xmi_model):
     """Analyze distribution of span types in model."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     surfaces = [
         entity for entity in xmi_model.entities

@@ -43,7 +43,7 @@ surface_type = XmiStructuralSurfaceMemberTypeEnum("wall")  # Returns WALL
 ### Creating Surface Members
 
 ```python
-from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
 # Create slab
 slab = XmiStructuralSurfaceMember(
@@ -72,7 +72,7 @@ raft = XmiStructuralSurfaceMember(
 ```python
 def get_surfaces_by_type(xmi_model, surface_type):
     """Get all surface members of a specific type."""
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     return [
         entity for entity in xmi_model.entities
@@ -130,7 +130,7 @@ for surf_type in XmiStructuralSurfaceMemberTypeEnum:
 def analyze_surface_types(xmi_model):
     """Analyze distribution of surface member types."""
     from collections import Counter
-    from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
+    from xmi.v2.models.entities.structural_analytical.xmi_structural_surface_member import XmiStructuralSurfaceMember
 
     surfaces = [
         entity for entity in xmi_model.entities

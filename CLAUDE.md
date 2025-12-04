@@ -25,6 +25,21 @@ The codebase has **two parallel implementations** (v1 and v2) with different arc
 
 ## Core Architecture
 
+### Base Class Hierarchy
+
+```
+XmiBaseEntity
+├─ XmiBasePhysicalEntity (type = Physical)
+│  ├─ XmiBeam / XmiColumn
+│  └─ XmiSlab / XmiWall
+└─ XmiBaseStructuralAnalyticalEntity (type = StructuralAnalytical)
+   ├─ XmiStructuralPointConnection
+   ├─ XmiStructuralCurveMember
+   └─ XmiStructuralSurfaceMember
+```
+
+All concrete entities inherit from the appropriate branch so `entity_type`/`type` are auto-filled before validation.
+
 ### Entity-Relationship Model
 Both versions follow an entity-relationship architecture:
 - **Entities**: Base classes (`XmiBaseEntity` in v1, Pydantic models in v2) represent structural elements (materials, connections, members, geometries)
@@ -41,11 +56,19 @@ Both versions follow an entity-relationship architecture:
 - `XmiSegment`: Individual geometric segments (lines, arcs) connecting nodes
 - Geometry classes: `XmiPoint3D`, `XmiLine3D`, `XmiArc3D`
 
+### Physical Entity Layer
+- `XmiBeam`, `XmiColumn`: Physical members that mirror analytical curve members
+- `XmiSlab`, `XmiWall`: Plate elements represented as physical metadata containers
+- `XmiBasePhysicalEntity`: Shared parent that auto-sets the `type`/domain to `Physical`
+- `XmiHasStructuralCurveMember`: Relationship linking a physical element to its analytical `XmiStructuralCurveMember`
+
+These entities are fully implemented in v2 and mapped through `ENTITY_CLASS_MAPPING`, enabling one-to-one parity with the C# 0.8.0 reference.
+
 ### Dependency Order
 When parsing XMI dictionaries, entities must be created in dependency order:
 1. `StructuralMaterial` (no dependencies)
 2. `StructuralPointConnection` (creates `XmiPoint3D` geometry)
-3. `StructuralCrossSection` (references materials)
+3. `CrossSection` (references materials)
 4. `StructuralCurveMember` (references cross-sections and point connections)
 5. `StructuralSurfaceMember` (references materials and point connections)
 
@@ -113,6 +136,13 @@ Relationships are explicitly created to track connections between entities:
 - `XmiHasStructuralNode`: Links members/segments to point connections
 - `XmiHasSegment`: Links members to their segments
 - `XmiHasGeometry`: Links entities to geometric elements
+- `XmiHasStructuralCurveMember`: Bridges `XmiBeam`/`XmiColumn` instances to analytical curve members, ensuring graph traversal from physical to analytical layers is a single hop
+
+### Physical-to-Analytical Mapping Pattern
+1. Parse physical entities (beam/column) via `XmiModel.load_from_dict()`—`entity_type` auto-assigns.
+2. Parse their analytical `XmiStructuralCurveMember` counterparts.
+3. During relationship parsing, `XmiHasStructuralCurveMember` validates the pairing (physical source, analytical target).
+4. Downstream queries grab the relationship edge to pivot between representations, allowing graph algorithms (e.g., QuikGraph / NetworkX) to reason across layers.
 
 ### v2 Pydantic Models
 When working with v2 models:
@@ -142,11 +172,20 @@ relationships = xmi_model.find_relationships_by_source(source_entity)
 ## Package Information
 
 - **Package Name**: `xmi`
-- **Current Version**: 0.2.17
+- **Current Version**: 0.4.0
 - **Build System**: poetry-core
 - **Python Requirement**: >=3.9
 - **Testing Framework**: pytest ^8.3.5
 - **Repository**: https://github.com/darellchua2/xmi-schema
+
+## Version Comparison
+
+| Version | Highlights | Feature Parity |
+|---------|------------|----------------|
+| v0.4.0 | Physical entities + bridges, coordinate deduplication, integration docs/tests | Phase 5 complete, Phase 6 docs/testing complete |
+| v0.3.x | Expanded shape parameters, improved v2 coverage | ~60% parity |
+| v0.2.x | Added materials + curve member refactors | ~45% parity |
+| v0.1.x | Initial v1 release | Baseline |
 
 ## When Adding New Entity Types
 
