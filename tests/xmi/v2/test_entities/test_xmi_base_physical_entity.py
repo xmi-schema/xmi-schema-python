@@ -14,42 +14,43 @@ from xmi.v2.models.bases.xmi_base_physical_entity import XmiBasePhysicalEntity
 from xmi.v2.models.enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 
 
-# Create a concrete test class since XmiBasePhysicalEntity is abstract
-class TestPhysicalEntity(XmiBasePhysicalEntity):
+# Create a concrete test class since XmiBasePhysicalEntity is abstract.
+# Pytest should not collect it, so avoid the ``Test`` prefix.
+class ConcretePhysicalEntity(XmiBasePhysicalEntity):
     """Concrete implementation for testing purposes."""
     pass
 
 
 def test_domain_type_auto_assignment():
     """Test that domain type is automatically set to 'Physical'."""
-    entity = TestPhysicalEntity()
+    entity = ConcretePhysicalEntity()
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
-    assert entity.entity_type == "TestPhysicalEntity"  # Class name
+    assert entity.entity_type == "ConcretePhysicalEntity"  # Class name
 
 
 def test_domain_type_with_explicit_id():
     """Test domain type assignment when ID is provided."""
-    entity = TestPhysicalEntity(id="test-001", name="Test Entity")
+    entity = ConcretePhysicalEntity(id="test-001", name="Test Entity")
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
-    assert entity.entity_type == "TestPhysicalEntity"
+    assert entity.entity_type == "ConcretePhysicalEntity"
     assert entity.id == "test-001"
     assert entity.name == "Test Entity"
 
 
 def test_domain_type_not_overridden():
     """Test that domain type is set to 'Physical' even if not provided."""
-    entity = TestPhysicalEntity(
+    entity = ConcretePhysicalEntity(
         id="test-002",
         name="Test Entity 2",
         description="A test physical entity"
     )
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
-    assert entity.entity_type == "TestPhysicalEntity"
+    assert entity.entity_type == "ConcretePhysicalEntity"
 
 
 def test_inherited_properties():
     """Test that all properties from XmiBaseEntity are inherited."""
-    entity = TestPhysicalEntity(
+    entity = ConcretePhysicalEntity(
         id="phys-001",
         name="Physical Entity",
         ifcguid="3cJh8fHxj3FwU$9vPQK1PN",
@@ -63,12 +64,12 @@ def test_inherited_properties():
     assert entity.native_id == "100"
     assert entity.description == "Test physical entity"
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
-    assert entity.entity_type == "TestPhysicalEntity"
+    assert entity.entity_type == "ConcretePhysicalEntity"
 
 
 def test_default_id_generation():
     """Test that ID is auto-generated when not provided."""
-    entity = TestPhysicalEntity()
+    entity = ConcretePhysicalEntity()
     assert entity.id is not None
     assert len(entity.id) > 0
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
@@ -76,14 +77,14 @@ def test_default_id_generation():
 
 def test_name_defaults_to_id():
     """Test that name defaults to ID when not provided."""
-    entity = TestPhysicalEntity(id="test-id-123")
+    entity = ConcretePhysicalEntity(id="test-id-123")
     assert entity.name == "test-id-123"
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
 
 
 def test_optional_fields():
     """Test that optional fields can be None."""
-    entity = TestPhysicalEntity(id="test-003")
+    entity = ConcretePhysicalEntity(id="test-003")
     assert entity.ifcguid is None
     assert entity.native_id is None
     assert entity.description is None
@@ -92,7 +93,7 @@ def test_optional_fields():
 
 def test_model_serialization():
     """Test that the model can be serialized to dict."""
-    entity = TestPhysicalEntity(
+    entity = ConcretePhysicalEntity(
         id="phys-002",
         name="Serialization Test",
         description="Test serialization"
@@ -113,7 +114,7 @@ def test_model_deserialization_pascalcase():
         "Description": "Test deserialization"
     }
 
-    entity = TestPhysicalEntity.model_validate(data)
+    entity = ConcretePhysicalEntity.model_validate(data)
     assert entity.id == "phys-003"
     assert entity.name == "Deserialization Test"
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
@@ -129,7 +130,7 @@ def test_model_deserialization_snake_case():
         "description": "Test snake_case"
     }
 
-    entity = TestPhysicalEntity.model_validate(data)
+    entity = ConcretePhysicalEntity.model_validate(data)
     assert entity.id == "phys-004"
     assert entity.name == "Snake Case Test"
     assert entity.type == XmiBaseEntityDomainEnum.PHYSICAL
@@ -137,8 +138,8 @@ def test_model_deserialization_snake_case():
 
 def test_multiple_instances_unique_ids():
     """Test that multiple instances get unique auto-generated IDs."""
-    entity1 = TestPhysicalEntity()
-    entity2 = TestPhysicalEntity()
+    entity1 = ConcretePhysicalEntity()
+    entity2 = ConcretePhysicalEntity()
 
     assert entity1.id != entity2.id
     assert entity1.type == XmiBaseEntityDomainEnum.PHYSICAL

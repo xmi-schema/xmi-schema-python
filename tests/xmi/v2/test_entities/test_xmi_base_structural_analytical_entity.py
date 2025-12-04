@@ -14,42 +14,42 @@ from xmi.v2.models.bases.xmi_base_structural_analytical_entity import XmiBaseStr
 from xmi.v2.models.enums.xmi_base_entity_domain_enum import XmiBaseEntityDomainEnum
 
 
-# Create a concrete test class since XmiBaseStructuralAnalyticalEntity is abstract
-class TestStructuralAnalyticalEntity(XmiBaseStructuralAnalyticalEntity):
+# Create a concrete class with a non-test prefix so pytest does not collect it.
+class ConcreteStructuralAnalyticalEntity(XmiBaseStructuralAnalyticalEntity):
     """Concrete implementation for testing purposes."""
     pass
 
 
 def test_domain_type_auto_assignment():
     """Test that domain type is automatically set to 'StructuralAnalytical'."""
-    entity = TestStructuralAnalyticalEntity()
+    entity = ConcreteStructuralAnalyticalEntity()
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
-    assert entity.entity_type == "TestStructuralAnalyticalEntity"  # Class name
+    assert entity.entity_type == "ConcreteStructuralAnalyticalEntity"  # Class name
 
 
 def test_domain_type_with_explicit_id():
     """Test domain type assignment when ID is provided."""
-    entity = TestStructuralAnalyticalEntity(id="test-001", name="Test Entity")
+    entity = ConcreteStructuralAnalyticalEntity(id="test-001", name="Test Entity")
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
-    assert entity.entity_type == "TestStructuralAnalyticalEntity"
+    assert entity.entity_type == "ConcreteStructuralAnalyticalEntity"
     assert entity.id == "test-001"
     assert entity.name == "Test Entity"
 
 
 def test_domain_type_not_overridden():
     """Test that domain type is set to 'StructuralAnalytical' even if not provided."""
-    entity = TestStructuralAnalyticalEntity(
+    entity = ConcreteStructuralAnalyticalEntity(
         id="test-002",
         name="Test Entity 2",
         description="A test structural analytical entity"
     )
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
-    assert entity.entity_type == "TestStructuralAnalyticalEntity"
+    assert entity.entity_type == "ConcreteStructuralAnalyticalEntity"
 
 
 def test_inherited_properties():
     """Test that all properties from XmiBaseEntity are inherited."""
-    entity = TestStructuralAnalyticalEntity(
+    entity = ConcreteStructuralAnalyticalEntity(
         id="anal-001",
         name="Analytical Entity",
         ifcguid="3cJh8fHxj3FwU$9vPQK1PN",
@@ -63,12 +63,12 @@ def test_inherited_properties():
     assert entity.native_id == "200"
     assert entity.description == "Test analytical entity"
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
-    assert entity.entity_type == "TestStructuralAnalyticalEntity"
+    assert entity.entity_type == "ConcreteStructuralAnalyticalEntity"
 
 
 def test_default_id_generation():
     """Test that ID is auto-generated when not provided."""
-    entity = TestStructuralAnalyticalEntity()
+    entity = ConcreteStructuralAnalyticalEntity()
     assert entity.id is not None
     assert len(entity.id) > 0
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
@@ -76,14 +76,14 @@ def test_default_id_generation():
 
 def test_name_defaults_to_id():
     """Test that name defaults to ID when not provided."""
-    entity = TestStructuralAnalyticalEntity(id="test-id-456")
+    entity = ConcreteStructuralAnalyticalEntity(id="test-id-456")
     assert entity.name == "test-id-456"
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
 
 
 def test_optional_fields():
     """Test that optional fields can be None."""
-    entity = TestStructuralAnalyticalEntity(id="test-003")
+    entity = ConcreteStructuralAnalyticalEntity(id="test-003")
     assert entity.ifcguid is None
     assert entity.native_id is None
     assert entity.description is None
@@ -92,7 +92,7 @@ def test_optional_fields():
 
 def test_model_serialization():
     """Test that the model can be serialized to dict."""
-    entity = TestStructuralAnalyticalEntity(
+    entity = ConcreteStructuralAnalyticalEntity(
         id="anal-002",
         name="Serialization Test",
         description="Test serialization"
@@ -113,7 +113,7 @@ def test_model_deserialization_pascalcase():
         "Description": "Test deserialization"
     }
 
-    entity = TestStructuralAnalyticalEntity.model_validate(data)
+    entity = ConcreteStructuralAnalyticalEntity.model_validate(data)
     assert entity.id == "anal-003"
     assert entity.name == "Deserialization Test"
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
@@ -129,7 +129,7 @@ def test_model_deserialization_snake_case():
         "description": "Test snake_case"
     }
 
-    entity = TestStructuralAnalyticalEntity.model_validate(data)
+    entity = ConcreteStructuralAnalyticalEntity.model_validate(data)
     assert entity.id == "anal-004"
     assert entity.name == "Snake Case Test"
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
@@ -137,8 +137,8 @@ def test_model_deserialization_snake_case():
 
 def test_multiple_instances_unique_ids():
     """Test that multiple instances get unique auto-generated IDs."""
-    entity1 = TestStructuralAnalyticalEntity()
-    entity2 = TestStructuralAnalyticalEntity()
+    entity1 = ConcreteStructuralAnalyticalEntity()
+    entity2 = ConcreteStructuralAnalyticalEntity()
 
     assert entity1.id != entity2.id
     assert entity1.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
@@ -147,7 +147,7 @@ def test_multiple_instances_unique_ids():
 
 def test_different_from_physical_domain_type():
     """Test that StructuralAnalytical is different from Physical domain type."""
-    entity = TestStructuralAnalyticalEntity(id="compare-001")
+    entity = ConcreteStructuralAnalyticalEntity(id="compare-001")
     assert entity.type == XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
     assert entity.type != XmiBaseEntityDomainEnum.PHYSICAL
 
