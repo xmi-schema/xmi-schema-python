@@ -1,4 +1,4 @@
-from pydantic import Field, field_validator, model_validator, ConfigDict
+from pydantic import Field, field_validator, model_validator, ConfigDict, field_serializer
 from typing import Dict, Any, List, Optional, Tuple, Union
 from ..bases.xmi_base_structural_analytical_entity import XmiBaseStructuralAnalyticalEntity
 from ..enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
@@ -56,6 +56,18 @@ class XmiStructuralCurveMember(XmiBaseStructuralAnalyticalEntity):
     def set_entity_type(cls, values):
         values.setdefault("EntityType", "XmiStructuralCurveMember")
         return values
+
+    @field_serializer("local_axis_x", "local_axis_y", "local_axis_z", when_used="json")
+    def serialize_axes(self, value):
+        if value is None:
+            return None
+        if isinstance(value, str):
+            return value
+        try:
+            coords = tuple(float(v) for v in value)
+        except TypeError:
+            return value
+        return ",".join(f"{coord:g}" for coord in coords)
 
     @classmethod
     def from_dict(cls, obj: Dict[str, Any]) -> Tuple[Optional["XmiStructuralCurveMember"], List[Exception]]:

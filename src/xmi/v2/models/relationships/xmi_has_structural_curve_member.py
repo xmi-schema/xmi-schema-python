@@ -126,4 +126,5 @@ class XmiHasStructuralCurveMember(XmiBaseRelationship):
         """
         values.setdefault("name", "hasStructuralCurveMember")
         values.setdefault("entity_type", "XmiRelHasStructuralCurveMember")
+        values.setdefault("uml_type", "Association")
         return values
