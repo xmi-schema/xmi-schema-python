@@ -47,4 +47,19 @@ class XmiPoint3D(XmiBaseGeometry):
 
         processed = {key_map.get(k, k): v for k, v in xmi_dict_obj.items()}
         return cls.from_dict(processed)
+
+    def equals_within_tolerance(self, other: "XmiPoint3D", tolerance: float = 1e-6) -> bool:
+        """Compare two points with a tolerance to account for floating point noise."""
+        if not isinstance(other, XmiPoint3D):
+            return False
+        return (
+            abs(self.x - other.x) <= tolerance and
+            abs(self.y - other.y) <= tolerance and
+            abs(self.z - other.z) <= tolerance
+        )
+
+    def __eq__(self, other: object) -> bool:  # pragma: no cover - thin wrapper
+        if not isinstance(other, XmiPoint3D):
+            return NotImplemented
+        return self.equals_within_tolerance(other)
     

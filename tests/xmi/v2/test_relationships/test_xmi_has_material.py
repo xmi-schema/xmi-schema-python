@@ -4,7 +4,7 @@ from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.entities.xmi_material import XmiMaterial
 from xmi.v2.models.enums.xmi_structural_material_type_enum import XmiStructuralMaterialTypeEnum
 
-def test_has_structural_material_valid_instantiation():
+def test_has_material_valid_instantiation():
     source = XmiBaseEntity(id="E1", name="Column")
     material = XmiMaterial(
         id="M1",

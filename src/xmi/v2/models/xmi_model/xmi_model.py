@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import Dict, Any, List, Optional, Type
-from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict
+import inspect
+from typing import Dict, Any, List, Optional, Type, Callable, Tuple
+from pydantic import BaseModel, Field, field_validator, model_validator, ConfigDict, PrivateAttr
 from xmi.v2.models.bases.xmi_base_entity import XmiBaseEntity
 from xmi.v2.models.bases.xmi_base_relationship import XmiBaseRelationship
 from xmi.v2.utils.xmi_entity_type_mapping import ENTITY_CLASS_MAPPING, RELATIONSHIP_CLASS_MAPPING
+from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 
 
 class ErrorLog(BaseModel):
@@ -28,6 +30,8 @@ class XmiModel(BaseModel):
     application_version: Optional[str] = Field(None, alias="ApplicationVersion")
 
     model_config = ConfigDict(populate_by_name=True, arbitrary_types_allowed=True)
+    _point_cache: Dict[Tuple[int, int, int, float], XmiPoint3D] = PrivateAttr(default_factory=dict)
+    _point_tolerance: float = PrivateAttr(default=1e-10)
 
     @field_validator('name', 'xmi_version', 'application_name', 'application_version', mode="before")
     @classmethod
@@ -41,6 +45,38 @@ class XmiModel(BaseModel):
             if getattr(entity, 'id', None) == entity_id:
                 return entity
         return None
+
+    def _quantize(self, value: float, tolerance: float) -> int:
+        return round(value / tolerance)
+
+    def _point_cache_key(self, x: float, y: float, z: float, tolerance: float) -> Tuple[int, int, int, float]:
+        return (
+            self._quantize(x, tolerance),
+            self._quantize(y, tolerance),
+            self._quantize(z, tolerance),
+            tolerance,
+        )
+
+    def _register_point(self, point: XmiPoint3D, tolerance: Optional[float] = None) -> None:
+        tol = tolerance if tolerance is not None else self._point_tolerance
+        key = self._point_cache_key(point.x, point.y, point.z, tol)
+        self._point_cache[key] = point
+
+    def create_point_3d(self, x: float, y: float, z: float, tolerance: Optional[float] = None) -> XmiPoint3D:
+        """Factory that reuses coordinates already present in the model within tolerance."""
+        tol = tolerance if tolerance is not None else self._point_tolerance
+        key = self._point_cache_key(x, y, z, tol)
+        cached = self._point_cache.get(key)
+        if cached and (
+            abs(cached.x - x) <= tol and
+            abs(cached.y - y) <= tol and
+            abs(cached.z - z) <= tol
+        ):
+            return cached
+
+        candidate = XmiPoint3D(x=x, y=y, z=z)
+        self._point_cache[key] = candidate
+        return candidate
 
     def load_from_dict(self, data: Dict[str, Any]) -> None:
         self.name = data.get("Name")
@@ -62,11 +98,19 @@ class XmiModel(BaseModel):
                 continue
 
             try:
-                instance, errors = (entity_class.from_dict(entity_data)
-                                    if hasattr(entity_class, 'from_dict')
-                                    else (entity_class.model_validate(entity_data), []))
+                from_dict_kwargs = {}
+                if hasattr(entity_class, 'from_dict'):
+                    params = inspect.signature(entity_class.from_dict).parameters
+                    if 'point_factory' in params:
+                        from_dict_kwargs['point_factory'] = self.create_point_3d
+                    instance, errors = entity_class.from_dict(entity_data, **from_dict_kwargs)
+                else:
+                    instance = entity_class.model_validate(entity_data)
+                    errors = []
                 if instance:
                     self.entities.append(instance)
+                    if isinstance(instance, XmiPoint3D):
+                        self._register_point(instance)
                 self.errors.extend(errors)
             except Exception as e:
                 self.errors.append(ErrorLog(

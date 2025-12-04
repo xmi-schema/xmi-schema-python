@@ -174,6 +174,26 @@ The library supports 18 different cross-section shape types with strongly-typed 
 - **v1**: Procedural parsing with explicit entity creation logic
 - **v2**: Declarative mapping approach with automatic type resolution
 
+### Point Factory & Coordinate Deduplication
+
+The v2 model keeps a single source of truth for `Point3D` data by routing all coordinate creation through `XmiModel.create_point_3d()`. When `XmiModel.load_from_dict()` instantiates geometry-heavy entities (such as `XmiStructuralPointConnection`, `XmiLine3D`, and `XmiArc3D`), it injects this point factory into their `from_dict` loaders. The factory quantizes coordinates using a tight tolerance (default `1e-10`) and reuses an existing `XmiPoint3D` instance whenever the incoming coordinates match within that tolerance. This lightweight cache means:
+
+- Members, segments, and relationships that reference the same coordinates automatically share the same `XmiPoint3D` object, producing a graph-friendly topology.
+- Structural relationships like `XmiHasStructuralCurveMember` can rely on identity equality instead of manual coordinate comparisons when traversing the graph.
+- Geometry parsing remains deterministic even if the input JSON contains duplicate nodes, since the first occurrence becomes canonical.
+
+You can opt into the same behavior for custom loaders by exposing a `point_factory` parameter on your entity’s `from_dict()` function and calling it instead of instantiating `XmiPoint3D` directly:
+
+```python
+@classmethod
+def from_dict(cls, data: dict, point_factory: Callable[[float, float, float], XmiPoint3D]):
+    x, y, z = data["Point"]["X"], data["Point"]["Y"], data["Point"]["Z"]
+    point = point_factory(x, y, z)
+    return cls(point=point), []
+```
+
+This pattern keeps the object graph compact while still letting you model additional tolerances or caching strategies by swapping in a different factory.
+
 ## Development
 
 ### Running Tests
