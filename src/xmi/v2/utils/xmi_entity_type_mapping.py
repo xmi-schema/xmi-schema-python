@@ -6,6 +6,10 @@ from xmi.v2.models.entities.xmi_structural_point_connection import XmiStructural
 from xmi.v2.models.entities.xmi_storey import XmiStorey
 from xmi.v2.models.entities.xmi_structural_surface_member import XmiStructuralSurfaceMember
 from xmi.v2.models.entities.xmi_unit import XmiUnit
+from xmi.v2.models.entities.xmi_beam import XmiBeam
+from xmi.v2.models.entities.xmi_column import XmiColumn
+from xmi.v2.models.entities.xmi_slab import XmiSlab
+from xmi.v2.models.entities.xmi_wall import XmiWall
 from xmi.v2.models.geometries.xmi_point_3d import XmiPoint3D
 from xmi.v2.models.geometries.xmi_line_3d import XmiLine3D
 from xmi.v2.models.geometries.xmi_arc_3d import XmiArc3D
@@ -17,6 +21,7 @@ from xmi.v2.models.relationships.xmi_has_cross_section import XmiHasCrossSection
 from xmi.v2.models.relationships.xmi_has_material import XmiHasMaterial
 from xmi.v2.models.relationships.xmi_has_structural_point_connection import XmiHasStructuralPointConnection
 from xmi.v2.models.relationships.xmi_has_storey import XmiHasStorey
+from xmi.v2.models.relationships.xmi_has_structural_curve_member import XmiHasStructuralCurveMember
 
 ENTITY_CLASS_MAPPING = {
     "XmiCrossSection": XmiCrossSection,
@@ -27,6 +32,10 @@ ENTITY_CLASS_MAPPING = {
     "XmiStorey": XmiStorey,
     "XmiStructuralSurfaceMember": XmiStructuralSurfaceMember,
     "XmiUnit": XmiUnit,
+    "XmiBeam": XmiBeam,
+    "XmiColumn": XmiColumn,
+    "XmiSlab": XmiSlab,
+    "XmiWall": XmiWall,
     "XmiPoint3D": XmiPoint3D,
     "XmiLine3D": XmiLine3D,
     "XmiArc3D": XmiArc3D,
@@ -41,4 +50,5 @@ RELATIONSHIP_CLASS_MAPPING = {
     "XmiHasStructuralMaterial": XmiHasMaterial,
     "XmiHasStructuralPointConnection": XmiHasStructuralPointConnection,
     "XmiHasStructuralStorey": XmiHasStorey,
+    "XmiHasStructuralCurveMember": XmiHasStructuralCurveMember,
 }

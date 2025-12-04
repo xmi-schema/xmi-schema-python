@@ -15,15 +15,15 @@
 
 | Member Name | Value | Description |
 |-------------|-------|-------------|
-| `TOP_LEFT` | "Top Left" | Top-left corner of cross-section |
-| `TOP_MIDDLE` | "Top Middle" | Top center of cross-section |
-| `TOP_RIGHT` | "Top Right" | Top-right corner of cross-section |
-| `MIDDLE_LEFT` | "Middle Left" | Middle-left edge of cross-section |
-| `MIDDLE_MIDDLE` | "Middle Middle" | Centroid/center of cross-section |
-| `MIDDLE_RIGHT` | "Middle Right" | Middle-right edge of cross-section |
-| `BOTTOM_LEFT` | "Bottom Left" | Bottom-left corner of cross-section |
-| `BOTTOM_MIDDLE` | "Bottom Middle" | Bottom center of cross-section |
-| `BOTTOM_RIGHT` | "Bottom Right" | Bottom-right corner of cross-section |
+| `TOP_LEFT` | "TopLeft" | Top-left corner of cross-section |
+| `TOP_MIDDLE` | "TopMiddle" | Top center of cross-section |
+| `TOP_RIGHT` | "TopRight" | Top-right corner of cross-section |
+| `MIDDLE_LEFT` | "MiddleLeft" | Middle-left edge of cross-section |
+| `MIDDLE_MIDDLE` | "MiddleMiddle" | Centroid/center of cross-section |
+| `MIDDLE_RIGHT` | "MiddleRight" | Middle-right edge of cross-section |
+| `BOTTOM_LEFT` | "BottomLeft" | Bottom-left corner of cross-section |
+| `BOTTOM_MIDDLE` | "BottomMiddle" | Bottom center of cross-section |
+| `BOTTOM_RIGHT` | "BottomRight" | Bottom-right corner of cross-section |
 | `UNKNOWN` | "Unknown" | System line not specified |
 
 ## Purpose and Functionality
@@ -59,7 +59,7 @@ from xmi.v2.models.enums.xmi_structural_curve_member_system_line_enum import Xmi
 
 # Direct access
 system_line = XmiStructuralCurveMemberSystemLineEnum.MIDDLE_MIDDLE
-print(system_line.value)  # "Middle Middle"
+print(system_line.value)  # "MiddleMiddle"
 
 # Case-insensitive lookup
 system_line = XmiStructuralCurveMemberSystemLineEnum("top left")  # Returns TOP_LEFT
@@ -113,7 +113,7 @@ def get_typical_system_line(member_type):
 from xmi.v2.models.enums.xmi_structural_curve_member_type_enum import XmiStructuralCurveMemberTypeEnum
 
 beam_line = get_typical_system_line(XmiStructuralCurveMemberTypeEnum.BEAM)
-print(f"Typical beam system line: {beam_line.value}")  # "Top Middle"
+print(f"Typical beam system line: {beam_line.value}")  # "TopMiddle"
 ```
 
 ### Calculating Eccentricity
@@ -179,13 +179,13 @@ def analyze_system_lines(xmi_model):
     {
       "Name": "B1",
       "Type": "Beam",
-      "SystemLine": "Top Middle",
+      "SystemLine": "TopMiddle",
       "Nodes": ["N1", "N2"]
     },
     {
       "Name": "C1",
       "Type": "Column",
-      "SystemLine": "Middle Middle",
+      "SystemLine": "MiddleMiddle",
       "Nodes": ["N3", "N4"]
     }
   ]

@@ -17,7 +17,7 @@
 | Property | Type | Description | Validation |
 |----------|------|-------------|------------|
 | `curve_member_type` | `XmiStructuralCurveMemberTypeEnum` | Type of the structural curve member (Beam, Column, Bracing, Other, Unknown) | Must be valid enum value |
-| `system_line` | `XmiStructuralCurveMemberSystemLineEnum` | Reference line position on the cross-section (e.g., Top Left, Middle Middle) | Must be valid enum value |
+| `system_line` | `XmiStructuralCurveMemberSystemLineEnum` | Reference line position on the cross-section (e.g., TopLeft, MiddleMiddle) | Must be valid enum value |
 
 ### Optional Properties with Defaults
 
@@ -164,7 +164,7 @@ curve_member_dict = {
     "CurveMemberType": "Column",
     "Nodes": "351149;351151",
     "Segments": "Line",
-    "SystemLine": "Middle Middle",
+    "SystemLine": "MiddleMiddle",
     "BeginNode": "351149",
     "EndNode": "351151",
     "Length": 3000.0,
@@ -333,7 +333,7 @@ Example valid formats:
       "CurveMemberType": "Column",
       "Nodes": "N1;N2",
       "Segments": "Line",
-      "SystemLine": "Middle Middle",
+      "SystemLine": "MiddleMiddle",
       "BeginNode": "N1",
       "EndNode": "N2",
       "Length": 3000.0,

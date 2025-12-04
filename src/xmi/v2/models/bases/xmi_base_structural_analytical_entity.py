@@ -39,7 +39,7 @@ class XmiBaseStructuralAnalyticalEntity(XmiBaseEntity):
         ...     name="M1",
         ...     description="Analytical beam element",
         ...     curve_member_type="Beam",
-        ...     system_line="Top Middle"
+        ...     system_line="TopMiddle"
         ... )
         >>> print(member.entity_type)  # "XmiStructuralCurveMember"
         >>> print(member.type)  # XmiBaseEntityDomainEnum.STRUCTURAL_ANALYTICAL
