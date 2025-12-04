@@ -26,13 +26,34 @@ stress scenario when isolating other bottlenecks.
 
 ### Baseline Snapshot (dev laptop, Py3.12)
 - Payload: synthetic, 5 beam/curve pairs (`--members 5 --iterations 1`)
-- Load avg: ~2.2ms
+- Load avg: ~2.2 ms
 - Peak memory during load: ~0.04 MiB
-- Entity lookup phase (5 IDs): <0.1ms total
-- Serialization loop: <0.1ms total
+- Entity lookup phase (5 IDs): <0.1 ms total
+- Serialization loop: <0.1 ms total
 
 These micro numbers simply validate the harness. Run with larger payloads (≥1k members) before
 deciding on production targets.
+
+### Large-Model Runs (Apr 2025 laptop)
+| Members | Entities | Relationships | Load avg (p95) | Peak MiB | Lookup avg | Serialization avg | Notes |
+|---------|----------|---------------|----------------|----------|------------|-------------------|-------|
+| 1,000   | 4,000    | 1,000         | 0.480 s (0.486 s) | 6.35     | 0.145 s for 1k IDs | 8.4 ms | Linear `find_entity` scan dominates lookup cost. |
+| 5,000   | 20,000   | 5,000         | 12.09 s (12.33 s) | 31.67    | 5.77 s for 5k IDs | 52 ms | Load time grows superlinearly due to repeated dictionary scans + coordinate deduplication hashing. |
+
+**Observations**
+- Model loading spends most of its time in `XmiModel.load_from_dict()` iterating `ENTITY_CLASS_MAPPING` and
+  repeatedly calling `model.find_entity()` during relationship wiring. Profiling highlights the lack of an
+  ID index—every lookup is O(n).
+- Memory footprint is acceptable (≈6 MiB per 1k member pairs), which confirms point deduplication is keeping
+  repeated nodes compact.
+- Serialization remains cheap compared with other phases; no work needed there yet.
+
+**Follow-ups**
+1. Add an internal `Dict[str, XmiBaseEntity]` cache to `XmiModel` so `find_entity()` becomes O(1). That should
+   cut the lookup benchmark from seconds to milliseconds for 5k IDs.
+2. Investigate batching inside `load_from_dict()` (e.g., pre-group entities by `EntityType` to avoid repetitive
+   string comparisons) once indexing is in place.
+3. Record a CI baseline using the 1k-member payload so regressions are visible.
 
 ## Next Steps
 - Record baseline numbers (store in repo or CI artifacts) for multiple payload sizes.
