@@ -25,8 +25,6 @@ class XmiColumn(XmiBasePhysicalEntity):
         end_node_y_offset: Y offset at the end node (default: 0.0)
         begin_node_z_offset: Z offset at the beginning node (default: 0.0)
         end_node_z_offset: Z offset at the end node (default: 0.0)
-        end_fixity_start: Fixity condition at the start of the column
-        end_fixity_end: Fixity condition at the end of the column
     """
 
     system_line: XmiStructuralCurveMemberSystemLineEnum = Field(..., alias="SystemLine")
@@ -42,9 +40,6 @@ class XmiColumn(XmiBasePhysicalEntity):
     end_node_y_offset: float = Field(0.0, alias="EndNodeYOffset")
     begin_node_z_offset: float = Field(0.0, alias="BeginNodeZOffset")
     end_node_z_offset: float = Field(0.0, alias="EndNodeZOffset")
-
-    end_fixity_start: Optional[str] = Field(None, alias="EndFixityStart")
-    end_fixity_end: Optional[str] = Field(None, alias="EndFixityEnd")
 
     model_config = ConfigDict(populate_by_name=True)
 
